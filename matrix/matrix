@@ -1,0 +1,469 @@
+#!/usr/bin/env sh
+# set -e
+args="$@"
+tabs="\t\t\t"
+
+[ -z $EDITOR ] && EDITOR=nano # more user friendly
+[ -z $MATRIX_INSTALL_PATH ] && MATRIX_INSTALL_PATH="$HOME/.config/nixpkgs/matrix"
+[ -z $MATRIX_BRIDGES_PATH ] && MATRIX_BRIDGES_PATH=$MATRIX_INSTALL_PATH/bridges
+[ -z $HOSTNAME ] && HOSTNAME=$(hostname)
+
+
+## TEXT MANIPULATION FUNCTIONS
+insert_after_match(){
+  search_content="$1"
+  insert_line="$2"
+  file="$3"
+  sed -i -r "s|$search_content|&$insert_line|" $file
+}
+
+replace_in_file(){
+  search_content="$1"
+  replace_by="$2"
+  file="$3"
+  sed -i -r "s|$search_content|$replace_by|" $file
+}
+
+update_key(){
+  key="$1"
+  value="$2"
+  file="$3"
+  sed -i -r "s|(($key)(.*))|\2 $value|" $file
+}
+
+uncomment_and_update_key(){
+  key="$1"
+  value="$2"
+  file="$3"
+  sed -i -r "s|(\#($key)(.*))|\2 $value|p" $file
+}
+
+edit(){
+  [ -z "$EDITOR" ] && EDITOR=nvim
+  exec $EDITOR $0
+}
+
+
+help(){
+cat<<EOF
+
+  Ajuda:
+  
+  -h --help                  exibe esse menu de ajuda
+  --start-server             inicia o synapse-server
+  --start                    inicia a bridge selecionada (apenas execute após configurar a bridge)
+  --reset-server             reinicia o synapse-server
+  --start-db-irc             inicia o banco de dados do irc útil para usar com systemd
+  --stop-db-irc              finaliza o banco de dados do irc útil para usar com systemd
+  --debug                    inicia o modo de depuração do server e das bridges
+  --setup  bridgename        inicia o processo de configuração da bridge
+  --setup-list               lista as bridges disponiveis para configurar
+  --setup-all-bridges        inicia o processo de configuração de todas as bridges
+  --start-bridge bridgename  inicia apenas a bridge selecionada
+  --start-all-bridges        inicia todas as bridges
+
+  Exit codes
+  5 parametro de argumento não informado
+  6 parametro do argumentro errado exemplo:
+  servicename --setup --debug
+  isto resulta num erro porque setup não considera valores iniciados com -- ou -
+
+EOF
+# prevents display help two times when use -h -h as arguments
+exit 0
+}
+
+#_debug(){
+#
+#}
+
+
+_start(){
+  #server
+  homeserver --daemonize -c "$config_home/homeserver/homeserver.yaml" &
+  # option case above command do not work
+  # synctl start "$config_home/matrix/homeserver/homeserver.yaml"
+
+  #bridges
+  mautrix-telegram -c "$config_bridges/mautrix-telegram.yaml" &
+  mautrix-whatsapp -c "$config_bridges/mautrix-whatsapp.yaml" &
+  matrix-appservice-irc -c "$config_bridges/matrix-appservice-irc.yaml" -f "$config_home/bridges-registration/registration-matrix-appservice-irc.yaml" -p 9999 &
+}
+
+show_arg_usage(){
+  arg_name="$1"
+  arg_example="$2"
+  echo "argumento requirido para $arg_name"
+  echo "exemplo: $arg_name $arg_example"
+  echo ""
+}
+
+arg_usage(){
+  arg_value="$1"
+  arg_name="$2"
+  arg_example="$3"
+  exit_code=0
+  if [ $(echo "$arg_value" | grep "^-") ];then
+    echo "argumento invalido $arg_value"
+    show_arg_usage $arg_name $arg_example
+    exit_code=5
+  fi
+  
+  # only show if user not pass the required parameter
+  if [ -z $arg_value ];then
+    show_arg_usage $arg_name $arg_example
+    exit_code=$(expr $exit_code + 6)
+  fi
+  
+  # the continue was post here to fix strange bug with sh
+  [ $exit_code -gt 0 ] && exit $exit_code || continue
+
+}
+
+# SETUP SECTION
+
+bridge_telegram="$MATRIX_BRIDGES_PATH/mautrix-telegram"
+bridge_whatsapp="$MATRIX_BRIDGES_PATH/mautrix-whatsapp"
+bridge_irc="$MATRIX_BRIDGES_PATH/matrix-appservice-irc"
+synapse="$MATRIX_INSTALL_PATH/server"
+
+_setup(){
+  bridge="$1"
+  arg_usage "$bridge" "--setup" "mautrix-telegram"
+  setup_$bridge
+}
+
+
+
+bridge_debug(){
+  case $bridge in
+    whatsapp)
+      bridge_path=$bridge_whatsapp;;
+    telegram)
+      bridge_path=$bridge_telegram;;
+    irc)
+      bridge_path=$bridge_irc;;
+    *)
+      echo bridge não suportada;;
+  esac
+
+  bridge=$1
+  config_file="$bridge_path/$([ -z $2 ] && echo config.yaml || echo $2)"
+  example_config_file="$bridge_path/$([ -z $3 ] && echo example-config.yaml || echo $3)"
+  registry_file="$bridge_path/$([ -z $4 ] && echo registry_file || echo $4)"
+   [ $DEBUG ] && cat<<EOF
+BRIDGE_PATH         = $bridge_path
+CONFIG_FILE         = $config_file
+EXAMPLE_CONFIG_FILE = $example_config_file
+REGISTRATION_FILE   = $registry_file
+
+SERVER_CONFIG_FILE  = $synapse/homeserver.yaml
+
+EOF
+}
+
+setup_irc(){
+  default_locale=$LOCALE_ARCHIVE
+  default_pgdata=$PGDATA
+  #first_run=0
+  export LOCALE_ARCHIVE="$HOME/.nix-profile/lib/locale/locale-archive" 
+  export PGDATA="$bridge_irc/database"
+
+  mkdir -p $bridge_irc
+
+  irc_network_url="chat.freenode.net"
+  bot_name="ircbot"
+  bridge_irc_port=9999
+  config_file="$bridge_irc/config.yaml"
+
+  /usr/bin/git clone --no-checkout "https://github.com/matrix-org/matrix-appservice-irc" "$bridge_irc"
+  cd "$bridge_irc"
+  /usr/bin/git sparse-checkout set scripts spec src app.js config.schema.yml config.sample.yaml package.json tsconfig.json 
+
+  cp config.sample.yaml config.yaml
+  update_key "domain:" "\"lenovo\"" $config_file
+  replace_in_file "irc.example.com" $irc_network_url $config_file
+  replace_in_file "additionalAddresses" "#additionalAddresses" $config_file
+  #replace_in_file "passwordEncryptionKeyPath:" "#passwordEncryptionKeyPath" $config_file
+  replace_in_file "# '\*': admin" " '*': admin" $config_file
+  replace_in_file "# permissions:" "permissions:" $config_file
+  update_key "connectionString:" '"postgres://ircbridge:s3cr3t@localhost:5432/ircbridge"' $config_file
+  insert_after_match "app_service_config_files:" "\n - $bridge_irc/registration.yaml" "$synapse/homeserver.yaml"
+
+  #GENERATE IRC PASSKEY
+  openssl genpkey -out passkey.pem -outform PEM -algorithm RSA -pkeyopt rsa_keygen_bits:2048
+
+  ##LOAD NODE
+  env_file="$HOME/.zshenv"
+  . "$env_file"
+  eval "$(fnm env)"
+
+  ##BUILD
+  npm install
+
+  [ ! -e "$bridge_irc/database" ] && initdb -D "$bridge_irc/database" && first_run=1
+  start_irc_db
+
+  # CREATE DATABASE AND USER
+  if [ "$first_run" -eq 1 ];then
+psql -h "$bridge_irc/database" -d postgres <<EOF
+CREATE DATABASE ircbridge;
+CREATE USER ircbridge WITH PASSWORD 's3cr3t';
+GRANT ALL ON DATABASE ircbridge TO ircbridge;
+EOF
+  fi
+
+  #GENERATE REGISTRATION
+  node "$bridge_irc/app.js" -c $config_file -f "$bridge_irc/registration.yaml" -u "http://localhost:$bridge_irc_port" -l $bot_name -r 
+
+  stop_irc_db
+
+  #DONT POLUTE OUR ENV
+  unset LOCALE_ARCHIVE
+  unset PGDATA
+  if [ ! -z $default_locale ];then
+    export LOCALE_ARCHIVE=$default_locale
+    export PGDATA=$default_pgdata
+  fi
+}
+
+setup_telegram(){
+  mkdir -p "$bridge_telegram"
+  version="v0.9.0"
+  example_config="https://raw.githubusercontent.com/tulir/mautrix-telegram/$version/mautrix_telegram/example-config.yaml"
+  alembic_ini="https://raw.githubusercontent.com/tulir/mautrix-telegram/$version/alembic.ini"
+
+  # Copy alembic folder
+  /usr/bin/git clone --no-checkout "https://github.com/tulir/mautrix-telegram/" "$bridge_telegram"
+  cd "$bridge_telegram"
+  /usr/bin/git sparse-checkout set alembic
+
+  # DOWNLOAD STUFF
+  wget $example_config -O "$bridge_telegram/example-config.yaml" -nv --show-progress
+  wget $alembic_ini -O "$bridge_telegram/alembic.ini" -nv --show-progress
+  
+  #PRE-SETUP
+  cp "$bridge_telegram/example-config.yaml" "$bridge_telegram/config.yaml"
+
+  replace_in_file "https://example.com" "http://localhost:8008" "$bridge_telegram/config.yaml"
+  update_key "domain:" "$HOSTNAME" "$bridge_telegram/config.yaml"
+  replace_in_file "admin:example.com" "rodrigo:$HOSTNAME" "$bridge_telegram/config.yaml"
+  replace_in_file "\"example.com\"" "\"$HOSTNAME\"" "$bridge_telegram/config.yaml"
+
+  cat<<EOF
+
+Essa Bridge precisa de credenciais do telegram para prosseguir
+Será Aberta uma janela em seu navegador para o site do Telegram
+
+Pressione Qualquer tecla para Prosseguir
+
+EOF
+
+  read go
+  exec xdg-open "https://my.telegram.org/apps" &
+  echo "Informe sua api_id:"
+  read api_id
+  echo "Informe sua api_hash:"
+  read api_hash
+
+  update_key "api_id:" "$api_id" "$bridge_telegram/config.yaml"
+  update_key "api_hash:" "$api_hash" "$bridge_telegram/config.yaml"
+
+  replace_in_file "#app_service_config_files:" "app_service_config_files:" "$synapse/homeserver.yaml"
+  insert_after_match "app_service_config_files:" "\n - $bridge_telegram/registration.yaml" "$synapse/homeserver.yaml"
+
+  #cd "$bridge_telegram"
+
+  update_key "script_location =" "$bridge_telegram/alembic" "$bridge_telegram/alembic.ini"
+  alembic -x config="$bridge_telegram/config.yaml" -c "$bridge_telegram/alembic.ini" upgrade head
+
+  #GENERATE REGISTRATION FILE
+  mautrix-telegram -c "$bridge_telegram/config.yaml" -r "$bridge_telegram/registration.yaml" -g 
+}
+
+setup_whatsapp(){
+  [ $DEBUG ] && bridge_debug "whatsapp\n"
+  version="v0.1.6"
+  #executable="https://github.com/tulir/mautrix-whatsapp/releases/download/$version/mautrix-whatsapp-amd64"
+  example_config="https://raw.githubusercontent.com/tulir/mautrix-whatsapp/$version/example-config.yaml"
+  
+  [ $DEBUG ] && echo "Criando diretório $bridge_whatsapp\n"
+  mkdir -p "$bridge_whatsapp"
+
+  [ $DEBUG ] && echo "Baixando o arquivo de exemplo em $bridge_whatsapp/example-config.yaml\n"
+  wget "$example_config" -O "$bridge_whatsapp/example-config.yaml" -nv --show-progress
+
+
+  [ $DEBUG ] && echo "Criando o arquivo de configuração da bridge em $bridge_whatsapp/config.yaml\n"
+  cp "$bridge_whatsapp/example-config.yaml" "$bridge_whatsapp/config.yaml"
+  
+  [ $DEBUG ] && echo "Fazendo substituições no arquivo $bridge_whatsapp/config.yaml\n"
+  replace_in_file "https://example.com" "http://localhost:8008" "$bridge_whatsapp/config.yaml"
+  update_key "domain:" "$HOSTNAME" "$bridge_whatsapp/config.yaml"
+  replace_in_file "admin:example.com" "rodrigo:$HOSTNAME" "$bridge_whatsapp/config.yaml"
+  replace_in_file "\"example.com\"" "\"$HOSTNAME\"" "$bridge_whatsapp/config.yaml"
+
+  [ $DEBUG ] && echo "Atualizando app_service_config_files em $synapse/homeserver.yaml\n"
+  replace_in_file "#app_service_config_files:" "app_service_config_files:" "$synapse/homeserver.yaml"
+  insert_after_match "app_service_config_files:" "\n - $bridge_whatsapp/registration.yaml" "$synapse/homeserver.yaml"
+
+  #GENERATE registration.yaml
+  [ $DEBUG ] && echo "Gerando o arquivo $bridge_whatsapp/registration.yaml\n"
+  mautrix-whatsapp -c "$bridge_whatsapp/config.yaml" -r "$bridge_whatsapp/registration.yaml" -g
+}
+
+setup_server(){
+  mkdir -p $synapse
+  
+  cd $synapse
+  homeserver \
+    --server-name $HOSTNAME \
+    --config-directory $synapse \
+    --data-directory $synapse \
+    --generate-config \
+    --report-stats=yes \
+    -c $synapse/homeserver.yaml
+
+  uncomment_and_update_key "enable_registration:" "true" $synapse/homeserver.yaml
+
+  #DELETE EXAMPLE APP_SERVICES
+  sed -i -r "/(^#\s?*-\sapp_service)/d" $synapse/homeserver.yaml
+  # UNCOMENT app_service_config_files
+  sed -i -r "s/#app_service_config_files:/app_service_config_files:/" $synapse/homeserver.yaml
+  
+  start_server
+  register_new_matrix_user -c $synapse/homeserver.yaml "http://localhost:8008"
+  stop_server
+}
+
+
+setup_list(){
+  cat <<EOF
+  argumentos suportados:
+  
+  server (em desenvolvimento) 
+  telegram
+  whatsapp (funcional eu acho)
+  appservice-irc
+
+  execute: 
+
+  $ matrix --setup whatsapp 
+
+  para instalar apenas uma bridge
+  
+EOF
+}
+
+# START SERVICES SECTION
+start_server(){
+  homeserver -c $synapse/homeserver.yaml -D
+}
+
+
+stop_server(){
+  server_pid=$(ps aux | grep homeserver | head -n -1 | awk '{ print $2 }')
+  kill -9 $server_pid
+  echo "Server Stoped"
+}
+
+reset(){
+  echo "Parando todos os serviços:"
+  stop_server
+  stop_irc_db
+  rm -rf $MATRIX_INSTALL_PATH/server
+  rm -rf $MATRIX_INSTALL_PATH/bridges
+}
+
+_start(){
+  service=$1
+  [ "$service" = "server" ] && echo "inicie o server com --start-server" && exit 6
+  start_$service
+}
+
+start_telegram(){
+  cd $bridge_telegram
+  mautrix-telegram -c "$bridge_telegram/config.yaml"
+}
+
+start_whatsapp(){
+  cd $bridge_whatsapp
+  mautrix-whatsapp -c "$bridge_whatsapp/config.yaml"
+}
+
+psql(){
+  $HOME/.config/nixpkgs/matrix/result/bin/psql "$@"
+}
+
+pg_ctl(){
+  $HOME/.config/nixpkgs/matrix/result/bin/pg_ctl "$@"
+}
+
+initdb(){
+  $HOME/.config/nixpkgs/matrix/result/bin/initdb "$@"
+}
+
+createdb(){
+  $HOME/.config/nixpkgs/matrix/result/bin/createdb "$@"
+}
+
+login(){
+  start_irc_db
+  psql -h $bridge_irc/database -d postgres
+}
+
+start_irc(){
+  cd $bridge_irc
+  start_irc_db
+  matrix-appservice-irc -c "$bridge_irc/config.yaml" -f "$bridge_irc/registration.yaml" -p 9999 
+}
+
+start_irc_db(){
+  default_locale=$LOCALE_ARCHIVE
+  default_pgdata=$PGDATA
+  #first_run=0
+  export LOCALE_ARCHIVE="$HOME/.nix-profile/lib/locale/locale-archive" 
+  export PGDATA="$bridge_irc/database"
+  
+  # Start database
+  pg_ctl -l $bridge_irc/database/logfile -o "--unix_socket_directories='$bridge_irc/database'" start
+  #[ $first_run -eq 1 ] && createdb -h "$bridge_irc/database" "$USER" && createdb -h $bridge_irc/database "ircbridge"
+
+  #dont polute our env
+  unset LOCALE_ARCHIVE
+  unset PGDATA
+  if [ ! -z $default_locale ];then
+    export LOCALE_ARCHIVE=$default_locale
+    export PGDATA=$default_pgdata
+  fi
+}
+
+stop_irc_db(){
+  default_locale=$LOCALE_ARCHIVE
+  export LOCALE_ARCHIVE="$HOME/.nix-profile/lib/locale/locale-archive" 
+
+  pg_ctl -D "$bridge_irc/database" stop
+
+  unset LOCALE_ARCHIVE
+  if [ ! -z $default_locale ];then
+    export LOCALE_ARCHIVE=$default_locale
+  fi
+}
+
+# show help if user not pass any arguments
+[ "$#" -eq 0 ] && help
+
+for arg in $args;do
+  case "$arg" in
+    -h|--help) help;;
+    --start) _start $2; shift 2;;
+    --start-server) start_server; shift 1;;
+    --stop-server) stop_server;;
+    --start-irc-db) start_irc_db;;
+    --stop-irc-db) stop_irc_db;;
+    --setup) _setup $2; shift 2;;
+    --setup-list) setup_list ;;
+    --reset) reset ; shift 1;;
+    --login) login;;
+  esac
+done
