@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# set -e
+[ $DEBUG ] && set -x
 args="$@"
 tabs="\t\t\t"
 
@@ -70,7 +70,7 @@ cat<<EOF
   --stop-db-irc              finaliza o banco de dados do irc útil para usar com systemd
 
   Comandos globais: 
-  --reset                    apaga todas as configurações tanto do server quanto das bridges
+  --reset                    apaga todas as configurações e instalções tanto do server quanto das bridges
   Exit codes
   5 Parametro de argumento não informado
   6 Parametro do argumentro errado exemplo:
@@ -169,6 +169,167 @@ SERVER_CONFIG_FILE  = $synapse/homeserver.yaml
 EOF
 }
 
+setup_irc_freenode(){
+  printf "\nInsira seu usuário da rede Freenode:"
+  read botnick
+  echo ""
+  printf "Insira a senha do seu usuário na rede Freenode:"
+  read -s botpass
+  echo ""
+
+  cat >> "$bridge_irc/irc_servers_configs" <<EOF 
+
+    chat.freenode.net:        ############## CHANGE THIS #############
+      name: "FreeNode"      ############## CHANGE THIS #############
+      port: 6697
+      ssl: true
+      sslselfsign: false
+      sasl: false
+      sendConnectionMessages: true
+      quitDebounce:
+        enabled: false
+        quitsPerSecond: 5
+        delayMinMs: 3600000 # 1h
+        delayMaxMs: 7200000 # 2h
+      modePowerMap:
+        o: 50
+        v: 1
+      botConfig:
+        nick: "$botnick"                                         ############## CHANGE THIS #############
+        password: "$botpass"                                     ############## CHANGE THIS #############
+        joinChannelsIfNoUsers: true
+      privateMessages:
+        enabled: true
+        federate: true
+      dynamicChannels:
+        enabled: true
+        createAlias: true
+        published: true
+        joinRule: public
+        groupId: +myircnetwork:localhost
+        federate: true
+        aliasTemplate: "#freenode_\$CHANNEL"  ############## CHANGE THIS #############
+      membershipLists:
+        enabled: false
+        floodDelayMs: 10000
+        global:
+          ircToMatrix:
+            initial: false
+            incremental: false
+          matrixToIrc:
+            initial: false
+            incremental: false
+        rooms:
+          - room: "!fuasirouddJoxtwfge:localhost"
+            matrixToIrc:
+              initial: false
+              incremental: false
+        channels:
+          - channel: "#foo"
+            ircToMatrix:
+              initial: false
+              incremental: false
+      mappings:
+        "#thepub":
+          roomIds: ["!kieouiJuedJoxtVdaG:localhost"]
+      matrixClients:
+        userTemplate: "@freenode_\$NICK" ############## CHANGE THIS #############
+        displayName: "\$NICK (IRC)"
+        joinAttempts: -1
+      ircClients:
+        nickTemplate: "\$DISPLAY[m]" 
+        allowNickChanges: true
+        maxClients: 30
+        ipv6:
+          only: false
+        idleTimeout: 10800
+        reconnectIntervalMs: 5000
+        concurrentReconnectLimit: 50
+        lineLimit: 3
+EOF
+}
+
+setup_irc_libera(){
+  printf "\nInsira seu usuário na rede Libera.chat:"
+  read botnick
+  echo ""
+  printf "Insira a senha do seu usuário na rede Libera.chat:"
+  read -s botpass
+  echo ""
+
+  cat >> "$bridge_irc/irc_servers_configs" <<EOF 
+
+    irc.libera.chat:        ############## CHANGE THIS #############
+        name: "Libera.chat"      ############## CHANGE THIS #############
+        port: 6697
+        ssl: true
+        sslselfsign: false
+        sasl: false
+        sendConnectionMessages: true
+        quitDebounce:
+          enabled: false
+          quitsPerSecond: 5
+          delayMinMs: 3600000 # 1h
+          delayMaxMs: 7200000 # 2h
+        modePowerMap:
+          o: 50
+          v: 1
+        botConfig:
+          nick: "$botnick"                                         ############## CHANGE THIS #############
+          password: "$botpass"                                     ############## CHANGE THIS #############
+          joinChannelsIfNoUsers: true
+        privateMessages:
+          enabled: true
+          federate: true
+        dynamicChannels:
+          enabled: true
+          createAlias: true
+          published: true
+          joinRule: public
+          groupId: +myircnetwork:localhost
+          federate: true
+          aliasTemplate: "#libera_\$CHANNEL"  ############## CHANGE THIS #############
+        membershipLists:
+          enabled: false
+          floodDelayMs: 10000
+          global:
+            ircToMatrix:
+              initial: false
+              incremental: false
+            matrixToIrc:
+              initial: false
+              incremental: false
+          rooms:
+            - room: "!fuasirouddJoxtwfge:localhost"
+              matrixToIrc:
+                initial: false
+                incremental: false
+          channels:
+            - channel: "#foo"
+              ircToMatrix:
+                initial: false
+                incremental: false
+        mappings:
+          "#thepub":
+            roomIds: ["!kieouiJuedJoxtVdaG:localhost"]
+        matrixClients:
+          userTemplate: "@libera_\$NICK" ############## CHANGE THIS #############
+          displayName: "\$NICK (IRC)"
+          joinAttempts: -1
+        ircClients:
+          nickTemplate: "\$DISPLAY[m]" 
+          allowNickChanges: true
+          maxClients: 30
+          ipv6:
+            only: false
+          idleTimeout: 10800
+          reconnectIntervalMs: 5000
+          concurrentReconnectLimit: 50
+          lineLimit: 3
+EOF
+}
+
+
 setup_irc(){
   version="0.26.0"
   [ $DEBUG ] && bridge_debug "irc"
@@ -192,7 +353,7 @@ setup_irc(){
   #debug "Copiando os arquivos do repositorio"
   #/usr/bin/git clone --no-checkout "https://github.com/matrix-org/matrix-appservice-irc" "$bridge_irc"
   cd "$bridge_irc"
-  wget "https://raw.githubusercontent.com/matrix-org/matrix-appservice-irc/0.26.0/config.sample.yaml" -O config.sample.yaml
+  wget "https://raw.githubusercontent.com/matrix-org/matrix-appservice-irc/$version/config.sample.yaml" -O config.sample.yaml
   #/usr/bin/git sparse-checkout set scripts spec src app.js config.schema.yml config.sample.yaml package.json tsconfig.json 
   #/usr/bin/git checkout 0.26.0
 
@@ -201,17 +362,32 @@ setup_irc(){
   
   debug "Fazendo substituições no arquivo de configuração"
   update_key "domain:" "\"lenovo\"" $config_file
-  replace_in_file "irc.example.com" $irc_network_url $config_file
+  #replace_in_file "irc.example.com" $irc_network_url $config_file
   replace_in_file "additionalAddresses" "#additionalAddresses" $config_file
   #replace_in_file "passwordEncryptionKeyPath:" "#passwordEncryptionKeyPath" $config_file
   replace_in_file "# '\*': admin" " '*': admin" $config_file
   replace_in_file "# permissions:" "permissions:" $config_file
+  replace_in_file "# bindPort:" "bindPort:" $config_file
   insert_after_match "app_service_config_files:" "\n - $bridge_irc/registration.yaml" "$synapse/homeserver.yaml"
 
+  # CONFIGURING FREENODE AND LIBERA CHAT
+  yq e --inplace "del(.ircService.servers[][0])" "$config_file"
+
+  setup_irc_freenode
+  setup_irc_libera
+  servers_configs=""
+  while IFS=$'\t' read -r line;do
+    servers_configs+="$line \n"
+  done < "$bridge_irc/irc_servers_configs"
+
+  sed -i -r "s/\s*?servers:\s*?\{\}\s*?/  servers: \n $servers_configs/" $config_file
+  echo $servers_configs
+
   #GENERATE IRC PASSKEY
-  debug "Gerando passkey.pem"
-  debug "Para salvar a senha do irc com encriptação no banco de dados"
-  [ ! -e passkey.pem ] && openssl genpkey -out passkey.pem -outform PEM -algorithm RSA -pkeyopt rsa_keygen_bits:2048
+  [ ! -e passkey.pem ] && \
+    openssl genpkey -out passkey.pem -outform PEM -algorithm RSA -pkeyopt rsa_keygen_bits:2048 && \
+    debug "Gerando passkey.pem" && \
+    debug "Para salvar a senha do irc com encriptação no banco de dados"
 
   #SOURCING NODE
   #. $HOME/.zshenv
@@ -225,6 +401,7 @@ setup_irc(){
     initdb -D "$bridge_irc/database" && \
     first_run=1 && \
     debug "Inicializando postgres cluster"
+  
   start_irc_db
 
   # CREATE DATABASE AND USER
@@ -261,7 +438,7 @@ EOF
 }
 
 setup_telegram(){
-   $DEBUG ] && bridge_debug "telegram"
+  [ $DEBUG ] && bridge_debug "telegram"
   debug "Criando o diretório $bridge_telegram"
   mkdir -p "$bridge_telegram"
   version="v0.9.0"
@@ -311,7 +488,7 @@ EOF
 
   debug "Inserindo a bridge/appservice no arquivo de configuração do server"
   replace_in_file "#app_service_config_files:" "app_service_config_files:" "$synapse/homeserver.yaml"
-  insert_after_match "app_service_config_files:" " - $bridge_telegram/registration.yaml" "$synapse/homeserver.yaml"
+  insert_after_match "app_service_config_files:" "\n - $bridge_telegram/registration.yaml" "$synapse/homeserver.yaml"
 
   #cd "$bridge_telegram"
 
@@ -350,7 +527,7 @@ setup_whatsapp(){
 
   debug "Atualizando app_service_config_files em $synapse/homeserver.yaml"
   replace_in_file "#app_service_config_files:" "app_service_config_files:" "$synapse/homeserver.yaml"
-  insert_after_match "app_service_config_files:" " - $bridge_whatsapp/registration.yaml" "$synapse/homeserver.yaml"
+  insert_after_match "app_service_config_files:" "\n - $bridge_whatsapp/registration.yaml" "$synapse/homeserver.yaml"
 
   #GENERATE registration.yaml
   debug "Gerando o arquivo $bridge_whatsapp/registration.yaml"
