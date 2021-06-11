@@ -53,9 +53,7 @@
          # dev mobile
          # jdk8 
 
-         (git.overrideAttrs(old:{
-          version="2.25.1";
-         }))
+         git
          lazygit
          
          # communication

@@ -1,7 +1,8 @@
 { 
   pkgs ? import <nixpkgs> {}, 
   stdenv ? pkgs.stdenv,
-  bundlerEnv ? pkgs.bundlerEnv
+  bundlerEnv ? pkgs.bundlerEnv,
+  systemdUser ? import ./systemd-user.nix {}
 }:
 stdenv.mkDerivation rec {
   pname = "drivesync-${version}";
@@ -31,42 +32,29 @@ stdenv.mkDerivation rec {
     # in future this will be used
   };
 
+  service = systemdUser.service{
+    name="drivesync";
+    description="Google Drive Sync Service";
+    destination="/lib/systemd/user/drivesync.service";
+    type="oneshot";
+    execStart="${pkgs.ruby}/bin/ruby /home/rodrigo/.nix-profile/lib/drivesync.rb";
+  };
+
+  timer = systemdUser.timer{
+    name="drivesync";
+    description="Verifica se os arquivos do  Google Drive foram modificados";
+    destination="/lib/systemd/user/drivesync.timer";
+    delayOnBoot = "5min";
+    delayAfterActive = "15min";
+  };
+  
+  #OPTIONS
   allow_remote_deletion = "false";
   drivePath = "~/Documentos/Google-Drive/";
-  enableService = true;
 
   postUnpack = ''
     mkdir -p $out/lib/src/
     mkdir -p $out/lib/systemd/user/
-    cat > $out/lib/systemd/user/drivesync.service << EOF
-[Unit]
-Description=Google Drive Sync Service
-
-[Service]
-ExecStart=${pkgs.ruby}/bin/ruby $out/lib/drivesync.rb
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=drivesync
-
-[Install]
-WantedBy=graphical.target
-EOF
-
-    cat > $out/lib/systemd/user/drivesync.timer << EOF
-[Unit]
-Description=Verifica se os arquivos do  Google Drive foram modificados
-
-[Timer]
-# Aguarda 15 minutos para iniciar após o boot
-OnBootSec=15min
-
-# Aguarda 15 minutos após a execução de drivesync.service
-OnUnitActiveSec=15min
-
-[Install]
-WantedBy=timers.target
-EOF
-
   '';
 
   installPhase = ''
@@ -99,6 +87,9 @@ EOF
     update_key "drive_path" '"${drivePath}"' "$out/lib/src/defaultconfig"
 
     echo ${pkgs.ruby}/bin/ruby $out/lib/drivesync.rb
+
+    cp ${timer}/lib/systemd/user/* $out/lib/systemd/user/
+    cp ${service}/lib/systemd/user/* $out/lib/systemd/user
   '';
   
   # Ensure that we replace the config path to point ~/.config/drivesync cause I don't like 
@@ -117,6 +108,7 @@ EOF
     # link $out/lib/systemd to ~/.nix-profile/share/systemd only if /lib/systemd/user exists
     # this allow use systemd user activation
     _moveSystemdUserUnits
+    echo "${service}"
   '';
 
   phases = [ "postUnpack" "installPhase" "checkPhase" "postBuild" ];

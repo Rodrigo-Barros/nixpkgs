@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+usage(){
+  tabs="\t\t\t"
+  echo "Ajuda:"
+  echo "--build $tabs constroi o ambiente executando a linkagem de serviços para seu usuário"
+}
+
+link_user_services(){
+  [ ! -e "$HOME/.nix-profile/share/systemd/user" ] && echo "Você não possui a pasta $HOME/.nix-profile/share/systemd/user" ] && exit 1
+  [ ! -e "$HOME/.config/systemd/user" ] && echo "Você não possui a pasta $HOME/.systemd/user" && exit 2
+  for service in $HOME/.nix-profile/share/systemd/user/* ; do
+    services_path="/home/rodrigo/.config/systemd/user"
+    service_name=$(basename $service)
+    updates_services_path="$updates_services_path/$service_name"
+    ln -sf "$service" "$services_path/$service_name"
+  done
+}
+
+build_env(){
+  nix-env -iA nixpkgs.packages && link_user_services || echo "Houveram Erros ao finalizar o build código de saída $?" && exit 0
+  echo "Build finalizado com sucesso"
+}
+
+case "$@" in 
+  --build)
+    build_env;;
+
+  *|-h|--help)
+    usage;;
+esac

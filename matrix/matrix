@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p postgresql matrix-synapse mautrix-telegram mautrix-whatsapp matrix-appservice-irc
+
 [ $DEBUG ] && set -x
 args="$@"
 tabs="\t\t\t"
@@ -39,7 +41,6 @@ uncomment_and_update_key(){
 }
 
 edit(){
-  [ -z "$EDITOR" ] && EDITOR=nvim
   exec $EDITOR $0
 }
 
@@ -170,12 +171,12 @@ EOF
 }
 
 setup_irc_freenode(){
-  printf "\nInsira seu usuário da rede Freenode:"
-  read botnick
-  echo ""
-  printf "Insira a senha do seu usuário na rede Freenode:"
-  read -s botpass
-  echo ""
+  #printf "\nInsira seu usuário da rede Freenode:"
+  #read botnick
+  #echo ""
+  #printf "Insira a senha do seu usuário na rede Freenode:"
+  #read -s botpass
+  #echo ""
 
   cat >> "$bridge_irc/irc_servers_configs" <<EOF 
 
@@ -195,6 +196,7 @@ setup_irc_freenode(){
         o: 50
         v: 1
       botConfig:
+        enabled: false
         nick: "$botnick"                                         ############## CHANGE THIS #############
         password: "$botpass"                                     ############## CHANGE THIS #############
         joinChannelsIfNoUsers: true
@@ -250,12 +252,12 @@ EOF
 }
 
 setup_irc_libera(){
-  printf "\nInsira seu usuário na rede Libera.chat:"
-  read botnick
-  echo ""
-  printf "Insira a senha do seu usuário na rede Libera.chat:"
-  read -s botpass
-  echo ""
+  # printf "\nInsira seu usuário na rede Libera.chat:"
+  # read botnick
+  # echo ""
+  # printf "Insira a senha do seu usuário na rede Libera.chat:"
+  # read -s botpass
+  # echo ""
 
   cat >> "$bridge_irc/irc_servers_configs" <<EOF 
 
@@ -275,6 +277,7 @@ setup_irc_libera(){
           o: 50
           v: 1
         botConfig:
+          enabled: false
           nick: "$botnick"                                         ############## CHANGE THIS #############
           password: "$botpass"                                     ############## CHANGE THIS #############
           joinChannelsIfNoUsers: true
@@ -623,21 +626,21 @@ start_whatsapp(){
   mautrix-whatsapp -c "$bridge_whatsapp/config.yaml"
 }
 
-psql(){
-  $HOME/.config/nixpkgs/matrix/result/bin/psql "$@"
-}
-
-pg_ctl(){
-  $HOME/.config/nixpkgs/matrix/result/bin/pg_ctl "$@"
-}
-
-initdb(){
-  $HOME/.config/nixpkgs/matrix/result/bin/initdb "$@"
-}
-
-createdb(){
-  $HOME/.config/nixpkgs/matrix/result/bin/createdb "$@"
-}
+# psql(){
+#   $HOME/.config/nixpkgs/matrix/result/bin/psql "$@"
+# }
+# 
+# pg_ctl(){
+#   $HOME/.config/nixpkgs/matrix/result/bin/pg_ctl "$@"
+# }
+# 
+# initdb(){
+#   $HOME/.config/nixpkgs/matrix/result/bin/initdb "$@"
+# }
+# 
+# createdb(){
+#   $HOME/.config/nixpkgs/matrix/result/bin/createdb "$@"
+# }
 
 login(){
   start_irc_db

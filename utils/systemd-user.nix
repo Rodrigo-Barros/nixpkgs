@@ -1,17 +1,17 @@
 # units
-{}:
+{pkgs ? import <nixpkgs> {} }:
 {
   service = {
     name ? "service",
     description ? "service description",
     execStartPre ? "",
     execStart ? "",
-    execStartPost? "",
+    execStopPost ? "",
     target ? "default.target",
     type ? "simple",
     log ? "syslog"
   }:{
-    inherit name description execStartPre execStart execStartPost target type log;
+    inherit name description execStartPre execStart execStopPost target type log;
     unitFile=''
       [Unit]
       Description=${description}
@@ -19,7 +19,7 @@
       [Service]
       ExecStartPre=${execStartPre}
       ExecStart=${execStart}
-      ExecStopPost=${execStartPost}
+      ExecStopPost=${execStopPost}
       Type=${type}
       SyslogIdentifier=${name}
       StandardOutput=${log}
