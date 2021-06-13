@@ -1,0 +1,57 @@
+" VIM SETTINGS
+" {{{
+
+set ts=2 sw=2 ai
+set laststatus=2
+set number
+set relativenumber
+set mouse=n
+set termguicolors
+let g:mapleader = "\<Space>"
+
+" }}}
+
+" VIM STARTUP
+" {{{
+augroup startup
+  au!
+  au BufEnter * :packadd onedark-vim
+  au BufEnter * colorscheme onedark
+
+  " LAZY LOADING PLUGINS BY FILE TYPE
+  
+  au FileType php,javascript,css,python,vim,html :packadd auto-pairs
+  au FileType php,javascript,css,python,vim,html :packadd MatchTagAlways
+  au FileType php,javascript,css,python,vim,html :packadd vim-surround
+
+augroup END
+" }}}
+
+" PLUGINS SETTINGS
+" {{{ 
+" WHICHKEY
+
+let g:which_key_map = {}
+let g:which_key_map.l = {
+      \'name':'LazyGit',
+      \'g':'open'
+      \}
+
+let g:which_key_map.w = "Vim Wiki"
+let g:which_key_map.t = 'TaskWarrior'
+
+" }}}
+
+" KEYBINDS
+" {{{
+nnoremap <C-o> :FZF<CR>
+
+" LAZY LOADING PLUGINS BY KEYBIND
+nnoremap <silent> <leader>lg :packadd lazygit \|:LazyGit<CR>
+nnoremap <silent> <leader>w :packadd vimwiki \|:VimWikiIndex<CR>
+
+nnoremap <silent> <leader> :packadd whichKey \| call which_key#register('<Space>', "g:which_key_map") \| :WhichKey '<Space>'<CR>
+
+" }}}
+
+" vim: set foldmethod=marker:

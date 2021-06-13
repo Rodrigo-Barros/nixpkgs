@@ -105,10 +105,7 @@ stdenv.mkDerivation rec {
   # NIX_DEBUG = 7;
 
   postBuild = ''
-    # link $out/lib/systemd to ~/.nix-profile/share/systemd only if /lib/systemd/user exists
-    # this allow use systemd user activation
     _moveSystemdUserUnits
-    echo "${service}"
   '';
 
   phases = [ "postUnpack" "installPhase" "checkPhase" "postBuild" ];

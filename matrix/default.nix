@@ -8,7 +8,7 @@ let
     description ="Matrix service and bridges"; 
     name="matrix"; 
     type="forking";
-    execStart="${matrixManager}/bin/matrix --start-server --start telegram --start whatsapp --start irc";
+    execStart="${matrixManager}/bin/matrix --start-server --start-all";
     execStopPost="${matrixManager}/bin/matrix --stop-irc-db";
   };
   installService = pkgs.writeTextFile {
@@ -31,7 +31,8 @@ pkgs.buildEnv rec{
   name="matrix-with-bridges";
   paths = with pkgs;[
     # server
-    matrix-synapse 
+    matrix-synapse
+    
 
     mautrix-telegram
     mautrix-whatsapp
@@ -45,6 +46,9 @@ pkgs.buildEnv rec{
 
     # my matrix manager script
     matrixManager
+
+    # dependencie for telegram bridge
+    python38Packages.alembic
   ];
 
   postBuild = ''
@@ -52,5 +56,4 @@ pkgs.buildEnv rec{
     _moveSystemdUserUnits
   '';
 
-  pathsToLink = [ "/lib" "/bin" "/share" ];
 }

@@ -1,7 +1,7 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p postgresql matrix-synapse mautrix-telegram mautrix-whatsapp matrix-appservice-irc
+#! nix-shell -i bash -p postgresql matrix-synapse mautrix-telegram mautrix-whatsapp matrix-appservice-irc yq-go
 
-[ $DEBUG ] && set -x
+[ -z "$DEBUG" ] && [ "$DEBUG" = "2" ] && set -x
 args="$@"
 tabs="\t\t\t"
 
@@ -60,11 +60,13 @@ cat<<EOF
 
 
   Comandos das bridges:
-
+  
   --setup  bridgename        inicia o processo de configuração da bridge
   --setup-list               lista as bridges disponiveis para configurar
+  --debug  bridgename        depura informações da bridge selecioa (no forking)
 
-  --start bridgename         inicia apenas a bridge selecionada
+  --start bridgename         inicia apenas a bridge selecionada (forking)
+  --start-all                inicia todas as bridges
 
   Somente para IRC bridge:
   --start-db-irc             inicia o banco de dados do irc útil para usar com systemd
@@ -79,6 +81,8 @@ cat<<EOF
   servicename --setup --debug
   isto resulta num erro porque setup não considera valores iniciados com -- ou -
 
+  forking: inicia o serviço em segundo plano.
+  no forking: inicia o serviço no terminal interativamente.
 EOF
 # prevents display help two times when use -h -h as arguments
 exit 0
@@ -384,7 +388,6 @@ setup_irc(){
   done < "$bridge_irc/irc_servers_configs"
 
   sed -i -r "s/\s*?servers:\s*?\{\}\s*?/  servers: \n $servers_configs/" $config_file
-  echo $servers_configs
 
   #GENERATE IRC PASSKEY
   [ ! -e passkey.pem ] && \
@@ -449,7 +452,7 @@ setup_telegram(){
   alembic_ini="https://raw.githubusercontent.com/tulir/mautrix-telegram/$version/alembic.ini"
 
   # Copy alembic folder
-  debug "Copiando os arquivos do repositorio"
+   debug "Copiando os arquivos do repositorio"
   /usr/bin/git clone --no-checkout "https://github.com/tulir/mautrix-telegram/" "$bridge_telegram"
   cd "$bridge_telegram"
   /usr/bin/git sparse-checkout set alembic
@@ -479,7 +482,7 @@ Pressione Qualquer tecla para Prosseguir
 EOF
 
   read go
-  exec xdg-open "https://my.telegram.org/apps" &
+  exec xdg-open "https://my.telegram.org/apps" 2> /dev/null &
   echo "Informe sua api_id:"
   read api_id
   echo "Informe sua api_hash:"
@@ -596,7 +599,6 @@ start_server(){
   homeserver -c $synapse/homeserver.yaml -D
 }
 
-
 stop_server(){
   server_pid=$(ps aux | grep homeserver | head -n -1 | awk '{ print $2 }')
   kill -9 $server_pid 2> /dev/null && echo "O servidor foi parado" || echo "O servidor não está rodando"
@@ -611,46 +613,37 @@ reset(){
 }
 
 _start(){
-  service=$1
-  [ "$service" = "server" ] && echo "inicie o server com --start-server" && exit 6
-  start_$service
+  bridge="$1"
+  arg_usage "$bridge" "--start" "telegram"
+  case $bridge in 
+    irc)
+      start_$bridge;;
+    telegram)
+      start_$bridge;;
+    whatsapp)
+      start_$bridge;;
+    server)
+      echo "Inicie o servidor utilizando --start-server" && exit 0;;
+    *)
+      setup_list && exit 0;
+  esac
 }
 
 start_telegram(){
   cd $bridge_telegram
-  mautrix-telegram -c "$bridge_telegram/config.yaml"
+  mautrix-telegram -c "$bridge_telegram/config.yaml" &
 }
 
 start_whatsapp(){
   cd $bridge_whatsapp
-  mautrix-whatsapp -c "$bridge_whatsapp/config.yaml"
+  mautrix-whatsapp -c "$bridge_whatsapp/config.yaml" &
 }
 
-# psql(){
-#   $HOME/.config/nixpkgs/matrix/result/bin/psql "$@"
-# }
-# 
-# pg_ctl(){
-#   $HOME/.config/nixpkgs/matrix/result/bin/pg_ctl "$@"
-# }
-# 
-# initdb(){
-#   $HOME/.config/nixpkgs/matrix/result/bin/initdb "$@"
-# }
-# 
-# createdb(){
-#   $HOME/.config/nixpkgs/matrix/result/bin/createdb "$@"
-# }
-
-login(){
-  start_irc_db
-  psql -h $bridge_irc/database -d postgres
-}
 
 start_irc(){
   cd $bridge_irc
   start_irc_db
-  matrix-appservice-irc -c "$bridge_irc/config.yaml" -f "$bridge_irc/registration.yaml" -p 9999 
+  matrix-appservice-irc -c "$bridge_irc/config.yaml" -f "$bridge_irc/registration.yaml" -p 9999 &
 }
 
 start_irc_db(){
@@ -673,6 +666,12 @@ start_irc_db(){
   fi
 }
 
+start_all(){
+  start_irc
+  start_telegram
+  start_whatsapp
+}
+
 stop_irc_db(){
   default_locale=$LOCALE_ARCHIVE
   export LOCALE_ARCHIVE="$HOME/.nix-profile/lib/locale/locale-archive" 
@@ -685,6 +684,50 @@ stop_irc_db(){
   fi
 }
 
+# DEBUG SERVICES SECTION
+
+login(){
+  start_irc_db
+  psql -h $bridge_irc/database -d postgres
+}
+
+_debug(){
+  bridge="$1"
+  arg_usage "$bridge" "--start" "telegram"
+  case $bridge in 
+    irc)
+      debug_$bridge;;
+    telegram)
+      debug_$bridge;;
+    whatsapp)
+      debug_$bridge;;
+    server)
+      debug_$bridge;;
+    *)
+      setup_list && exit 0;
+  esac
+}
+
+debug_irc(){
+  cd $bridge_irc
+  start_irc_db
+  matrix-appservice-irc -c "$bridge_irc/config.yaml" -f "$bridge_irc/registration.yaml" -p 9999
+}
+
+debug_telegram(){
+  cd $bridge_telegram
+  mautrix-telegram -c "$bridge_telegram/config.yaml" 
+}
+
+debug_whatsapp(){
+  cd $bridge_whatsapp
+  mautrix-whatsapp -c "$bridge_whatsapp/config.yaml"
+}
+
+debug_server(){
+  tail -f $synapse/homeserver.log
+}
+
 # show help if user not pass any arguments
 [ "$#" -eq 0 ] && help
 
@@ -692,7 +735,9 @@ for arg in $args;do
   case "$arg" in
     -h|--help) help;;
     --start) _start $2; shift 2;;
+    --start-all) start_all; shift 1;;
     --start-server) start_server; shift 1;;
+    --debug) _debug $2; shift 2;;
     --stop-server) stop_server;shift 1;;
     --setup-server) setup_server; shift 1;;
     --start-irc-db) start_irc_db;;
