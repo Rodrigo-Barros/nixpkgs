@@ -53,20 +53,24 @@ let
       sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
     };
   };
-  
+
 in
 pkgs.neovim.override {
   configure={
+    customRC = builtins.readFile ./vimrc;
     packages.myPlugins = with pkgs.vimPlugins; {
       start = [ 
-        barbar-nvim
-        nvim-web-devicons
-        #telescope-media-files
+        telescope-media-files
 				telescope-nvim
-        vim-gitgutter
+        #vim-gitgutter
 				vim-startify
+        nvim-web-devicons
+        barbar-nvim
+        galaxyline-nvim
+        onedark-vim
       ];
       opt = [ 
+        gitsigns-nvim
         auto-pairs
         dbext
         fugitive 
@@ -74,7 +78,6 @@ pkgs.neovim.override {
         lazygit 
         MatchTagAlways
 				nvim-lspconfig
-        onedark-vim 
         taskwarrior
         vim-nix
         vim-surround
@@ -85,7 +88,6 @@ pkgs.neovim.override {
       # To automatically load a plugin when opening a filetype, add vimrc lines like:
       # autocmd FileType php :packadd phpCompletion
     };
-    customRC = builtins.readFile ./vimrc;
   };
+}
 
-	}

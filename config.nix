@@ -42,7 +42,7 @@
 				 ueberzug
          bat ripgrep
          nvim
-         nodejs fira-code
+         nodejs fira-code-symbols
 
          # vcs
          git lazygit
@@ -80,9 +80,7 @@
 
        postBuild = ''
          substituteInPlace $prefix/share/applications/kitty.desktop \
-          --replace \
-          "Exec=kitty" \
-          "Exec=nixGL /nix/store/3b91fwq7h8c69vq6vdy3dzh5iqhmfy8g-all-packages/bin/kitty"
+          --replace "Exec=kitty" "Exec=nixGL /nix/store/3b91fwq7h8c69vq6vdy3dzh5iqhmfy8g-all-packages/bin/kitty"
        '';
 
      };
