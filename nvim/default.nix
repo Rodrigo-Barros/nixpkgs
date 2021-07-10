@@ -23,23 +23,64 @@ let
       sha256 = "18n5mqwgkjsf67jg2r24d4w93hadg7fnqyvmqq6dd5bsmqwp9v14";
     };
   };
+
+  telescope-media-files = pkgs.vimUtils.buildVimPlugin{
+    name="telescope-media-files";
+    src = pkgs.fetchFromGitHub{
+      owner = "nvim-telescope";
+      repo = "telescope-media-files.nvim";
+      rev = "85f6cf21ae49cc8291a07728498a64ae67fef503";
+      sha256 = "160y1yc2b0xy2p1nqxzmaw76fvrh66jqzb5pi4mj0nh432jk639a";
+    };
+  };
+
+  dbext = pkgs.vimUtils.buildVimPlugin{
+    name="dbext";
+    src = pkgs.fetchFromGitHub{
+      owner = "vim-scripts";
+      repo = "dbext.vim";
+      rev = "14f3d530b6189dc3f97edfa70b7a36006e21148c";
+      sha256 = "03mrqrf689ww8ci80mwlz87zyijdrfnz57qq4n9waavjl9lbhpmn";
+    };
+  };
+
+  taskwarrior = pkgs.vimUtils.buildVimPlugin{
+    name="taskwarrior";
+    src = pkgs.fetchFromGitHub{
+      owner = "xarthurx";
+      repo = "taskwarrior.vim";
+      rev = "c77eac74a5ae9d8fd72d5d07aa284b053c51f982";
+      sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
+    };
+  };
+  
 in
 pkgs.neovim.override {
   configure={
     packages.myPlugins = with pkgs.vimPlugins; {
       start = [ 
+        barbar-nvim
+        nvim-web-devicons
+        #telescope-media-files
+				telescope-nvim
         vim-gitgutter
+				vim-startify
       ];
       opt = [ 
-        whichKey
-        vim-surround
-        lazygit 
-        fzf-vim
         auto-pairs
-        onedark-vim 
+        dbext
         fugitive 
-        vimwiki
+        fzf-vim
+        lazygit 
         MatchTagAlways
+				nvim-lspconfig
+        onedark-vim 
+        taskwarrior
+        vim-nix
+        vim-surround
+        vimwiki
+        whichKey
+        nvim-tree-lua
       ];
       # To automatically load a plugin when opening a filetype, add vimrc lines like:
       # autocmd FileType php :packadd phpCompletion
@@ -47,4 +88,4 @@ pkgs.neovim.override {
     customRC = builtins.readFile ./vimrc;
   };
 
-}
+	}

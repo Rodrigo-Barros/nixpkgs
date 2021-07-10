@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-
+set -e
 usage(){
   tabs="\t\t\t"
   echo "Ajuda:"
@@ -18,8 +18,8 @@ link_user_services(){
 }
 
 build_env(){
-  nix-env -iA nixpkgs.packages && link_user_services || echo "Houveram Erros ao finalizar o build código de saída $?" && exit 0
-  echo "Build finalizado com sucesso"
+  nix-env -iA nixpkgs.packages && link_user_services &&  echo "\nBuild finializado com Sucesso" || \
+    echo "\nHouveram Erros ao finalizar o build, código de saída $?" && exit 0
 }
 
 case "$@" in 

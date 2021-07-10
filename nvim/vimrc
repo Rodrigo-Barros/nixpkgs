@@ -8,49 +8,147 @@ set relativenumber
 set mouse=n
 set termguicolors
 let g:mapleader = "\<Space>"
+set signcolumn=yes
 
 " }}}
 
 " VIM STARTUP
-" {{{
+	" {{{
 augroup startup
   au!
   au BufEnter * :packadd onedark-vim
+  au BufEnter * :packadd nvim-lspconfig
   au BufEnter * colorscheme onedark
+  au BufReadPre *.nix :packadd vim-nix
 
   " LAZY LOADING PLUGINS BY FILE TYPE
   
   au FileType php,javascript,css,python,vim,html :packadd auto-pairs
   au FileType php,javascript,css,python,vim,html :packadd MatchTagAlways
   au FileType php,javascript,css,python,vim,html :packadd vim-surround
+  au FileType php,javascript,python,sql :packadd dbext
+	au FileType php,javascript,python,sql :DBSetOption profile=mySQL
 
 augroup END
 " }}}
 
 " PLUGINS SETTINGS
-" {{{ 
+" {{{
+
 " WHICHKEY
+" {{{ 
 
 let g:which_key_map = {}
 let g:which_key_map.l = {
-      \'name':'LazyGit',
+      \'name':'lazygit',
       \'g':'open'
       \}
+
+let g:which_key_map.t = {
+			\'\\' :'busca',
+      \'name':'Telescope',
+      \'o':'abrir arquivos',
+			\'c': 'comandos',
+			\'r':'registradores',
+			\'k':'keymaps'
+      \}
+
+let g:which_key_map.f = {
+			\'name' : 'Fugitive',
+			\'s':'status',
+			\'l':'log',
+			\'d':'diff',
+			\'b':'author',
+			\'u':'pull',
+			\'p':'push'
+}
 
 let g:which_key_map.w = "Vim Wiki"
 let g:which_key_map.t = 'TaskWarrior'
 
 " }}}
 
+" DBEXT
+" {{{
+let g:dbext_default_profile_mySQL = 'type=MYSQL:user=admin:passwd=admin:dbname=programador_junior'
+" }}}
+
+" BARBAR
+
+
+" }}}
+
 " KEYBINDS
 " {{{
-nnoremap <C-o> :FZF<CR>
+
+" GENERAL
+" {{{
+" MOVING BETWEEN TABS
+nnoremap <silent> <C-H> :tabNext<CR>
+nnoremap <silent> <C-L> :tabprevious<CR>
+
+" MOVING BETWEEN SPLITS
+nnoremap <C-M-L> <C-W><C-L>
+nnoremap <C-M-H> <C-W><C-H>
+nnoremap <C-M-J> <C-W><C-J>
+nnoremap <C-M-K> <C-W><C-K>
+
+" EXIT ON jj
+inoremap jj <ESC>
+
+" DISABLE ARROWS
+nnoremap <UP> <NOP>
+nnoremap <DOWN> <NOP>
+nnoremap <LEFT> <NOP>
+nnoremap <RIGHT> <NOP>
+
+" MOVE LINE UP OR DOWN
+nnoremap <M-J> :m .+1<CR>==
+nnoremap <M-K> :m .-2<CR>==
+inoremap <M-J> <Esc>:m .+1<CR>==gi
+inoremap <M-K> <Esc>:m .-2<CR>==gi
+vnoremap <M-J> :m '>+1<CR>gv=gv
+vnoremap <M-K> :m '<-2<CR>gv=gv
+
+" }}}
+
+" Telescope
+" {{{
+nnoremap <leader>to :Telescope find_files<CR>
+nnoremap <leader>t/ :Telescope current_buffer_fuzzy_find<CR>
+nnoremap <leader>tr :Telescope registers<CR>
+nnoremap <leader>tc :Telescope commands<CR>
+nnoremap <leader>tk :Telescope keymaps<CR>
+
+" }}}
+ 
+" }}}
 
 " LAZY LOADING PLUGINS BY KEYBIND
-nnoremap <silent> <leader>lg :packadd lazygit \|:LazyGit<CR>
-nnoremap <silent> <leader>w :packadd vimwiki \|:VimWikiIndex<CR>
+" {{{
 
+" SINGLE
+" {{{ 
 nnoremap <silent> <leader> :packadd whichKey \| call which_key#register('<Space>', "g:which_key_map") \| :WhichKey '<Space>'<CR>
+
+nnoremap <silent> <leader>lg :packadd lazygit \|:LazyGit<CR>
+nnoremap <silent> <leader>w :packadd vimwiki \|:VimwikiIndex<CR>
+
+nnoremap <silent> <leader>t :packadd taskwarrior \| :TW <CR>
+nnoremap <silent> <B> :packadd \| NvimTreeToogle <CR>
+
+" }}}
+
+" VIM FUGITIVE
+" {{{
+nnoremap <silent> <leader>fs :packadd vim-fugitive \| :Gstatus <CR>
+nnoremap <silent> <leader>fl :packadd vim-fugitive \| :GcLog <CR>
+nnoremap <silent> <leader>fd :packadd vim-fugitive \| :Gvdiffsplit <CR>
+nnoremap <silent> <leader>fb :packadd vim-fugitive \| :Gblame<CR>
+nnoremap <silent> <leader>fu :packadd vim-fugitive \| :Git pull<CR>
+nnoremap <silent> <leader>fp :packadd vim-fugitive \| :Git push<CR>
+
+" }}}
 
 " }}}
 
