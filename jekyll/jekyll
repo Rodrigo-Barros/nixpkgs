@@ -1,0 +1,176 @@
+#!/bin/bash
+[ -z $JEKYLL_SITE_ROOT ] && JEKYLL_SITE_ROOT="$HOME/Documentos/blog"
+[ -z $EDITOR ] && EDITOR=nvim
+
+show_help(){
+cat << EOL
+jekyll-helper post opções:
+
+-e                  edita esse script
+
+--new 							cria um novo post e abre no seu editor favorito
+--build 						gera os arquivos do site final
+--serve							inicia o servidor em localhost para testar seu site
+--draft 						inicia a edição do post como rascunho
+--manage 						gerencia os seus post permitindo alterar o estado entre rascunho e publico
+
+EOL
+
+exit 0
+}
+
+friendly_post_name(){
+	data=$(date +"%Y-%m-%d-")
+	post_title="$data$1.markdown"
+	hifen="s/\s/-/g"
+	lowercase="s/(\w|\d)/\l\1/g"
+	echo $post_title | sed -r $hifen | sed -r $lowercase
+}
+
+post(){
+post_type="$1"
+
+case $post_type in
+	new)
+		working_dir="_posts";;
+	draft)
+		working_dir="_drafts";;
+	*)
+		echo "Esse função só aceita new ou draft como argumento"; exit 1 ;;
+esac
+
+# DISBALE FILE EXISTS
+mkdir $JEKYLL_SITE_ROOT/$working_dir 2> /dev/null
+
+printf "Titulo:"
+read titulo
+
+printf "Categorias:"
+read categorias
+
+data=$(date +"%Y-%m-%d %H:%M:%S")
+file=$(friendly_post_name "$titulo")
+
+cat << EOF > $JEKYLL_SITE_ROOT/$working_dir/$file
+---
+layout: post
+title:  "$titulo"
+date:   $data -0300
+categories: $categorias
+---
+EOF
+
+exec $EDITOR $JEKYLL_SITE_ROOT/$working_dir/$file
+}
+
+manage(){
+cat << EOL 
+Opções:
+
+Gerenciar Posts(p)
+Gerenciar Rascunhos(r)
+Sair (q)
+
+EOL
+
+read -sn 1 option
+
+case $option in 
+	r)
+		do_action "_drafts";;
+	p)
+		do_action "_posts";;
+	q)
+		exit 0;;
+	*)
+		echo -e "\nOpção incorreta." ; manage;;
+esac
+}
+
+do_action(){
+target="$1"
+posts=$(ls $JEKYLL_SITE_ROOT/$target | fzf --multi)
+
+cat << EOL
+
+Editar(e)
+Mover(m)
+Excluir(d)
+Página inicial(h)
+Sair(q)
+
+EOL
+
+read -sn 1 action
+
+case $action in
+	d)
+		delete $target "$posts";;
+	e)
+		edit $target "$posts";;
+	h)
+		manage;;
+	m)
+		move_from $target "$posts";;
+	q)
+		exit 0;;
+	*)
+		echo -e "Opção incorreta"; manage;;
+esac
+
+}
+
+delete(){
+	target="$1"
+	posts="$2"
+	for post in $posts;do
+		rm -i $JEKYLL_SITE_ROOT/$target/$post
+	done
+}
+
+edit(){
+	target="$1"
+	posts="$2"
+	files_list=""
+	for post in $posts;do
+		files_list+="$JEKYLL_SITE_ROOT/$target/$post "
+	done
+
+	exec $EDITOR $files_list
+}
+
+move_from(){
+	from="$1"
+	posts="$2"
+
+	case $from in
+		_drafts)
+			to="_posts";;
+		_posts)
+			to="_drafts";;
+		*)
+			echo -e "\nOpção incorreta"; manage;;
+	esac
+
+	#posts=$(ls $JEKYLL_SITE_ROOT/$from | fzf --multi)
+	for i in $posts;do
+		#echo -e "\n mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i"
+		echo -e "\n\nmoving $from/$i to $to"
+		#mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i 
+	done
+}
+
+for arg in "$@"; do
+	case $arg in
+		--new)
+			post "new";;
+		--draft)
+			post "draft";;
+		--manage)
+			manage;;
+		-e)
+			exec $EDITOR $0;;
+		*)
+			show_help;;
+	esac
+done

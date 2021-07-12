@@ -68,6 +68,8 @@ pkgs.neovim.override {
         barbar-nvim
         galaxyline-nvim
         onedark-vim
+				nvim-lspconfig
+        nvim-compe
       ];
       opt = [ 
         gitsigns-nvim
@@ -77,7 +79,6 @@ pkgs.neovim.override {
         fzf-vim
         lazygit 
         MatchTagAlways
-				nvim-lspconfig
         taskwarrior
         vim-nix
         vim-surround

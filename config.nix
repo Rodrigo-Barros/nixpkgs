@@ -21,6 +21,10 @@
        ${builtins.readFile ./utils/nix-env-builder }
      '';
 
+     post = pkgs.writeScriptBin "post" ''
+      ${builtins.readFile ./jekyll/jekyll }
+     '';
+
      home = pkgs.buildEnv {
        name = "home-env";
        paths = with pkgs; [
@@ -41,8 +45,8 @@
          # editor config 
 				 ueberzug
          bat ripgrep
-         nvim
-         nodejs fira-code-symbols
+         nodejs 
+         nvim fira-code-symbols
 
          # vcs
          git lazygit
@@ -75,13 +79,21 @@
 				 #others
 				 zathura
 				 jekyll
+         post
+          
+         # time control
+         taskwarrior
+         timewarrior
 
        ];
 
-       postBuild = ''
-         substituteInPlace $prefix/share/applications/kitty.desktop \
-          --replace "Exec=kitty" "Exec=nixGL /nix/store/3b91fwq7h8c69vq6vdy3dzh5iqhmfy8g-all-packages/bin/kitty"
-       '';
+        postBuild = ''
+          substituteInPlace $prefix/share/applications/kitty.desktop \
+           --replace "Exec=kitty" "Exec=bash -c 'nixGL kitty'"
+
+            substituteInPlace $prefix/share/applications/chiaki.desktop \
+           --replace "Exec=chiaki" "Exec=bash -c \"nixGL chiaki\""
+        '';
 
      };
 
@@ -90,8 +102,8 @@
 			paths = with pkgs; [			
 				squid
 				ueberzug
-				nvim
 				nginx
+        asterisk
 			];
 
 		 };
