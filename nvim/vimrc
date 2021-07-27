@@ -19,7 +19,7 @@ augroup startup
 	" WORKAROUNDS
 	" {{{
 	" FIX HUNKS ISSUE FOUND AT :https://github.com/NixOS/nixpkgs/issues/96062
-	packadd! gitsigns.nvim
+	packadd! gitsigns-nvim
 	" }}}
 augroup END
 
@@ -107,6 +107,9 @@ local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+	-- lsp_signature-nvim
+	require "lsp_signature".on_attach()
+
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
@@ -133,7 +136,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "bashls", "rust_analyzer", "tsserver" }
+local servers = { "intelephense", "bashls", "tsserver" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -229,22 +232,26 @@ nnoremap <LEFT> <NOP>
 nnoremap <RIGHT> <NOP>
 
 " MOVE LINE UP OR DOWN
-nnoremap <M-J> :m .+1<CR>==
-nnoremap <M-K> :m .-2<CR>==
-inoremap <M-J> <Esc>:m .+1<CR>==gi
-inoremap <M-K> <Esc>:m .-2<CR>==gi
-vnoremap <M-J> :m '>+1<CR>gv=gv
-vnoremap <M-K> :m '<-2<CR>gv=gv
+nnoremap <silent> <M-J> :m .+1<CR>==
+nnoremap <silent> <M-K> :m .-2<CR>==
+inoremap <silent> <M-J> <Esc>:m .+1<CR>==gi
+inoremap <silent> <M-K> <Esc>:m .-2<CR>==gi
+vnoremap <silent> <M-J> :m '>+1<CR>gv=gv
+vnoremap <silent> <M-K> :m '<-2<CR>gv=gv
+
+vnoremap <C-c> "+y :echo 'Copied to clipboard'<CR>
 
 " }}}
 
 " Telescope
 " {{{
+
 nnoremap <leader>to :Telescope find_files<CR>
 nnoremap <leader>t/ :Telescope current_buffer_fuzzy_find<CR>
 nnoremap <leader>tr :Telescope registers<CR>
 nnoremap <leader>tc :Telescope commands<CR>
 nnoremap <leader>tk :Telescope keymaps<CR>
+nnoremap <leader>tru :Telescope oldfiles<CR>
 
 " }}}
  

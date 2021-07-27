@@ -580,7 +580,6 @@ setup_list(){
   cat <<EOF
   argumentos suportados:
   
-  server
   irc
   telegram
   whatsapp

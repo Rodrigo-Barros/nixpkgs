@@ -10,6 +10,8 @@
   matrix ? pkgs.callPackage ./matrix {},
   profile ? (pkgs.callPackage ./profile.nix {}).profile,
   services ? pkgs.callPackage services/default.nix {},
+  jekyll ? pkgs.callPackage ./jekyll {},
+  intelephense ? pkgs.callPackage ./nvim/language-server/intelephense/intelephense.nix {}
 }:
 {
    # allow comercial programs like chrome
@@ -20,9 +22,14 @@
      nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
        ${builtins.readFile ./utils/nix-env-builder }
      '';
-
+    
+     # Jekyll helper script
      post = pkgs.writeScriptBin "post" ''
       ${builtins.readFile ./jekyll/jekyll }
+     '';
+
+     taskremind = pkgs.writeScriptBin "taskremind" ''
+      ${builtins.readFile ./scripts/taskremind}
      '';
 
      home = pkgs.buildEnv {
@@ -46,8 +53,8 @@
 				 ueberzug
          bat ripgrep
          nodejs 
-         nvim fira-code-symbols
-
+         nvim fira-code-symbols intelephense
+         nodePackages.bash-language-server
          # vcs
          git lazygit
 
@@ -72,14 +79,15 @@
 
          # Scripts
          nixEnvBuilder
+         taskremind
 				 
          #desktop
          awesome
 
 				 #others
 				 zathura
-				 jekyll
          post
+         jekyll
           
          # time control
          taskwarrior

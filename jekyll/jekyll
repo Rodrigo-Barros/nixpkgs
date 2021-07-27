@@ -1,6 +1,7 @@
 #!/bin/bash
 [ -z $JEKYLL_SITE_ROOT ] && JEKYLL_SITE_ROOT="$HOME/Documentos/blog"
 [ -z $EDITOR ] && EDITOR=nvim
+[ -z $site_destination ] &&	site_destination="$HOME/Documentos/Git/Personal/rodrigo-barros.github.io/blog"
 
 show_help(){
 cat << EOL
@@ -8,12 +9,12 @@ jekyll-helper post opções:
 
 -e                  edita esse script
 
---new 							cria um novo post e abre no seu editor favorito
---build 						gera os arquivos do site final
---serve							inicia o servidor em localhost para testar seu site
---draft 						inicia a edição do post como rascunho
---manage 						gerencia os seus post permitindo alterar o estado entre rascunho e publico
-
+--new               cria um novo post e abre no seu editor favorito
+--build             gera os arquivos do site final
+--serve             inicia o servidor em localhost para testar seu site
+--draft             inicia a edição do post como rascunho
+--manage            gerencia os seus post permitindo alterar o estado entre rascunho e publico
+--publish           publica as alterações no blog
 EOL
 
 exit 0
@@ -61,6 +62,22 @@ categories: $categorias
 EOF
 
 exec $EDITOR $JEKYLL_SITE_ROOT/$working_dir/$file
+}
+
+publish(){
+	cd $JEKYLL_SITE_ROOT
+	JEKYLL_ENV=production jekyll build -d $site_destination
+	cd $site_destination
+	git add $site_destination
+	git status
+	printf "\nPublicar as alterações acima? (s/n)"
+	read response
+	if [ "$response" = "s" ];then
+		git commit
+		git push origin master
+	else
+		printf "\nSaindo sem fazer nenhuma alteração"
+	fi
 }
 
 manage(){
@@ -156,7 +173,7 @@ move_from(){
 	for i in $posts;do
 		#echo -e "\n mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i"
 		echo -e "\n\nmoving $from/$i to $to"
-		#mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i 
+		mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i 
 	done
 }
 
@@ -168,6 +185,8 @@ for arg in "$@"; do
 			post "draft";;
 		--manage)
 			manage;;
+		--publish)
+			publish;;
 		-e)
 			exec $EDITOR $0;;
 		*)

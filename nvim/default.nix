@@ -56,6 +56,7 @@ let
 
 in
 pkgs.neovim.override {
+  vimAlias = true;
   configure={
     customRC = builtins.readFile ./vimrc;
     packages.myPlugins = with pkgs.vimPlugins; {
@@ -70,6 +71,8 @@ pkgs.neovim.override {
         onedark-vim
 				nvim-lspconfig
         nvim-compe
+        vim-commentary
+        lsp_signature-nvim
       ];
       opt = [ 
         gitsigns-nvim
