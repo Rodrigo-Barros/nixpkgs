@@ -6,6 +6,12 @@ let
     alias dotfiles="$(which git) --git-dir=$DOTFILES --work-tree=$HOME"
     alias icat="kitty +kitten icat"
     alias grep="grep --color"
+    alias j="autojump"
+
+	lib="$(nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib64"
+	alias nvim="LD_LIBRARY_PATH=$lib nvim"
+	alias vim="LD_LIBRARY_PATH=$lib vim"
+	unset lib
   '';
   profileText = pkgs.writeText "profile" ''
     # LOCALE_ARCHIVE=/home/rodrigo/.nix-profile/lib/locale/locale-archive

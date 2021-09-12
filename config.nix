@@ -3,8 +3,8 @@
   pkgs ? import <nixpkgs> {nixpkgs.config.allowunfree=true;},
 
   # Graphics library
-  GL ? import ( fetchTarball "https://github.com/guibou/nixGL/archive/master.tar.gz" ) {},
-  
+  GL ? import ( fetchTarball "https://github.com/guibou/nixGL/archive/main.tar.gz" ) {},
+
   drivesync ? pkgs.callPackage ./drivesync {},
   nvim ? pkgs.callPackage ./nvim {},
   matrix ? pkgs.callPackage ./matrix {},
@@ -47,14 +47,19 @@
 
          # printer over usb
          # linuxPackages.usbip
-         GL.nixGLDefault
+         GL.auto.nixGLDefault
 
          # editor config 
-				 ueberzug
+		 ueberzug
          bat ripgrep
          nodejs 
-         nvim fira-code-symbols intelephense
+		 nvim
+	     nerdfonts intelephense
+
+         #LSP nodeps for nvim
          nodePackages.bash-language-server
+         sumneko-lua-language-server
+		 rnix-lsp
          # vcs
          git lazygit
 
@@ -70,9 +75,10 @@
          nmap drivesync firefox
          
          # terminal
-				 fzf kitty
-				 zsh zinit
+		 fzf kitty
+		 zsh zinit
          tmux
+         autojump
 
          # games
          chiaki lutris
@@ -83,9 +89,9 @@
 				 
          #desktop
          awesome
-
-				 #others
-				 zathura
+         dmenu
+		 #others
+		 zathura
          post
          jekyll
           
@@ -97,21 +103,21 @@
 
         postBuild = ''
           substituteInPlace $prefix/share/applications/kitty.desktop \
-           --replace "Exec=kitty" "Exec=bash -c 'nixGL kitty'"
+           --replace 'Exec=kitty' 'Exec=sh -c "nixGL kitty"'
 
             substituteInPlace $prefix/share/applications/chiaki.desktop \
-           --replace "Exec=chiaki" "Exec=bash -c \"nixGL chiaki\""
+           --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
         '';
 
      };
 
-		 work = pkgs.buildEnv {
+	work = pkgs.buildEnv {
 			name = "work-env";
 			paths = with pkgs; [			
 				squid
 				ueberzug
 				nginx
-        asterisk
+				asterisk
 			];
 
 		 };

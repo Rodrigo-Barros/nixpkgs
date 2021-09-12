@@ -2,16 +2,16 @@
   pkgs? import <nixpkgs> {}, 
   stdenv ? pkgs.stdenv,
 }:
-let 
-#   lazygit = pkgs.vimUtils.buildVimPlugin{
-#     name = "lazygit";
-#     src = pkgs.fetchFromGitHub{
-#       owner = "kdheepak";
-#       repo = "lazygit.nvim";
-#       rev = "71db1e8403dfce884480185be4145eae180b9c77";
-#       sha256 = "1ji23i43x3bhzph14c5cxqavjbhy4xry5yg8886d3i3hh89yy1zr";
-#     };
-#   };
+let
+   lazygit = pkgs.vimUtils.buildVimPlugin{
+     name = "lazygit";
+     src = pkgs.fetchFromGitHub{
+       owner = "kdheepak";
+       repo = "lazygit.nvim";
+       rev = "71db1e8403dfce884480185be4145eae180b9c77";
+       sha256 = "1ji23i43x3bhzph14c5cxqavjbhy4xry5yg8886d3i3hh89yy1zr";
+     };
+   };
 # 
 #   whichKey = pkgs.vimUtils.buildVimPlugin{
 #     name="whichKey";
@@ -58,7 +58,7 @@ let
 	 '';
    };
 
-  vim-atom-dark = pkgs.vimUtils.buildVimPlugin{
+  onedark = pkgs.vimUtils.buildVimPlugin{
 	name="vim-atom-dark";
 	src = pkgs.fetchFromGitHub{
 	   owner = "joshdick";
@@ -68,16 +68,16 @@ let
 	};
   };
 
-# 
-#   taskwarrior = pkgs.vimUtils.buildVimPlugin{
-#     name="taskwarrior";
-#     src = pkgs.fetchFromGitHub{
-#       owner = "xarthurx";
-#       repo = "taskwarrior.vim";
-#       rev = "c77eac74a5ae9d8fd72d5d07aa284b053c51f982";
-#       sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
-#     };
-#   };
+ 
+   taskwarrior = pkgs.vimUtils.buildVimPlugin{
+     name="taskwarrior";
+     src = pkgs.fetchFromGitHub{
+       owner = "xarthurx";
+       repo = "taskwarrior.vim";
+       rev = "c77eac74a5ae9d8fd72d5d07aa284b053c51f982";
+       sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
+     };
+   };
 
 in
 pkgs.neovim.override {
@@ -95,6 +95,18 @@ pkgs.neovim.override {
 			gitsigns-nvim
 			nvim-treesitter
 			dbext
+			nvim-tree-lua
+			barbar-nvim
+			lazygit
+			taskwarrior
+			vim-commentary
+			vim-surround
+			indentLine
+			nvim-dap
+			nvim-dap-ui
+			which-key-nvim
+			vimwiki
+			vim-floaterm
 
 			# Telescope
 			plenary-nvim
@@ -104,7 +116,7 @@ pkgs.neovim.override {
 
 			# Customization
 			windline
-			vim-atom-dark
+			onedark
 		];
 	};
   };

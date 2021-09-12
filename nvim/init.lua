@@ -14,8 +14,8 @@ function create_augroup(autocmds, name)
     cmd('augroup END')
 end
 
-function dump(dump_obj)
-	print(vim.inspect(dump_obj))
+function dump(var)
+	print(vim.inspect(var))
 end
 
 -- Settings
@@ -24,8 +24,8 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.relativenumber = true
 opt.number = true
-opt.autoindent = true
-opt.cindent=true
+-- opt.autoindent = true
+-- opt.cindent=true
 opt.termguicolors = true -- enable devicons, found at :https://github.com/nvim-telescope/telescope.nvim/issues/652#issuecomment-798766661
 opt.signcolumn = "yes"
 opt.updatetime = 1000
@@ -40,7 +40,12 @@ cmd("colorscheme onedark")
 -- {{{
 create_augroup({
 	{'FileType','php,javascript,python,sql,lua','DBSetOption','profile=mySQL'},
+	{'BufEnter','*nix','set','filetype=nix'}
 },"startup")
+
+-- create_augroup({
+-- 	{'BufEnter','*nix','set','filetype=nix'}
+-- },"fixnix")
 
 -- }}}
 -- }}}
@@ -63,8 +68,8 @@ lsp_server.sumneko = {
 		cmd = {'lua-language-server'};
 		filetypes = {'lua'};
 		root_dir = function(fname)
-      	return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    end;
+      		return util.find_git_ancestor(fname) or util.path.dirname(fname)
+    	end;
 	};
 }
 
@@ -76,16 +81,16 @@ local on_attach = function(client, bufnr)
 	-- highlight LSP
 	-- local cmd=vim.api.nvim_command
 
-	if client.resolved_capabilities.document_highlight then
-     vim.api.nvim_exec([[
-         hi LspReferenceRead cterm=bold ctermbg=red guibg=Purple
-         hi LspReferenceText cterm=bold ctermbg=red guibg=Purple
-         hi LspReferenceWrite cterm=bold ctermbg=red guibg=Purple
-     ]], false)
-     cmd 'autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()'
-     cmd 'autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()'
-     cmd 'autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()'
-	end
+	-- if client.resolved_capabilities.document_highlight then
+    --  vim.api.nvim_exec([[
+    --      hi LspReferenceRead cterm=bold ctermbg=red guibg=Purple
+    --      hi LspReferenceText cterm=bold ctermbg=red guibg=Purple
+    --      hi LspReferenceWrite cterm=bold ctermbg=red guibg=Purple
+    --  ]], false)
+    --  cmd 'autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()'
+    --  cmd 'autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()'
+    --  cmd 'autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()'
+	-- end
 
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -120,7 +125,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'bashls','intelephense','sumneko' }
+local servers = { 'bashls','intelephense','sumneko','rnix' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -144,7 +149,7 @@ ts.setup{
 
 -- Compe
 -- {{{
-compe=require('compe')
+local compe=require('compe')
 compe.setup {
   enabled = true;
   autocomplete = true;
@@ -202,7 +207,7 @@ map('i', '<C-k>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
 
 -- Git Signs
 -- {{{
-gitsigns = require('gitsigns')
+local gitsigns = require('gitsigns')
 gitsigns.setup()
 -- }}}
 
@@ -239,7 +244,7 @@ telescope.setup{
 	}
   },
   extensions = {
-	  media_files = {
+      media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
       filetypes = {"png", "webp", "jpg", "jpeg"},
@@ -252,7 +257,9 @@ telescope.setup{
 
 -- Dbext
 -- {{{
+cmd("let $LD_LIBRARY_PATH=''")
 var.dbext_default_profile_mySQL = 'type=MYSQL:user=admin:passwd=admin:dbname=programador_junior'
+var.dbext_default_history_file = "$HOME/.local/cache/dbext_sql_history.txt"
 -- }}}
 
 -- Windline
@@ -260,7 +267,27 @@ var.dbext_default_profile_mySQL = 'type=MYSQL:user=admin:passwd=admin:dbname=pro
 require('wlsample.bubble')
 -- }}}
 
+-- Indentline
+-- {{{
+var.indentLine_char_list = { '|', '¦', '┆', '┊' }
+var.indentLine_concealcursor = 'inc'
+var.indentLine_conceallevel = 2
 -- }}}
+
+-- Which key nvim 
+-- {{{
+local wk = require('which-key')
+wk.setup{}
+-- }}}
+
+-- barbar
+-- {{{
+var.bufferline = {
+	auto_hide = true,
+}
+-- }}}
+
+--- }}}
 
 -- Mappings
 -- {{{
@@ -312,13 +339,65 @@ map('v','<C-C>','"+y :echo "Copied to clipboard"<CR>',opts)
 -- Telescope
 -- {{{
 
-map('n','<leader>to',':Telescope find_files<CR>',opts)
-map('n','<leader>t/',':Telescope current_buffer_fuzzy_find<CR>',opts)
-map('n','<leader>tr',':Telescope registers<CR>',opts)
-map('n','<leader>tc',':Telescope commands<CR>',opts)
-map('n','<leader>tk',':Telescope keymaps<CR>',opts)
-map('n','<leader>tru',':Telescope oldfiles<CR>',opts)
+wk.register({
+	t = {
+		name = "Telescope",
+		o = { ":Telescope find_files<CR>", "Find Files" },
+		["/"] = {":Telescope current_buffer_fuzzy_find<CR>", "Search In File"},
+		r = {":Telescope registers<CR>","Registers"},
+		c = {":Telescope commands<CR>","Commands"},
+		k = {":Telescope keymaps<CR>","Keymaps"},
+	}
+},{prefix='<leader>'})
 
+wk.register({
+	u = {":Telescope oldfiles<CR>","Recent Used"}
+},{prefix="<Leader>tr"})
+
+-- }}}
+
+--  Nvim tree
+-- {{{
+local barbar = require('bufferline.state')
+local nvim_tree = require('nvim-tree')
+local opened=false
+
+tree ={}
+tree.open = function()
+   barbar.set_offset(31, 'FileTree')
+   nvim_tree.find_file(true)
+end
+
+tree.close = function()
+   barbar.set_offset(0)
+   nvim_tree.close()
+end
+
+tree.toggle = function()
+	opened = not opened
+	if opened then
+		tree.open()
+	else
+		tree.close()
+	end
+end
+
+function maplua(vimcmd)
+	return ':lua ' .. vimcmd .. '<CR>'
+end
+map('n','<leader>b',maplua('tree.toggle()'),opts)
+
+-- }}}
+
+-- Vim commentary
+-- {{{
+map('n',';',':Commentary<CR>',opts)
+map('v',';',':Commentary<CR>',opts)
+-- }}}
+
+-- Lazygit
+-- {{{
+map('n','<leader>lg',':LazyGit<CR>',opts)
 -- }}}
 
 -- }}}

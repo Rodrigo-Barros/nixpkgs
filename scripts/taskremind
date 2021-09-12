@@ -9,8 +9,8 @@ project=""
 due=""
 rem_date=""
 
-#task="corrigir +bug em @blueweb &21 14:00+10 +1w"
-#task="corrigir +bug em @blueweb &21 14:00+10 08-07-22+1d"
+#task="corrigir +bug em @blueweb &21 10+14:00 1w"
+#task="corrigir +bug em @blueweb &21 10+14:00 08-07-2022"
 task="arrumar problema de transferencia de ligações +bug +frontend +backend @blueweb &23 14:00 7+7m"
 
 #printf "Informe os detalhes da tarefa:"
@@ -34,7 +34,6 @@ for word in $task; do
    if [ $(check_regex "$word" "^[a-zA-Z]") ];then
 	   taskwarrior+="$word "
 		 remind+="$word "
-
 		 desc+="$word "
 	 
 	 # Assunto/Categoria
@@ -57,7 +56,6 @@ for word in $task; do
    elif [ $(check_regex "$word" "^&") ];then
 		current_word=$(replace "$word" "&" "")
 		taskwarrior+="depends:$current_word "
-
 		depends+="depends:$current_word "
 
 	 # Hora
@@ -95,12 +93,17 @@ for word in $task; do
 
 	 # Dia especifico para a tarefa/lembrete
 	 #elif [ $(check_regex "$current_word" "^[0-9]{2}-[0-9]{2}-[0-9]{2,4}\+?([0-9a-z]{2})?") ];then
-	 elif [ $(check_regex "$word" "^[0-9]{2}-[0-9]{2}-[0-9]{2,4}") ];then
-		days_before=$(echo $word | sed -r "s/^[0-9]{2}-[0-9]{2}-[0-9]{2,4}\+([0-9])./\+\1/")
-	  day=$(echo $word | sed -r "s/^([0-9]{2}).+/\1/")
-	  month=$(echo $word | sed -r "s/.+([0-9]{2})-.+/\1/")
-	  #year=$(echo $current_word | sed -r "s/.+-([0-9]{2,4}$)/\1/")
-	  year=$(echo $word | sed -r "s/.+-([0-9]{2,4})(\+\w{2})?$/\1/")
+ elif [ $(check_regex "$word" "^([0-9]+\+)?([0-9]{2}-[0-9]{2}-[0-9]{2,4})$") ];then
+	 	deadline=$(echo $word | sed -r "s/^([0-9]+\+)?([0-9]{2}-[0-9]{2}-[0-9]{2,4})$/\2/")
+		day=$(echo $word | sed -r "s/^([0-9]+\+)?([0-9]{2})-([0-9]{2})-([0-9]{2,4})$/\2/")
+		month=$(echo $word | sed -r "s/^([0-9]+\+)?([0-9]{2})-([0-9]{2})-([0-9]{2,4})$/\3/")
+		year=$(echo $word | sed -r "s/^([0-9]+\+)?([0-9]{2})-([0-9]{2})-([0-9]{2,4})$/\4/")
+
+		deadline=$(date -d "$year-$month-$day" +"%Y-%m-%d")
+		rem_days_before=$(echo $word | sed -r "s/^([0-9]+\+)?([0-9]{2}-[0-9]{2}-[0-9]{2,4})$/\1/")
+		[ "$rem_days_before" = "+" ] && unset rem_days_before
+		due="due:$deadline"
+		rem_date=$(date -d "$deadline" +"%d %b $rem_days_before %Y")
 		
 	  taskwarrior+=$(date -d "$year-$month-$day" +"due:%Y-%m-%d")
 		due=$(date -d "$year-$month-$day" +"due:%Y-%m-%d")
@@ -110,7 +113,5 @@ for word in $task; do
 done
 
 remind_time="$notification_before_time $hour"
-echo taskwarrior: $taskwarrior
-echo taskwarrior n: task add $desc $tags $project $depends $due
-echo remind: $remind
-echo remind n: REM $rem_date $days MSG $desc em $rem_proj AT $remind_time
+echo taskwarrior: task add $desc $tags $project $depends $due
+echo remind: REM $rem_date $days MSG $desc $rem_proj AT $remind_time
