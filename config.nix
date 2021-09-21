@@ -11,7 +11,8 @@
   profile ? (pkgs.callPackage ./profile.nix {}).profile,
   services ? pkgs.callPackage services/default.nix {},
   jekyll ? pkgs.callPackage ./jekyll {},
-  intelephense ? pkgs.callPackage ./nvim/language-server/intelephense/intelephense.nix {}
+  intelephense ? pkgs.callPackage ./nvim/language-server/intelephense/intelephense.nix {},
+  awesomewm ? pkgs.callPackage ./awesome {}
 }:
 {
    # allow comercial programs like chrome
@@ -55,9 +56,11 @@
          nodejs 
 		 nvim
 	     nerdfonts intelephense
+		 line-awesome
 
          #LSP nodeps for nvim
          nodePackages.bash-language-server
+		 nodePackages.javascript-typescript-langserver
          sumneko-lua-language-server
 		 rnix-lsp
          # vcs
@@ -78,7 +81,7 @@
 		 fzf kitty
 		 zsh zinit
          tmux
-         autojump
+		 zsh-z
 
          # games
          chiaki lutris
@@ -88,8 +91,9 @@
          taskremind
 				 
          #desktop
-         awesome
+         awesomewm
          dmenu
+		 rofi
 		 #others
 		 zathura
          post

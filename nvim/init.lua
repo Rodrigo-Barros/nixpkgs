@@ -269,7 +269,7 @@ require('wlsample.bubble')
 
 -- Indentline
 -- {{{
-var.indentLine_char_list = { '|', '¦', '┆', '┊' }
+var.indentLine_char_list = { '|', }
 var.indentLine_concealcursor = 'inc'
 var.indentLine_conceallevel = 2
 -- }}}
