@@ -13,7 +13,8 @@ jekyll-helper post opções:
 --build             gera os arquivos do site final
 --serve             inicia o servidor em localhost para testar seu site
 --draft             inicia a edição do post como rascunho
---manage            gerencia os seus post permitindo alterar o estado entre rascunho e publico
+--manage            gerencia os seus post permitindo alterar o estado entre rascunho e publico e publicar
+					as alterações no seu blog
 --publish           publica as alterações no blog
 EOL
 
@@ -40,8 +41,8 @@ case $post_type in
 		echo "Esse função só aceita new ou draft como argumento"; exit 1 ;;
 esac
 
-# DISBALE FILE EXISTS
-mkdir $JEKYLL_SITE_ROOT/$working_dir 2> /dev/null
+# CREATE $JEKYLL_SITE_ROOT IF NOT EXISTS
+[ ! -e $JEKYLL_SITE_ROOT ] && mkdir $JEKYLL_SITE_ROOT/$working_dir
 
 printf "Titulo:"
 read titulo
@@ -61,7 +62,8 @@ categories: $categorias
 ---
 EOF
 
-exec $EDITOR $JEKYLL_SITE_ROOT/$working_dir/$file
+$EDITOR $JEKYLL_SITE_ROOT/$working_dir/$file
+manage
 }
 
 publish(){
@@ -81,22 +83,45 @@ publish(){
 }
 
 manage(){
-cat << EOL 
-Opções:
+# cat << EOL 
+# Opções:
 
-Gerenciar Posts(p)
-Gerenciar Rascunhos(r)
-Sair (q)
+# Gerenciar Posts(p)
+# Gerenciar Rascunhos(r)
+# Sair (q)
 
-EOL
+# EOL
 
-read -sn 1 option
+# read -sn 1 option
+local options=""
+options+="Gerenciar Posts(p)\n"
+options+="Gerenciar Rascunhos(r)\n"
+options+="Sair (q)\n"
+options+="Novo Post(n)\n"
+options+="Novo Rascunho(d)\n"
+options+="Publicar alterações para o site(P)"
+
+# Two entry modes ares avaible by hiting enter and by use the keyboard shortcut
+choose_method=$(echo -e $options | fzf --expect=h,p,r,q,n,d,P)
+length=$( expr $(printf $choose_method | cut -d " " -f1| wc -m) - 1 )
+
+if [ $length -gt 1 ]; then
+	option=$(echo $choose_method | sed -r "s/(.+\((\w)\))/\2/" )
+else
+	option=$(echo $choose_method | cut -d " " -f1)
+fi
 
 case $option in 
+	n)
+		post "new";;
+	d)
+		post "draft";;
 	r)
 		do_action "_drafts";;
 	p)
 		do_action "_posts";;
+	P)
+		publish;;
 	q)
 		exit 0;;
 	*)
@@ -106,19 +131,25 @@ esac
 
 do_action(){
 target="$1"
-posts=$(ls $JEKYLL_SITE_ROOT/$target | fzf --multi)
+posts=$(ls $JEKYLL_SITE_ROOT/$target | fzf --multi --expect=q,ctrl-h)
 
-cat << EOL
+action=$(echo -e "$posts" | cut -d " " -f1)
 
-Editar(e)
-Mover(m)
-Excluir(d)
-Página inicial(h)
-Sair(q)
+case $action in
+	q)
+		exit 0;;
+	ctrl-h)
+		manage;;
+esac
 
-EOL
+local actions=""
+actions+="Editar(e)\n"
+actions+="Mover(m)\n"
+actions+="Excluir(d)\n"
+actions+="Página inicial(h)\n"
+actions+="Sair(q)\n"
 
-read -sn 1 action
+action=$(echo -e $actions | fzf --expect=e,m,d,h,q | head -n 1)
 
 case $action in
 	d)
@@ -143,6 +174,7 @@ delete(){
 	for post in $posts;do
 		rm -i $JEKYLL_SITE_ROOT/$target/$post
 	done
+	manage
 }
 
 edit(){
@@ -153,7 +185,8 @@ edit(){
 		files_list+="$JEKYLL_SITE_ROOT/$target/$post "
 	done
 
-	exec $EDITOR $files_list
+	$EDITOR $files_list
+	manage
 }
 
 move_from(){
@@ -175,6 +208,8 @@ move_from(){
 		echo -e "\n\nmoving $from/$i to $to"
 		mv $JEKYLL_SITE_ROOT/$from/$i $JEKYLL_SITE_ROOT/$to/$i 
 	done
+	sleep .5
+	manage
 }
 
 for arg in "$@"; do
