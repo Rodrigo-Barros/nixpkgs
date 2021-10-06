@@ -5,14 +5,10 @@
   # Graphics library
   GL ? import ( fetchTarball "https://github.com/guibou/nixGL/archive/main.tar.gz" ) {},
 
-  drivesync ? pkgs.callPackage ./drivesync {},
-  nvim ? pkgs.callPackage ./nvim {},
-  matrix ? pkgs.callPackage ./matrix {},
   profile ? (pkgs.callPackage ./profile.nix {}).profile,
   services ? pkgs.callPackage services/default.nix {},
-  jekyll ? pkgs.callPackage ./jekyll {},
-  intelephense ? pkgs.callPackage ./nvim/language-server/intelephense/intelephense.nix {},
-  awesomewm ? pkgs.callPackage ./awesome {}
+  repo ? pkgs.callPackage ./packages {},
+  scripts ? pkgs.callPackage ./scripts {}
 }:
 {
    # allow comercial programs like chrome
@@ -20,18 +16,31 @@
 
    packageOverrides = pkgs: rec{
 
-     nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
-       ${builtins.readFile ./utils/nix-env-builder }
-     '';
+     #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
+     #    ${builtins.readFile ./utils/nix-env-builder }
+     #  '';
     
-     # Jekyll helper script
-     post = pkgs.writeScriptBin "post" ''
-      ${builtins.readFile ./jekyll/jekyll }
-     '';
+     #  # Jekyll helper script
+     #  post = pkgs.writeScriptBin "post" ''
+     #   ${builtins.readFile ./jekyll/jekyll }
+     #  '';
 
-     taskremind = pkgs.writeScriptBin "taskremind" ''
-      ${builtins.readFile ./scripts/taskremind}
-     '';
+     #  taskremind = pkgs.writeScriptBin "taskremind" ''
+     #   ${builtins.readFile ./scripts/taskremind}
+     #  '';
+
+
+     # my custom packages	
+     packages = with repo;[
+        php
+	    awesome
+	    nvim
+	    drivesync
+	    awesome
+	    matrix
+	    jekyll
+		intelephense
+     ];
 
      home = pkgs.buildEnv {
        name = "home-env";
@@ -54,15 +63,13 @@
 		 ueberzug
          bat ripgrep
          nodejs 
-		 nvim
-	     nerdfonts intelephense
-		 line-awesome
-
+	     nerdfonts 
+	     line-awesome
          #LSP nodeps for nvim
          nodePackages.bash-language-server
-		 nodePackages.javascript-typescript-langserver
          sumneko-lua-language-server
-		 rnix-lsp
+	     rnix-lsp
+	 
          # vcs
          git lazygit
 
@@ -72,38 +79,40 @@
          # dev mobile
          
          # communication
-         matrix
 
          # network-tools
-         nmap drivesync firefox
+         nmap firefox
          
          # terminal
-		 fzf kitty
-		 zsh zinit
+	     fzf kitty
+	     zsh zinit
          tmux
-		 zsh-z
+	     zsh-z
 
          # games
          chiaki lutris
 
          # Scripts
-         nixEnvBuilder
-         taskremind
+         # nixEnvBuilder
+         # taskremind
 				 
          #desktop
-         awesomewm
          dmenu
-		 rofi
-		 #others
-		 zathura
-         post
-         jekyll
+	     rofi
+	     #others
+	     zathura
+         # post
           
          # time control
          taskwarrior
          timewarrior
 
-       ];
+		 # Scripts
+		 scripts.post
+		 scripts.taskremind
+		 scripts.remind
+		 scripts.bindPrinter
+       ] ++ packages;
 
         postBuild = ''
           substituteInPlace $prefix/share/applications/kitty.desktop \

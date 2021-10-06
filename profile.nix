@@ -13,6 +13,9 @@ let
 	alias vim="LD_LIBRARY_PATH=$lib vim"
 	unset lib
   '';
+  sources = ''
+	source $HOME/.nix-profile/etc/profile.d/command-not-found.sh
+  '';
   profileText = pkgs.writeText "profile" ''
     LOCALE_ARCHIVE=/home/rodrigo/.nix-profile/lib/locale/locale-archive
     export PATH=$PATH:$HOME/.local/bin:$HOME/.nix-profile/bin
@@ -42,6 +45,8 @@ let
 
     # ALIASES
     ${aliases}
+	# SOURCES
+	${sources}
   '';
 in {
  profile = pkgs.runCommand "profile" {}  ''

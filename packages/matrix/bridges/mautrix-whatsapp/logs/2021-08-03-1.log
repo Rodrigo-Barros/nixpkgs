@@ -1,0 +1,27 @@
+[Aug  3, 2021 19:13:33] [INFO] Initializing mautrix-whatsapp 0.1.7+dev.unknown (unknown)
+[Aug  3, 2021 19:13:33] [DEBUG] Initializing database connection
+[Aug  3, 2021 19:13:33] [DEBUG] Initializing state store
+[Aug  3, 2021 19:13:33] [DEBUG] Initializing Matrix event processor
+[Aug  3, 2021 19:13:33] [DEBUG] Initializing Matrix event handler
+[Aug  3, 2021 19:13:33] [DEBUG] Bridge built with end-to-bridge encryption, but disabled in config
+[Aug  3, 2021 19:13:33] [INFO] Bridge initialization complete, starting...
+[Aug  3, 2021 19:13:33] [DEBUG] Running database upgrades
+[Aug  3, 2021 19:13:33] [Database/Upgrade/INFO] Database currently on v21, latest: v21
+[Aug  3, 2021 19:13:33] [DEBUG] Checking connection to homeserver
+[Aug  3, 2021 19:13:33] [DEBUG] Starting application service HTTP server
+[Aug  3, 2021 19:13:33] [DEBUG] Starting event processor
+[Aug  3, 2021 19:13:33] [Matrix/INFO] Listening on 0.0.0.0:29318
+[Aug  3, 2021 19:13:33] [INFO] Bridge started!
+[Aug  3, 2021 19:13:33] [DEBUG] Updating bot profile
+[Aug  3, 2021 19:13:33] [DEBUG] Starting users
+[Aug  3, 2021 19:13:33] [DEBUG] Starting custom puppets
+[Aug  3, 2021 19:13:33] [User/@rodrigo:lenovo/DEBUG] Connecting to WhatsApp
+[Aug  3, 2021 19:13:33] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug  3, 2021 19:13:33] [User/@rodrigo:lenovo/ERROR] Failed to restore session: couldn't dial whatsapp web websocket: dial tcp: lookup web.whatsapp.com: device or resource busy
+[Aug  3, 2021 19:13:35] [User/@rodrigo:lenovo/DEBUG] Disconnecting due to failed session restore...
+[Aug  3, 2021 19:13:35] [User/@rodrigo:lenovo/ERROR] Failed to disconnect after failed session restore: not connected
+[Aug  3, 2021 20:11:28] [INFO] Interrupt received, stopping...
+[Aug  3, 2021 20:11:28] [Matrix/DEBUG] Listener stopped.
+[Aug  3, 2021 20:11:28] [DEBUG] Disconnecting @rodrigo:lenovo
+[Aug  3, 2021 20:11:28] [ERROR] Error while disconnecting @rodrigo:lenovo: not connected
+[Aug  3, 2021 20:11:28] [INFO] Bridge stopped.

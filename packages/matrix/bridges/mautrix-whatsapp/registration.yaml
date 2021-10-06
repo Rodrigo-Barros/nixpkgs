@@ -1,0 +1,12 @@
+id: whatsapp
+url: http://localhost:29318
+as_token: O05cWWHDCqSwcsR0Y1CF9LwAzQOlEhhlsJCUoNBg4g9ZdQNvNjTmgKBt4JaRHoK0
+hs_token: bZLYkJE2kG20Gsx6fU4YcMhbYiCOesiQ9cXbeAa3VSPzXePrKkiI4xXMwPFPObqt
+sender_localpart: l7btUbSBld3i3KpTPMwojUh7m9SHf3eA
+rate_limited: false
+namespaces:
+  users:
+  - regex: ^@whatsapp_[0-9]+:lenovo$
+    exclusive: true
+  - regex: ^@whatsappbot:lenovo$
+    exclusive: true

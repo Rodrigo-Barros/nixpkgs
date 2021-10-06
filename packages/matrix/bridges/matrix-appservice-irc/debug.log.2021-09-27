@@ -1,0 +1,5 @@
+INFO:IrcBridge Started metrics on http://127.0.0.1:7001
+INFO:IrcBridge Using PgDataStore for Datastore
+INFO:CryptoStore Private key loaded from passkey.pem - IRC password encryption enabled.
+INFO:PgDatastore Starting postgres database engine
+INFO:IrcBridge Started metrics on http://127.0.0.1:7001

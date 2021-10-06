@@ -1,0 +1,62 @@
+[Aug  1, 2021 11:10:03] [INFO] Initializing mautrix-whatsapp 0.1.7+dev.unknown (unknown)
+[Aug  1, 2021 11:10:03] [DEBUG] Initializing database connection
+[Aug  1, 2021 11:10:03] [DEBUG] Initializing state store
+[Aug  1, 2021 11:10:03] [DEBUG] Initializing Matrix event processor
+[Aug  1, 2021 11:10:03] [DEBUG] Initializing Matrix event handler
+[Aug  1, 2021 11:10:03] [DEBUG] Bridge built with end-to-bridge encryption, but disabled in config
+[Aug  1, 2021 11:10:03] [INFO] Bridge initialization complete, starting...
+[Aug  1, 2021 11:10:03] [DEBUG] Running database upgrades
+[Aug  1, 2021 11:10:03] [Database/Upgrade/INFO] Database currently on v21, latest: v21
+[Aug  1, 2021 11:10:03] [DEBUG] Checking connection to homeserver
+[Aug  1, 2021 11:10:03] [DEBUG] Starting application service HTTP server
+[Aug  1, 2021 11:10:03] [DEBUG] Starting event processor
+[Aug  1, 2021 11:10:03] [Matrix/INFO] Listening on 0.0.0.0:29318
+[Aug  1, 2021 11:10:03] [INFO] Bridge started!
+[Aug  1, 2021 11:10:03] [DEBUG] Updating bot profile
+[Aug  1, 2021 11:10:03] [DEBUG] Starting users
+[Aug  1, 2021 11:10:03] [DEBUG] Starting custom puppets
+[Aug  1, 2021 11:10:03] [User/@rodrigo:lenovo/DEBUG] Connecting to WhatsApp
+[Aug  1, 2021 11:10:03] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug  1, 2021 11:10:03] [User/@rodrigo:lenovo/Conn/DEBUG] Successfully connected to websocket
+[Aug  1, 2021 11:10:03] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump starting 0xc00009c0f0
+[Aug  1, 2021 11:10:03] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop starting 0xc00009c0f0
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00009c0f0 failed (error #1): connection timed out
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/ERROR] Error getting next websocket reader: read tcp 192.168.100.19:55060->157.240.222.60:443: read: connection reset by peer
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump exiting 0xc00009c0f0
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/ERROR] WhatsApp error: connection to WhatsApp servers failed: read tcp 192.168.100.19:55060->157.240.222.60:443: read: connection reset by peer
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/DEBUG] Disconnecting websocket
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/ERROR] Failed to restore session: connection closed before login finished
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive for %p is working again after %d errors &{{0 0} {{} [1 1 0]} 0xc000158b00 0xc000230100 0x4b9700 0 1 0xc000380060} 1
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop exiting 0xc00009c0f0
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket disconnection complete
+[Aug  1, 2021 11:17:05] [User/@rodrigo:lenovo/WARN] Failed to disconnect after connection fail: tls: failed to send closeNotify alert (but connection was closed anyway): write tcp 192.168.100.19:55060->157.240.222.60:443: write: broken pipe
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Successfully connected to websocket
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump starting 0xc00041e6e0
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop starting 0xc00041e6e0
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/DEBUG] Disconnecting due to failed session restore...
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Disconnecting websocket
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/ERROR] Error while trying to reconnect after disconnection: connection closed before login finished
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop exiting 0xc00041e6e0
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump exiting 0xc00041e6e0
+[Aug  1, 2021 11:17:06] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket disconnection complete
+[Aug  1, 2021 11:17:11] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug  1, 2021 11:17:15] [User/@rodrigo:lenovo/ERROR] Error while trying to reconnect after disconnection: couldn't dial whatsapp web websocket: dial tcp 157.240.226.60:443: connect: no route to host
+[Aug  1, 2021 11:17:21] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug  1, 2021 11:17:21] [User/@rodrigo:lenovo/Conn/DEBUG] Successfully connected to websocket
+[Aug  1, 2021 11:17:21] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump starting 0xc00041f090
+[Aug  1, 2021 11:17:21] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop starting 0xc00041f090
+[Aug  1, 2021 11:43:37] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00041f090 failed (error #1): connection timed out
+[Aug  1, 2021 11:43:57] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00041f090 failed (error #2): connection timed out
+[Aug  1, 2021 11:44:17] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00041f090 failed (error #3): connection timed out
+[Aug  1, 2021 11:44:37] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00041f090 failed (error #4): connection timed out
+[Aug  1, 2021 11:44:57] [User/@rodrigo:lenovo/Conn/ERROR] Websocket keepalive for 0xc00041f090 failed (error #5): connection timed out
+[Aug  1, 2021 11:44:57] [User/@rodrigo:lenovo/ERROR] WhatsApp error: websocket keepalive failed
+[Aug  1, 2021 11:44:57] [User/@rodrigo:lenovo/Conn/DEBUG] Disconnecting websocket
+[Aug  1, 2021 11:44:57] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump exiting 0xc00041f090
+[Aug  1, 2021 11:44:57] [User/@rodrigo:lenovo/ERROR] Error while trying to reconnect after disconnection: connection closed before login finished
+[Aug  1, 2021 13:03:16] [INFO] Interrupt received, stopping...
+[Aug  1, 2021 13:03:16] [Matrix/DEBUG] Listener stopped.
+[Aug  1, 2021 13:03:16] [DEBUG] Disconnecting @rodrigo:lenovo
+[Aug  1, 2021 13:03:16] [ERROR] Error while disconnecting @rodrigo:lenovo: not connected
+[Aug  1, 2021 13:03:16] [INFO] Bridge stopped.

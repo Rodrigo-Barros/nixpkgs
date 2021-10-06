@@ -1,0 +1,33 @@
+[Aug 30, 2021 19:46:30] [INFO] Initializing mautrix-whatsapp 0.1.7+dev.unknown (unknown)
+[Aug 30, 2021 19:46:30] [DEBUG] Initializing database connection
+[Aug 30, 2021 19:46:30] [DEBUG] Initializing state store
+[Aug 30, 2021 19:46:30] [DEBUG] Initializing Matrix event processor
+[Aug 30, 2021 19:46:30] [DEBUG] Initializing Matrix event handler
+[Aug 30, 2021 19:46:30] [DEBUG] Bridge built with end-to-bridge encryption, but disabled in config
+[Aug 30, 2021 19:46:30] [INFO] Bridge initialization complete, starting...
+[Aug 30, 2021 19:46:30] [DEBUG] Running database upgrades
+[Aug 30, 2021 19:46:30] [Database/Upgrade/INFO] Database currently on v21, latest: v21
+[Aug 30, 2021 19:46:30] [DEBUG] Checking connection to homeserver
+[Aug 30, 2021 19:46:30] [DEBUG] Starting application service HTTP server
+[Aug 30, 2021 19:46:30] [DEBUG] Starting event processor
+[Aug 30, 2021 19:46:30] [Matrix/INFO] Listening on 0.0.0.0:29318
+[Aug 30, 2021 19:46:30] [INFO] Bridge started!
+[Aug 30, 2021 19:46:30] [DEBUG] Starting users
+[Aug 30, 2021 19:46:30] [DEBUG] Updating bot profile
+[Aug 30, 2021 19:46:30] [DEBUG] Starting custom puppets
+[Aug 30, 2021 19:46:30] [User/@rodrigo:lenovo/DEBUG] Connecting to WhatsApp
+[Aug 30, 2021 19:46:30] [User/@rodrigo:lenovo/Conn/DEBUG] Dialing wss://web.whatsapp.com/ws
+[Aug 30, 2021 19:46:30] [User/@rodrigo:lenovo/Conn/DEBUG] Successfully connected to websocket
+[Aug 30, 2021 19:46:30] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump starting 0xc00012e140
+[Aug 30, 2021 19:46:30] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop starting 0xc00012e140
+[Aug 30, 2021 19:49:30] [User/@rodrigo:lenovo/ERROR] Failed to restore session: login context finished: context deadline exceeded
+[Aug 30, 2021 19:49:31] [User/@rodrigo:lenovo/DEBUG] Disconnecting due to failed session restore...
+[Aug 30, 2021 19:49:31] [User/@rodrigo:lenovo/Conn/DEBUG] Disconnecting websocket
+[Aug 30, 2021 19:49:31] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket read pump exiting 0xc00012e140
+[Aug 30, 2021 19:49:31] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket keepalive loop exiting 0xc00012e140
+[Aug 30, 2021 19:49:31] [User/@rodrigo:lenovo/Conn/DEBUG] Websocket disconnection complete
+[Aug 30, 2021 23:06:44] [INFO] Interrupt received, stopping...
+[Aug 30, 2021 23:06:44] [Matrix/DEBUG] Listener stopped.
+[Aug 30, 2021 23:06:44] [DEBUG] Disconnecting @rodrigo:lenovo
+[Aug 30, 2021 23:06:44] [ERROR] Error while disconnecting @rodrigo:lenovo: not connected
+[Aug 30, 2021 23:06:44] [INFO] Bridge stopped.

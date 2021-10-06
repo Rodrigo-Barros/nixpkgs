@@ -1,0 +1,183 @@
+2021-09-06 08:32:30,640 - root - 323 - WARNING - main - ***** STARTING SERVER *****
+2021-09-06 08:32:30,675 - root - 324 - WARNING - main - Server /nix/store/8q5hmzywxw1ibnmq4ql0g66j2rabcpls-matrix-synapse-1.37.1/bin/homeserver version 1.37.1
+2021-09-06 08:32:30,675 - root - 325 - INFO - main - Server hostname: lenovo
+2021-09-06 08:32:30,675 - root - 326 - INFO - main - Instance name: master
+2021-09-06 08:32:30,675 - synapse.app.homeserver - 361 - INFO - main - Setting up server
+2021-09-06 08:32:30,675 - synapse.server - 309 - INFO - main - Setting up.
+2021-09-06 08:32:30,758 - synapse.storage.databases - 49 - INFO - main - [database config 'master']: Checking database server
+2021-09-06 08:32:30,758 - synapse.storage.databases - 52 - INFO - main - [database config 'master']: Preparing for databases ['main', 'state']
+2021-09-06 08:32:30,759 - synapse.storage.prepare_database - 116 - INFO - main - ['main', 'state']: Checking existing schema version
+2021-09-06 08:32:30,811 - synapse.storage.prepare_database - 120 - INFO - main - ['main', 'state']: Existing schema is 59 (+18 deltas)
+2021-09-06 08:32:30,812 - synapse.storage.databases.main - 353 - INFO - main - Checking database for consistency with configuration...
+2021-09-06 08:32:30,819 - synapse.storage.prepare_database - 407 - INFO - main - Applying schema deltas for v59
+2021-09-06 08:32:30,825 - synapse.storage.prepare_database - 535 - INFO - main - Schema now up to date
+2021-09-06 08:32:30,915 - synapse.storage.databases - 67 - INFO - main - [database config 'master']: Starting 'main' database
+2021-09-06 08:32:30,915 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for public_room_list_stream(stream_id)
+2021-09-06 08:32:30,939 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_lists_stream(stream_id)
+2021-09-06 08:32:30,940 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for user_signature_stream(stream_id)
+2021-09-06 08:32:30,944 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_lists_outbound_pokes(stream_id)
+2021-09-06 08:32:30,950 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for e2e_cross_signing_keys(stream_id)
+2021-09-06 08:32:30,961 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for event_reports(id)
+2021-09-06 08:32:30,970 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules(id)
+2021-09-06 08:32:30,977 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules_enable(id)
+2021-09-06 08:32:30,978 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for local_group_updates(stream_id)
+2021-09-06 08:32:31,018 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:29318', 'hs_token': '<redacted>', 'sender': '@l7btUbSBld3i3KpTPMwojUh7m9SHf3eA:lenovo', 'server_name': 'lenovo', 'namespaces': {'users': [{'regex': re.compile('^@whatsapp_[0-9]+:lenovo$'), 'exclusive': True}, {'regex': re.compile('^@whatsappbot:lenovo$'), 'exclusive': True}], 'aliases': [], 'rooms': []}, 'id': 'whatsapp', 'ip_range_whitelist': None, 'supports_ephemeral': False, 'protocols': set(), 'rate_limited': False}
+2021-09-06 08:32:31,084 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:29317', 'hs_token': '<redacted>', 'sender': '@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo', 'server_name': 'lenovo', 'namespaces': {'users': [{'exclusive': True, 'regex': re.compile('@telegram_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('@telegrambot:lenovo')}], 'aliases': [{'exclusive': True, 'regex': re.compile('\\#telegram_.*:lenovo')}], 'rooms': []}, 'id': 'telegram', 'ip_range_whitelist': None, 'supports_ephemeral': False, 'protocols': set(), 'rate_limited': False}
+2021-09-06 08:32:31,098 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:9999', 'hs_token': '<redacted>', 'sender': '@ircbot:lenovo', 'server_name': 'lenovo', 'namespaces': {'rooms': [{'exclusive': False, 'regex': re.compile('!kieouiJuedJoxtVdaG:localhost')}, {'exclusive': False, 'regex': re.compile('!kieouiJuedJoxtVdaG:localhost')}], 'aliases': [{'exclusive': True, 'regex': re.compile('#freenode_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('#libera_.*:lenovo')}], 'users': [{'exclusive': True, 'regex': re.compile('@freenode_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('@libera_.*:lenovo')}]}, 'id': '88ff8e189f30de2341ba33ec3049d2cd048bcc87f8c3d120433ec9882ad147fa', 'ip_range_whitelist': None, 'supports_ephemeral': True, 'protocols': {'irc'}, 'rate_limited': False}
+2021-09-06 08:32:31,099 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for receipts_linearized(stream_id)
+2021-09-06 08:32:31,111 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for room_account_data(stream_id)
+2021-09-06 08:32:31,112 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for room_tags_revisions(stream_id)
+2021-09-06 08:32:31,123 - synapse.storage.databases.main.event_push_actions - 537 - INFO - main - Searching for stream ordering 1 month ago
+2021-09-06 08:32:31,192 - synapse.storage.databases.main.event_push_actions - 541 - INFO - main - Found stream ordering 1 month ago: it's 677
+2021-09-06 08:32:31,192 - synapse.storage.databases.main.event_push_actions - 544 - INFO - main - Searching for stream ordering 1 day ago
+2021-09-06 08:32:31,208 - synapse.storage.databases.main.event_push_actions - 548 - INFO - main - Found stream ordering 1 day ago: it's 1151
+2021-09-06 08:32:31,212 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for events(stream_ordering)
+2021-09-06 08:32:31,212 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for events(stream_ordering)
+2021-09-06 08:32:31,213 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for ex_outlier_stream(event_stream_ordering)
+2021-09-06 08:32:31,237 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_inbox(stream_id)
+2021-09-06 08:32:31,244 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for pushers(id)
+2021-09-06 08:32:31,244 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for deleted_pushers(stream_id)
+2021-09-06 08:32:31,245 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules_stream(stream_id)
+2021-09-06 08:32:31,258 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for presence_stream(stream_id)
+2021-09-06 08:32:31,399 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for access_tokens(id)
+2021-09-06 08:32:31,451 - synapse.storage.databases - 84 - INFO - main - [database config 'master']: Starting 'state' database
+2021-09-06 08:32:31,452 - synapse.storage.databases - 99 - INFO - main - [database config 'master']: prepared
+2021-09-06 08:32:31,452 - synapse.server - 312 - INFO - main - Finished setting up.
+2021-09-06 08:32:31,464 - synapse.push.pusher - 38 - INFO - main - email enable notifs: False
+2021-09-06 08:32:31,480 - synapse.handlers.auth - 213 - INFO - main - Extra password_providers: []
+2021-09-06 08:32:31,486 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.device_list_update'
+2021-09-06 08:32:31,488 - synapse.federation.federation_server - 1095 - INFO - main - Registering federation query handler for 'profile'
+2021-09-06 08:32:31,579 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.presence'
+2021-09-06 08:32:31,580 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.typing'
+2021-09-06 08:32:31,585 - synapse.federation.federation_server - 1095 - INFO - main - Registering federation query handler for 'directory'
+2021-09-06 08:32:31,594 - twisted - 258 - INFO - main - Redirected stdout/stderr to logs
+2021-09-06 08:32:31,596 - synapse.app.homeserver - 136 - WARNING - sentinel - Starting daemon.
+2021-09-06 08:32:31,597 - synapse.app.homeserver - 118 - INFO - sentinel - Running
+2021-09-06 08:32:31,599 - synapse.app.homeserver - 29 - INFO - sentinel - Set file limit to: 1048576
+2021-09-06 08:32:31,600 - synapse.handlers.deactivate_account - 207 - INFO - user_parter_loop-0 - Starting user parter
+2021-09-06 08:32:31,627 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'm.receipt'
+2021-09-06 08:32:31,628 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'org.matrix.signing_key_update'
+2021-09-06 08:32:31,628 - synapse.federation.federation_server - 1095 - INFO - sentinel - Registering federation query handler for 'client_keys'
+2021-09-06 08:32:31,629 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'm.direct_to_device'
+2021-09-06 08:32:31,649 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.health.HealthResource object at 0x7f7cd5c77730> to path b'/health'
+2021-09-06 08:32:31,649 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f7cd5c77820> to path b'/_matrix/client/api/v1'
+2021-09-06 08:32:31,649 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f7cd5c77820> to path b'/_matrix/client/r0'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f7cd5c77820> to path b'/_matrix/client/unstable'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f7cd5c77820> to path b'/_matrix/client/v2_alpha'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f7cd5c77820> to path b'/_matrix/client/versions'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.well_known.WellKnownResource object at 0x7f7cd5e898b0> to path b'/.well-known/matrix/client'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.admin.AdminRestResource object at 0x7f7cd5e89940> to path b'/_synapse/admin'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.pick_idp.PickIdpResource object at 0x7f7cd5e8cd00> to path b'/_synapse/client/pick_idp'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <twisted.web.resource.Resource object at 0x7f7cd5e8cd60> to path b'/_synapse/client/pick_username'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.new_user_consent.NewUserConsentResource object at 0x7f7cd5e93100> to path b'/_synapse/client/new_user_consent'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.sso_register.SsoRegisterResource object at 0x7f7cd5e930d0> to path b'/_synapse/client/sso_register'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching FilePath('/nix/store/8q5hmzywxw1ibnmq4ql0g66j2rabcpls-matrix-synapse-1.37.1/lib/python3.8/site-packages/synapse/static') to path b'/_matrix/static'
+2021-09-06 08:32:31,651 - twisted - 258 - INFO - sentinel - SynapseSite starting on 8008
+2021-09-06 08:32:31,651 - twisted - 258 - INFO - sentinel - SynapseSite starting on 8008
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.media.v1.media_repository.MediaRepositoryResource object at 0x7f7cd5e93460> to path b'/_matrix/media/r0'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.media.v1.media_repository.MediaRepositoryResource object at 0x7f7cd5e93460> to path b'/_matrix/media/v1'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.federation.transport.server.TransportLayerServer object at 0x7f7cd5e93550> to path b'/_matrix/federation'
+2021-09-06 08:32:31,650 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.key.v2.KeyApiV2Resource object at 0x7f7cd5e93670> to path b'/_matrix/key/v2'
+2021-09-06 08:32:31,651 - synapse.app.homeserver - 166 - INFO - sentinel - Synapse now listening on TCP port 8008
+2021-09-06 08:32:31,653 - synapse.app.homeserver - 186 - INFO - sentinel - Scheduling stats reporting for 3 hour intervals
+2021-09-06 08:32:31,709 - synapse.storage.background_updates - 109 - INFO - background_updates-0 - Starting background schema updates
+2021-09-06 08:32:31,710 - synapse.handlers.deactivate_account - 217 - INFO - user_parter_loop-0 - User parter finished: stopping
+2021-09-06 08:32:31,711 - synapse.push.pusherpool - 320 - INFO - start_pushers-0 - Started pushers
+2021-09-06 08:32:32,713 - synapse.storage.background_updates - 122 - INFO - background_updates-0 - No more background updates to do. Unscheduling background update task.
+2021-09-06 08:32:33,048 - synapse.access.http.8008 - 389 - INFO - GET-0 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 0.017sec/-0.000sec (0.000sec, 0.000sec) (0.000sec/0.014sec/1) 33B 200 "GET /_matrix/client/r0/account/whoami?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [0 dbevts]
+2021-09-06 08:32:33,419 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $9WsXVr9b_UjRA2muHE-3oqqXqSulgAzsraSBXxG3hHA duplicated by $L7UeNJO5VpWX-NiFssuXWY4-gDuF7FIMGlyHEGjo9c8
+2021-09-06 08:32:33,751 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $rw6PtFmOy5YGYIDX7z-0b0GK7VPcNZxdKTbooG73yGM duplicated by $-fT8X87-5TdQ2QUKxHMmv664NT9YyHN9ZuWw2sqOAj4
+2021-09-06 08:32:34,051 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $LySh8JKxxxsLWh1LOQbe_ntZ0gVPzpNCL2lyljo--Wk duplicated by $6cRq77z5lEcy_an9_tqCFIdoeAFzW1smZf37kvV3Whw
+2021-09-06 08:32:34,240 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $5j1-8FmuAf7vkeKyzw6jYB1QKtFfUNgkDcEGXyfFk3c duplicated by $f9farKF_qg6kuPA6nfSFthtOswdtmjbS2XYKYI_LtEs
+2021-09-06 08:32:34,451 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $b--cyo9Nh0xxMHhN029Hljj9wveIF3i-NanDhhmZMQY duplicated by $Mvyaa5NoZbIMm4NzbB0rWH_OQm7p0MHbjXt__UAOhQs
+2021-09-06 08:32:34,452 - synapse.access.http.8008 - 389 - INFO - PUT-1 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 1.400sec/-0.000sec (0.047sec, 0.009sec) (0.016sec/1.278sec/55) 2B 200 "PUT /_matrix/client/r0/profile/@whatsappbot:lenovo/avatar_url?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [9 dbevts]
+2021-09-06 08:32:34,786 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $P2UDA7RX66f3g94CrDEfnoG3dGm3tv2U3mRKoNB_IfM duplicated by $L7UeNJO5VpWX-NiFssuXWY4-gDuF7FIMGlyHEGjo9c8
+2021-09-06 08:32:35,010 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $7BTOuL9Xe3OzpQt62-PqkS71v3lQ2vh_XbNaRQAiSvc duplicated by $-fT8X87-5TdQ2QUKxHMmv664NT9YyHN9ZuWw2sqOAj4
+2021-09-06 08:32:35,268 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $TiWqP1EX4MUCTou-I6bT53adjU87YQ2YjvOyBvgDGMM duplicated by $6cRq77z5lEcy_an9_tqCFIdoeAFzW1smZf37kvV3Whw
+2021-09-06 08:32:35,479 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $JAP0WFwdV0Of-jfkg170fEwF9lvgHI5khSla5PCdT-o duplicated by $f9farKF_qg6kuPA6nfSFthtOswdtmjbS2XYKYI_LtEs
+2021-09-06 08:32:35,818 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $6v2fiS4WQ9Qa-3v_r2Ah1BEKKgLb4v9AsRQAyBA-l2Y duplicated by $Mvyaa5NoZbIMm4NzbB0rWH_OQm7p0MHbjXt__UAOhQs
+2021-09-06 08:32:35,819 - synapse.access.http.8008 - 389 - INFO - PUT-2 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 1.366sec/-0.000sec (0.027sec, 0.000sec) (0.008sec/1.328sec/27) 2B 200 "PUT /_matrix/client/r0/profile/@whatsappbot:lenovo/displayname?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [0 dbevts]
+2021-09-06 08:32:35,852 - synapse.access.http.8008 - 389 - INFO - GET-3 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.001sec/-0.000sec (0.001sec, 0.000sec) (0.000sec/0.000sec/1) 33B 200 "GET /_matrix/client/r0/account/whoami?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:35,854 - synapse.access.http.8008 - 389 - INFO - GET-4 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.000sec/-0.000sec (0.000sec, 0.000sec) (0.000sec/0.000sec/0) 26B 200 "GET /_matrix/media/r0/config?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:36,152 - synapse.handlers.message - 563 - INFO - POST-5 - Failed to get profile information for @ircbot:lenovo: 404: Profile was not found
+2021-09-06 08:32:36,304 - synapse.handlers.message - 1030 - INFO - POST-5 - Not bothering to persist state event $I1frbo79_x3h0-uLyg4u09VpWnqeMTpkhLVbC44kCqw duplicated by $ahzZ3ows_f_jDBa_WsbXd6dc6woylrHqLguoU3GTJF4
+2021-09-06 08:32:36,306 - synapse.access.http.8008 - 389 - INFO - POST-5 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.164sec/-0.000sec (0.003sec, 0.000sec) (0.002sec/0.151sec/10) 40B 200 "POST /_matrix/client/r0/join/!axWyUhZdJVrCzcssDy%3Alenovo?access_token=<redacted> HTTP/1.1" "-" [1 dbevts]
+2021-09-06 08:32:36,352 - synapse.http.server - 88 - INFO - POST-6 - <XForwardedForRequest at 0x7f7cd61cba90 method='POST' uri='/_matrix/client/r0/register?kind=user&user_id=@telegrambot:lenovo' clientproto='HTTP/1.1' site='8008'> SynapseError: 400 - User ID already taken.
+2021-09-06 08:32:36,353 - synapse.access.http.8008 - 389 - INFO - POST-6 - 127.0.0.1 - 8008 - {@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo} Processed request: 0.180sec/-0.000sec (0.002sec, 0.000sec) (0.128sec/0.049sec/1) 60B 400 "POST /_matrix/client/r0/register?kind=user&user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:36,586 - synapse.access.http.8008 - 389 - INFO - GET-8 - 127.0.0.1 - 8008 - {None} Processed request: 0.028sec/-0.000sec (0.002sec, 0.000sec) (0.018sec/0.006sec/1) 37B 200 "GET /_matrix/client/r0/profile/%40telegrambot%3Alenovo/displayname?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:36,606 - synapse.access.http.8008 - 389 - INFO - GET-9 - 127.0.0.1 - 8008 - {None} Processed request: 0.008sec/-0.000sec (0.003sec, 0.000sec) (0.004sec/0.001sec/1) 59B 200 "GET /_matrix/client/r0/profile/%40telegrambot%3Alenovo/avatar_url?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:36,850 - synapse.access.http.8008 - 389 - INFO - PUT-7 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.512sec/-0.000sec (0.015sec, 0.000sec) (0.061sec/0.154sec/6) 59B 200 "PUT /_matrix/client/r0/rooms/!axWyUhZdJVrCzcssDy%3Alenovo/send/org.matrix.bridge.ping/m1630927956326.0?access_token=<redacted> HTTP/1.1" "-" [2 dbevts]
+2021-09-06 08:32:37,365 - synapse.appservice.scheduler - 84 - INFO - as_scheduler-0 - Starting appservice scheduler
+2021-09-06 08:32:38,088 - synapse.http.client - 440 - INFO - as-sender-88ff8e189f30de2341ba33ec3049d2cd048bcc87f8c3d120433ec9882ad147fa-0 - Received response to PUT http://localhost:9999/transactions/250?access_token=<redacted>: 200
+2021-09-06 08:32:38,836 - synapse.access.http.8008 - 389 - INFO - GET-10 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.546sec/-0.000sec (0.003sec, 0.002sec) (0.424sec/0.118sec/1) 134B 200 "GET /_matrix/client/r0/joined_rooms?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-06 08:32:38,885 - synapse.http.server - 88 - INFO - POST-11 - <XForwardedForRequest at 0x7f7cd5d836a0 method='POST' uri='/_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted>' clientproto='HTTP/1.1' site='8008'> SynapseError: 404 - Profile was not found
+2021-09-06 08:32:38,886 - synapse.access.http.8008 - 389 - INFO - POST-11 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.013sec/-0.000sec (0.002sec, 0.000sec) (0.004sec/0.004sec/6) 57B 404 "POST /_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-06 08:32:38,888 - synapse.http.server - 88 - INFO - POST-12 - <XForwardedForRequest at 0x7f7cd5d21b50 method='POST' uri='/_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted>' clientproto='HTTP/1.1' site='8008'> SynapseError: 404 - Profile was not found
+2021-09-06 08:32:38,889 - synapse.access.http.8008 - 389 - INFO - POST-12 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.014sec/-0.000sec (0.004sec, 0.000sec) (0.001sec/0.000sec/2) 57B 404 "POST /_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-06 08:33:35,820 - twisted - 258 - INFO - sentinel - Timing out client: IPv4Address(type='TCP', host='127.0.0.1', port=47288)
+2021-09-06 08:32:39,347 - synapse.access.http.8008 - 389 - INFO - GET-13 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.112sec/-0.000sec (0.001sec, 0.000sec) (0.001sec/0.107sec/1) 506B 200 "GET /_matrix/client/r0/rooms/%21MBTrMJSWycMNeElWPn%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:40,098 - synapse.access.http.8008 - 389 - INFO - GET-14 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.002sec/-0.000sec (0.000sec, 0.000sec) (0.000sec/0.000sec/0) 506B 200 "GET /_matrix/client/r0/rooms/%21MBTrMJSWycMNeElWPn%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:32:40,629 - synapse.access.http.8008 - 389 - INFO - GET-15 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.529sec/-0.000sec (0.007sec, 0.004sec) (0.001sec/0.521sec/1) 12819B 200 "GET /_matrix/client/r0/rooms/%21ybCdPrJCBsayVXPmVm%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-06 08:34:11,251 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-06 08:35:33,661 - synapse.access.http.8008 - 389 - INFO - PUT-16 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 0.569sec/-0.000sec (0.020sec, 0.000sec) (0.009sec/0.109sec/8) 59B 200 "PUT /_matrix/client/r0/rooms/%21qkCVTLOPoYWQxilDXU:lenovo/send/m.room.message/mautrix-go_1630928133087248187_1?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [2 dbevts]
+2021-09-06 08:35:33,829 - synapse.logging.context - 70 - WARNING - PUT-16 - Re-starting finished log context PUT-16
+2021-09-06 08:35:33,832 - synapse.logging.context - 70 - WARNING - PUT-16 - Re-starting finished log context PUT-16
+2021-09-06 08:35:34,317 - synapse.http.client - 440 - INFO - as-sender-whatsapp-0 - Received response to PUT http://localhost:29318/transactions/385?access_token=<redacted>: 200
+2021-09-06 08:35:34,487 - synapse.logging.context - 70 - WARNING - PUT-16 - Re-starting finished log context PUT-16
+2021-09-06 08:36:33,663 - twisted - 258 - INFO - sentinel - Timing out client: IPv4Address(type='TCP', host='127.0.0.1', port=47320)
+2021-09-06 08:37:31,655 - synapse.app.homeserver - 45 - INFO - phone_stats_home-0 - Gathering stats for reporting
+2021-09-06 08:37:31,657 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-0 - Calling _generate_user_daily_visits
+2021-09-06 08:37:31,734 - synapse.app.homeserver - 128 - INFO - phone_stats_home-0 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 82828, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1630928251, 'uptime_seconds': 301, 'python_version': '3.8.9', 'total_users': 286, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 0, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 2, 'daily_sent_messages': 2, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-06 08:37:32,597 - synapse.http.client - 440 - INFO - phone_stats_home-0 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-06 08:39:56,248 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-06 08:42:31,213 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-0 - Searching for stream ordering 1 month ago
+2021-09-06 08:42:31,216 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-0 - Found stream ordering 1 month ago: it's 677
+2021-09-06 08:42:31,216 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-0 - Searching for stream ordering 1 day ago
+2021-09-06 08:42:31,218 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-0 - Found stream ordering 1 day ago: it's 1151
+2021-09-06 08:42:31,655 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-1 - Calling _generate_user_daily_visits
+2021-09-06 08:47:31,248 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-06 08:47:31,655 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-2 - Calling _generate_user_daily_visits
+2021-09-06 08:52:31,212 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-1 - Searching for stream ordering 1 month ago
+2021-09-06 08:52:31,215 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-1 - Found stream ordering 1 month ago: it's 677
+2021-09-06 08:52:31,215 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-1 - Searching for stream ordering 1 day ago
+2021-09-06 08:52:31,216 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-1 - Found stream ordering 1 day ago: it's 1151
+2021-09-06 08:52:31,655 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-3 - Calling _generate_user_daily_visits
+2021-09-06 08:55:01,250 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-06 08:57:31,655 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-4 - Calling _generate_user_daily_visits
+2021-09-06 18:13:21,168 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-0 - Rotating notifications
+2021-09-06 18:13:21,170 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-2 - Searching for stream ordering 1 month ago
+2021-09-06 18:13:21,183 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-2 - Found stream ordering 1 month ago: it's 677
+2021-09-06 18:13:21,184 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-2 - Searching for stream ordering 1 day ago
+2021-09-06 18:13:21,184 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-2 - Found stream ordering 1 day ago: it's 1155
+2021-09-06 18:13:21,195 - synapse.app.homeserver - 45 - INFO - phone_stats_home-1 - Gathering stats for reporting
+2021-09-06 18:13:21,733 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-0 - Rotating notifications up to: 1155
+2021-09-06 18:13:21,755 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-0 - Rotating notifications, handling 1 rows
+2021-09-06 18:13:21,755 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-0 - Rotating notifications, deleted 1 push actions
+2021-09-06 18:13:22,207 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-5 - Calling _generate_user_daily_visits
+2021-09-06 18:13:22,296 - synapse.app.homeserver - 128 - INFO - phone_stats_home-1 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 86524, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1630962801, 'uptime_seconds': 34851, 'python_version': '3.8.9', 'total_users': 286, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 0, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 1, 'daily_sent_messages': 1, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-06 18:13:22,298 - twisted - 258 - CRITICAL - sentinel - Unhandled error in Deferred:
+2021-09-06 18:13:22,298 - twisted - 258 - CRITICAL - sentinel - 
+Traceback (most recent call last):
+  File "/nix/store/5yv23axrym7zgcpcwb22h10drccdzxcx-python3.8-Twisted-20.3.0/lib/python3.8/site-packages/twisted/python/threadpool.py", line 250, in inContext
+    result = inContext.theWork()
+  File "/nix/store/5yv23axrym7zgcpcwb22h10drccdzxcx-python3.8-Twisted-20.3.0/lib/python3.8/site-packages/twisted/python/threadpool.py", line 266, in <lambda>
+    inContext.theWork = lambda: context.call(ctx, func, *args, **kw)
+  File "/nix/store/5yv23axrym7zgcpcwb22h10drccdzxcx-python3.8-Twisted-20.3.0/lib/python3.8/site-packages/twisted/python/context.py", line 122, in callWithContext
+    return self.currentContext().callWithContext(ctx, func, *args, **kw)
+  File "/nix/store/5yv23axrym7zgcpcwb22h10drccdzxcx-python3.8-Twisted-20.3.0/lib/python3.8/site-packages/twisted/python/context.py", line 85, in callWithContext
+    return func(*args,**kw)
+  File "/nix/store/5yv23axrym7zgcpcwb22h10drccdzxcx-python3.8-Twisted-20.3.0/lib/python3.8/site-packages/twisted/internet/_resolver.py", line 123, in get
+    return self._getaddrinfo(hostName, portNumber, addressFamily,
+  File "/nix/store/6cfajs6lsy9b4wxp3jvyyl1g5x2pjmpr-python3-3.8.9/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+OSError: [Errno 16] Device or resource busy
+2021-09-06 18:13:54,701 - twisted - 258 - INFO - sentinel - Received SIGTERM, shutting down.
+2021-09-06 18:13:54,703 - twisted - 258 - INFO - sentinel - (TCP Port 8008 Closed)
+2021-09-06 18:13:54,704 - twisted - 258 - INFO - sentinel - (TCP Port 8008 Closed)
+2021-09-06 18:13:54,705 - twisted - 258 - INFO - sentinel - Main loop terminated.
+2021-09-06 18:13:54,701 - synapse.storage.databases.main.lock - 79 - INFO - LockStore._on_shutdown-0 - Dropping held locks due to shutdown
+2021-09-06 18:13:54,701 - synapse.storage.databases.main.lock - 84 - INFO - LockStore._on_shutdown-0 - Dropped locks due to shutdown
+2021-09-06 18:13:54,702 - synapse.handlers.presence - 732 - INFO - presence.on_shutdown-0 - Performing _on_shutdown. Persisting 1 unpersisted changes
+2021-09-06 18:13:54,702 - synapse.handlers.presence - 745 - INFO - presence.on_shutdown-0 - Finished _on_shutdown
+2021-09-06 18:13:54,703 - synapse.app._base - 428 - INFO - sentinel - Shutting down...
+2021-09-06 18:13:54,706 - synapse.app.homeserver - 130 - WARNING - sentinel - Stopping daemon.

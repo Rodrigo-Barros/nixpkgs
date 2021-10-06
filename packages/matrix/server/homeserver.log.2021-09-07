@@ -1,0 +1,882 @@
+2021-09-07 10:24:19,323 - root - 323 - WARNING - main - ***** STARTING SERVER *****
+2021-09-07 10:24:19,372 - root - 324 - WARNING - main - Server /nix/store/8q5hmzywxw1ibnmq4ql0g66j2rabcpls-matrix-synapse-1.37.1/bin/homeserver version 1.37.1
+2021-09-07 10:24:19,372 - root - 325 - INFO - main - Server hostname: lenovo
+2021-09-07 10:24:19,373 - root - 326 - INFO - main - Instance name: master
+2021-09-07 10:24:19,373 - synapse.app.homeserver - 361 - INFO - main - Setting up server
+2021-09-07 10:24:19,373 - synapse.server - 309 - INFO - main - Setting up.
+2021-09-07 10:24:19,460 - synapse.storage.databases - 49 - INFO - main - [database config 'master']: Checking database server
+2021-09-07 10:24:19,460 - synapse.storage.databases - 52 - INFO - main - [database config 'master']: Preparing for databases ['main', 'state']
+2021-09-07 10:24:19,461 - synapse.storage.prepare_database - 116 - INFO - main - ['main', 'state']: Checking existing schema version
+2021-09-07 10:24:19,530 - synapse.storage.prepare_database - 120 - INFO - main - ['main', 'state']: Existing schema is 59 (+18 deltas)
+2021-09-07 10:24:19,535 - synapse.storage.databases.main - 353 - INFO - main - Checking database for consistency with configuration...
+2021-09-07 10:24:19,549 - synapse.storage.prepare_database - 407 - INFO - main - Applying schema deltas for v59
+2021-09-07 10:24:19,557 - synapse.storage.prepare_database - 535 - INFO - main - Schema now up to date
+2021-09-07 10:24:19,657 - synapse.storage.databases - 67 - INFO - main - [database config 'master']: Starting 'main' database
+2021-09-07 10:24:19,657 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for public_room_list_stream(stream_id)
+2021-09-07 10:24:19,680 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_lists_stream(stream_id)
+2021-09-07 10:24:19,692 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for user_signature_stream(stream_id)
+2021-09-07 10:24:19,696 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_lists_outbound_pokes(stream_id)
+2021-09-07 10:24:19,702 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for e2e_cross_signing_keys(stream_id)
+2021-09-07 10:24:19,713 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for event_reports(id)
+2021-09-07 10:24:19,722 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules(id)
+2021-09-07 10:24:19,730 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules_enable(id)
+2021-09-07 10:24:19,731 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for local_group_updates(stream_id)
+2021-09-07 10:24:19,759 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:29318', 'hs_token': '<redacted>', 'sender': '@l7btUbSBld3i3KpTPMwojUh7m9SHf3eA:lenovo', 'server_name': 'lenovo', 'namespaces': {'users': [{'regex': re.compile('^@whatsapp_[0-9]+:lenovo$'), 'exclusive': True}, {'regex': re.compile('^@whatsappbot:lenovo$'), 'exclusive': True}], 'aliases': [], 'rooms': []}, 'id': 'whatsapp', 'ip_range_whitelist': None, 'supports_ephemeral': False, 'protocols': set(), 'rate_limited': False}
+2021-09-07 10:24:19,764 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:29317', 'hs_token': '<redacted>', 'sender': '@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo', 'server_name': 'lenovo', 'namespaces': {'users': [{'exclusive': True, 'regex': re.compile('@telegram_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('@telegrambot:lenovo')}], 'aliases': [{'exclusive': True, 'regex': re.compile('\\#telegram_.*:lenovo')}], 'rooms': []}, 'id': 'telegram', 'ip_range_whitelist': None, 'supports_ephemeral': False, 'protocols': set(), 'rate_limited': False}
+2021-09-07 10:24:19,769 - synapse.config.appservice - 87 - INFO - main - Loaded application service: ApplicationService: {'token': '<redacted>', 'url': 'http://localhost:9999', 'hs_token': '<redacted>', 'sender': '@ircbot:lenovo', 'server_name': 'lenovo', 'namespaces': {'rooms': [{'exclusive': False, 'regex': re.compile('!kieouiJuedJoxtVdaG:localhost')}, {'exclusive': False, 'regex': re.compile('!kieouiJuedJoxtVdaG:localhost')}], 'aliases': [{'exclusive': True, 'regex': re.compile('#freenode_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('#libera_.*:lenovo')}], 'users': [{'exclusive': True, 'regex': re.compile('@freenode_.*:lenovo')}, {'exclusive': True, 'regex': re.compile('@libera_.*:lenovo')}]}, 'id': '88ff8e189f30de2341ba33ec3049d2cd048bcc87f8c3d120433ec9882ad147fa', 'ip_range_whitelist': None, 'supports_ephemeral': True, 'protocols': {'irc'}, 'rate_limited': False}
+2021-09-07 10:24:19,769 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for receipts_linearized(stream_id)
+2021-09-07 10:24:19,786 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for room_account_data(stream_id)
+2021-09-07 10:24:19,787 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for room_tags_revisions(stream_id)
+2021-09-07 10:24:19,798 - synapse.storage.databases.main.event_push_actions - 537 - INFO - main - Searching for stream ordering 1 month ago
+2021-09-07 10:24:19,878 - synapse.storage.databases.main.event_push_actions - 541 - INFO - main - Found stream ordering 1 month ago: it's 677
+2021-09-07 10:24:19,878 - synapse.storage.databases.main.event_push_actions - 544 - INFO - main - Searching for stream ordering 1 day ago
+2021-09-07 10:24:19,894 - synapse.storage.databases.main.event_push_actions - 548 - INFO - main - Found stream ordering 1 day ago: it's 1157
+2021-09-07 10:24:19,896 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for events(stream_ordering)
+2021-09-07 10:24:19,896 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for events(stream_ordering)
+2021-09-07 10:24:19,896 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for ex_outlier_stream(event_stream_ordering)
+2021-09-07 10:24:19,912 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for device_inbox(stream_id)
+2021-09-07 10:24:19,924 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for pushers(id)
+2021-09-07 10:24:19,925 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for deleted_pushers(stream_id)
+2021-09-07 10:24:19,925 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for push_rules_stream(stream_id)
+2021-09-07 10:24:19,932 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for presence_stream(stream_id)
+2021-09-07 10:24:20,123 - synapse.storage.util.id_generators - 55 - INFO - main - initialising stream generator for access_tokens(id)
+2021-09-07 10:24:20,228 - synapse.storage.databases - 84 - INFO - main - [database config 'master']: Starting 'state' database
+2021-09-07 10:24:20,230 - synapse.storage.databases - 99 - INFO - main - [database config 'master']: prepared
+2021-09-07 10:24:20,231 - synapse.server - 312 - INFO - main - Finished setting up.
+2021-09-07 10:24:20,260 - synapse.push.pusher - 38 - INFO - main - email enable notifs: False
+2021-09-07 10:24:20,277 - synapse.handlers.auth - 213 - INFO - main - Extra password_providers: []
+2021-09-07 10:24:20,283 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.device_list_update'
+2021-09-07 10:24:20,284 - synapse.federation.federation_server - 1095 - INFO - main - Registering federation query handler for 'profile'
+2021-09-07 10:24:20,387 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.presence'
+2021-09-07 10:24:20,388 - synapse.federation.federation_server - 1075 - INFO - main - Registering federation EDU handler for 'm.typing'
+2021-09-07 10:24:20,393 - synapse.federation.federation_server - 1095 - INFO - main - Registering federation query handler for 'directory'
+2021-09-07 10:24:20,402 - twisted - 258 - INFO - main - Redirected stdout/stderr to logs
+2021-09-07 10:24:20,405 - synapse.app.homeserver - 136 - WARNING - sentinel - Starting daemon.
+2021-09-07 10:24:20,405 - synapse.app.homeserver - 118 - INFO - sentinel - Running
+2021-09-07 10:24:20,408 - synapse.app.homeserver - 29 - INFO - sentinel - Set file limit to: 1048576
+2021-09-07 10:24:20,409 - synapse.handlers.deactivate_account - 207 - INFO - user_parter_loop-0 - Starting user parter
+2021-09-07 10:24:20,442 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'm.receipt'
+2021-09-07 10:24:20,443 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'org.matrix.signing_key_update'
+2021-09-07 10:24:20,443 - synapse.federation.federation_server - 1095 - INFO - sentinel - Registering federation query handler for 'client_keys'
+2021-09-07 10:24:20,444 - synapse.federation.federation_server - 1075 - INFO - sentinel - Registering federation EDU handler for 'm.direct_to_device'
+2021-09-07 10:24:20,465 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.health.HealthResource object at 0x7f202942f700> to path b'/health'
+2021-09-07 10:24:20,465 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f202942f7f0> to path b'/_matrix/client/api/v1'
+2021-09-07 10:24:20,465 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f202942f7f0> to path b'/_matrix/client/r0'
+2021-09-07 10:24:20,465 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f202942f7f0> to path b'/_matrix/client/unstable'
+2021-09-07 10:24:20,465 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f202942f7f0> to path b'/_matrix/client/v2_alpha'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.ClientRestResource object at 0x7f202942f7f0> to path b'/_matrix/client/versions'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.well_known.WellKnownResource object at 0x7f2029639910> to path b'/.well-known/matrix/client'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.admin.AdminRestResource object at 0x7f20296399a0> to path b'/_synapse/admin'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.pick_idp.PickIdpResource object at 0x7f2029644d60> to path b'/_synapse/client/pick_idp'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <twisted.web.resource.Resource object at 0x7f2029644dc0> to path b'/_synapse/client/pick_username'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.new_user_consent.NewUserConsentResource object at 0x7f202964d160> to path b'/_synapse/client/new_user_consent'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.synapse.client.sso_register.SsoRegisterResource object at 0x7f202964d130> to path b'/_synapse/client/sso_register'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching FilePath('/nix/store/8q5hmzywxw1ibnmq4ql0g66j2rabcpls-matrix-synapse-1.37.1/lib/python3.8/site-packages/synapse/static') to path b'/_matrix/static'
+2021-09-07 10:24:20,467 - twisted - 258 - INFO - sentinel - SynapseSite starting on 8008
+2021-09-07 10:24:20,467 - twisted - 258 - INFO - sentinel - SynapseSite starting on 8008
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.media.v1.media_repository.MediaRepositoryResource object at 0x7f202964d4c0> to path b'/_matrix/media/r0'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.media.v1.media_repository.MediaRepositoryResource object at 0x7f202964d4c0> to path b'/_matrix/media/v1'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.federation.transport.server.TransportLayerServer object at 0x7f202964d5b0> to path b'/_matrix/federation'
+2021-09-07 10:24:20,466 - synapse.util.httpresourcetree - 46 - INFO - sentinel - Attaching <synapse.rest.key.v2.KeyApiV2Resource object at 0x7f202964d700> to path b'/_matrix/key/v2'
+2021-09-07 10:24:20,467 - synapse.app.homeserver - 166 - INFO - sentinel - Synapse now listening on TCP port 8008
+2021-09-07 10:24:20,469 - synapse.app.homeserver - 186 - INFO - sentinel - Scheduling stats reporting for 3 hour intervals
+2021-09-07 10:24:20,528 - synapse.storage.background_updates - 109 - INFO - background_updates-0 - Starting background schema updates
+2021-09-07 10:24:20,529 - synapse.handlers.deactivate_account - 217 - INFO - user_parter_loop-0 - User parter finished: stopping
+2021-09-07 10:24:20,563 - synapse.push.pusherpool - 320 - INFO - start_pushers-0 - Started pushers
+2021-09-07 10:24:21,530 - synapse.storage.background_updates - 122 - INFO - background_updates-0 - No more background updates to do. Unscheduling background update task.
+2021-09-07 10:24:21,976 - synapse.access.http.8008 - 389 - INFO - GET-0 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 0.015sec/-0.000sec (0.001sec, 0.000sec) (0.000sec/0.013sec/1) 33B 200 "GET /_matrix/client/r0/account/whoami?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [0 dbevts]
+2021-09-07 10:24:22,728 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $JGCJqdEbgZ8EdgpqRFhvtepSoSHtGkHYd4oWeU6YlxA duplicated by $L7UeNJO5VpWX-NiFssuXWY4-gDuF7FIMGlyHEGjo9c8
+2021-09-07 10:24:22,967 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $sttOT7T9hPpfIEQCxRfwzNGrEcaPZlfAQXUZRTmuP_Q duplicated by $-fT8X87-5TdQ2QUKxHMmv664NT9YyHN9ZuWw2sqOAj4
+2021-09-07 10:24:23,180 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $EB6Z0ukVaIQ4Ke1tTPzgFJTDCGlBO4zacPbt874oa4U duplicated by $6cRq77z5lEcy_an9_tqCFIdoeAFzW1smZf37kvV3Whw
+2021-09-07 10:24:23,447 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $JMCmSBXNV8MUnoWYGixS8vhvzHU8mKa2e39ZZnqZRY8 duplicated by $f9farKF_qg6kuPA6nfSFthtOswdtmjbS2XYKYI_LtEs
+2021-09-07 10:24:23,850 - synapse.handlers.message - 1030 - INFO - PUT-1 - Not bothering to persist state event $yH1xB8JBs44UTKwUS6682_kawOatPRk57pjClyqVa24 duplicated by $Mvyaa5NoZbIMm4NzbB0rWH_OQm7p0MHbjXt__UAOhQs
+2021-09-07 10:24:23,850 - synapse.access.http.8008 - 389 - INFO - PUT-1 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 1.870sec/-0.000sec (0.028sec, 0.017sec) (0.016sec/1.621sec/55) 2B 200 "PUT /_matrix/client/r0/profile/@whatsappbot:lenovo/avatar_url?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [9 dbevts]
+2021-09-07 10:24:24,120 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $bG9XKJfGBtkbWvN7ug4iLn14Cg683LvwMpu0oLqxihQ duplicated by $L7UeNJO5VpWX-NiFssuXWY4-gDuF7FIMGlyHEGjo9c8
+2021-09-07 10:24:24,400 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $zUY2aZrW80iDfopLNDElBpErD3BKEPv1aYGSA7kxMHg duplicated by $-fT8X87-5TdQ2QUKxHMmv664NT9YyHN9ZuWw2sqOAj4
+2021-09-07 10:24:24,760 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $VY1U69cpfIGW_G6Rm_0hhGOcAHJ6vU5pHxZG5umWfck duplicated by $6cRq77z5lEcy_an9_tqCFIdoeAFzW1smZf37kvV3Whw
+2021-09-07 10:24:24,987 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $qVitXo4W-8ceUJ5kOyDgghKAnjuyrV067V_zktxtClc duplicated by $f9farKF_qg6kuPA6nfSFthtOswdtmjbS2XYKYI_LtEs
+2021-09-07 10:24:24,991 - synapse.access.http.8008 - 389 - INFO - GET-3 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.085sec/-0.000sec (0.001sec, 0.000sec) (0.079sec/0.003sec/1) 33B 200 "GET /_matrix/client/r0/account/whoami?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:24,999 - synapse.access.http.8008 - 389 - INFO - GET-4 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.001sec/-0.000sec (0.000sec, 0.000sec) (0.000sec/0.000sec/0) 26B 200 "GET /_matrix/media/r0/config?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:25,401 - synapse.handlers.message - 1030 - INFO - PUT-2 - Not bothering to persist state event $cc2A7D-15bgRmIk-O-wJnm6fcFaChrP4oqMTpLWlLKY duplicated by $Mvyaa5NoZbIMm4NzbB0rWH_OQm7p0MHbjXt__UAOhQs
+2021-09-07 10:24:25,402 - synapse.access.http.8008 - 389 - INFO - PUT-2 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 1.551sec/-0.000sec (0.026sec, 0.002sec) (0.027sec/1.492sec/27) 2B 200 "PUT /_matrix/client/r0/profile/@whatsappbot:lenovo/displayname?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [0 dbevts]
+2021-09-07 10:24:25,686 - synapse.http.server - 88 - INFO - POST-6 - <XForwardedForRequest at 0x7f2029984940 method='POST' uri='/_matrix/client/r0/register?kind=user&user_id=@telegrambot:lenovo' clientproto='HTTP/1.1' site='8008'> SynapseError: 400 - User ID already taken.
+2021-09-07 10:24:25,687 - synapse.access.http.8008 - 389 - INFO - POST-6 - 127.0.0.1 - 8008 - {@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo} Processed request: 0.011sec/-0.000sec (0.007sec, 0.000sec) (0.002sec/0.002sec/1) 60B 400 "POST /_matrix/client/r0/register?kind=user&user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:25,723 - synapse.access.http.8008 - 389 - INFO - GET-7 - 127.0.0.1 - 8008 - {None} Processed request: 0.028sec/-0.000sec (0.003sec, 0.000sec) (0.002sec/0.024sec/1) 37B 200 "GET /_matrix/client/r0/profile/%40telegrambot%3Alenovo/displayname?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:25,728 - synapse.handlers.message - 563 - INFO - POST-5 - Failed to get profile information for @ircbot:lenovo: 404: Profile was not found
+2021-09-07 10:24:25,736 - synapse.access.http.8008 - 389 - INFO - GET-8 - 127.0.0.1 - 8008 - {None} Processed request: 0.004sec/-0.000sec (0.001sec, 0.000sec) (0.001sec/0.001sec/1) 59B 200 "GET /_matrix/client/r0/profile/%40telegrambot%3Alenovo/avatar_url?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:26,429 - synapse.handlers.message - 1030 - INFO - POST-5 - Not bothering to persist state event $pkF8g8GrdWtNnjr8F3O96uqYkgMfS2FEa0cTuZhqCyo duplicated by $ahzZ3ows_f_jDBa_WsbXd6dc6woylrHqLguoU3GTJF4
+2021-09-07 10:24:26,431 - synapse.access.http.8008 - 389 - INFO - POST-5 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.800sec/-0.000sec (0.013sec, 0.004sec) (0.032sec/0.744sec/10) 40B 200 "POST /_matrix/client/r0/join/!axWyUhZdJVrCzcssDy%3Alenovo?access_token=<redacted> HTTP/1.1" "-" [1 dbevts]
+2021-09-07 10:24:28,394 - synapse.access.http.8008 - 389 - INFO - PUT-9 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 1.922sec/-0.000sec (0.019sec, 0.002sec) (0.007sec/0.236sec/6) 59B 200 "PUT /_matrix/client/r0/rooms/!axWyUhZdJVrCzcssDy%3Alenovo/send/org.matrix.bridge.ping/m1631021066461.0?access_token=<redacted> HTTP/1.1" "-" [2 dbevts]
+2021-09-07 10:24:31,055 - synapse.appservice.scheduler - 84 - INFO - as_scheduler-0 - Starting appservice scheduler
+2021-09-07 10:24:34,871 - synapse.access.http.8008 - 389 - INFO - GET-10 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 2.164sec/-0.000sec (0.005sec, 0.001sec) (1.889sec/0.269sec/1) 506B 200 "GET /_matrix/client/r0/rooms/%21MBTrMJSWycMNeElWPn%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:34,890 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:24:34,910 - synapse.http.client - 440 - INFO - as-sender-88ff8e189f30de2341ba33ec3049d2cd048bcc87f8c3d120433ec9882ad147fa-0 - Received response to PUT http://localhost:9999/transactions/251?access_token=<redacted>: 200
+2021-09-07 10:24:35,300 - synapse.access.http.8008 - 389 - INFO - GET-11 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.267sec/-0.000sec (0.006sec, 0.000sec) (0.195sec/0.066sec/1) 134B 200 "GET /_matrix/client/r0/joined_rooms?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-07 10:24:35,336 - synapse.access.http.8008 - 389 - INFO - GET-14 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.001sec/-0.000sec (0.002sec, 0.000sec) (0.000sec/0.000sec/0) 506B 200 "GET /_matrix/client/r0/rooms/%21MBTrMJSWycMNeElWPn%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:35,535 - synapse.http.server - 88 - INFO - POST-12 - <XForwardedForRequest at 0x7f2029a62370 method='POST' uri='/_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted>' clientproto='HTTP/1.1' site='8008'> SynapseError: 404 - Profile was not found
+2021-09-07 10:24:35,539 - synapse.access.http.8008 - 389 - INFO - POST-12 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.212sec/-0.000sec (0.004sec, 0.002sec) (0.005sec/0.192sec/6) 57B 404 "POST /_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-07 10:24:35,548 - synapse.http.server - 88 - INFO - POST-13 - <XForwardedForRequest at 0x7f2029552c40 method='POST' uri='/_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted>' clientproto='HTTP/1.1' site='8008'> SynapseError: 404 - Profile was not found
+2021-09-07 10:24:35,551 - synapse.access.http.8008 - 389 - INFO - POST-13 - 127.0.0.1 - 8008 - {@ircbot:lenovo} Processed request: 0.221sec/-0.000sec (0.000sec, 0.000sec) (0.002sec/0.002sec/2) 57B 404 "POST /_matrix/client/r0/join/!kieouiJuedJoxtVdaG%3Alocalhost?access_token=<redacted> HTTP/1.1" "-" [0 dbevts]
+2021-09-07 10:24:36,244 - synapse.handlers.auth - 821 - INFO - POST-15 - Logging in user @telegram_1669089088:lenovo on device NTFXGTDDJH
+2021-09-07 10:24:36,392 - synapse.access.http.8008 - 389 - INFO - POST-15 - 127.0.0.1 - 8008 - {@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo} Processed request: 0.598sec/-0.000sec (0.019sec, 0.011sec) (0.009sec/0.565sec/6) 165B 200 "POST /_matrix/client/r0/register?kind=user&user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:36,499 - synapse.access.http.8008 - 389 - INFO - GET-16 - 127.0.0.1 - 8008 - {None} Processed request: 0.006sec/-0.000sec (0.000sec, 0.000sec) (0.001sec/0.001sec/1) 37B 200 "GET /_matrix/client/r0/profile/%40telegram_1669089088%3Alenovo/displayname?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:36,609 - synapse.access.http.8008 - 389 - INFO - PUT-17 - 127.0.0.1 - 8008 - {@telegram_1669089088:lenovo} Processed request: 0.101sec/-0.000sec (0.005sec, 0.001sec) (0.004sec/0.087sec/4) 2B 200 "PUT /_matrix/client/r0/profile/%40telegram_1669089088%3Alenovo/displayname?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:37,410 - synapse.rest.media.v1.media_repository - 171 - INFO - POST-18 - Stored local media in file '/home/rodrigo/.config/nixpkgs/matrix/server/media_store/local_content/pJ/OW/EExDxwnCDsFDGaCHqUue'
+2021-09-07 10:24:38,888 - synapse.rest.media.v1.upload_resource - 101 - INFO - POST-18 - Uploaded content with URI 'mxc://lenovo/pJOWEExDxwnCDsFDGaCHqUue'
+2021-09-07 10:24:38,890 - synapse.access.http.8008 - 389 - INFO - POST-18 - 127.0.0.1 - 8008 - {@telegram_1669089088:lenovo} Processed request: 1.658sec/-0.000sec (0.160sec, 0.021sec) (0.002sec/1.281sec/6) 55B 200 "POST /_matrix/media/r0/upload?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:25:25,403 - twisted - 258 - INFO - sentinel - Timing out client: IPv4Address(type='TCP', host='127.0.0.1', port=56478)
+2021-09-07 10:24:39,516 - synapse.access.http.8008 - 389 - INFO - GET-19 - 127.0.0.1 - 8008 - {None} Processed request: 0.005sec/-0.000sec (0.004sec, 0.000sec) (0.001sec/0.001sec/1) 2B 200 "GET /_matrix/client/r0/profile/%40telegram_1669089088%3Alenovo/avatar_url?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:40,165 - synapse.access.http.8008 - 389 - INFO - PUT-20 - 127.0.0.1 - 8008 - {@telegram_1669089088:lenovo} Processed request: 0.640sec/-0.000sec (0.006sec, 0.000sec) (0.002sec/0.629sec/2) 2B 200 "PUT /_matrix/client/r0/profile/%40telegram_1669089088%3Alenovo/avatar_url?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:43,372 - synapse.access.http.8008 - 389 - INFO - POST-21 - 127.0.0.1 - 8008 - {@telegram_1669089088:lenovo} Processed request: 2.015sec/-0.000sec (0.061sec, 0.014sec) (0.015sec/0.933sec/15) 40B 200 "POST /_matrix/client/r0/join/%21ybCdPrJCBsayVXPmVm%3Alenovo?user_id=@telegram_1669089088:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [4 dbevts]
+2021-09-07 10:24:45,925 - synapse.access.http.8008 - 389 - INFO - GET-22 - 127.0.0.1 - 8008 - {None} Processed request: 0.576sec/-0.000sec (0.003sec, 0.000sec) (0.570sec/0.002sec/1) 87B 200 "GET /_matrix/client/r0/profile/%40telegram_508734081%3Alenovo/displayname?user_id=@telegram_508734081:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:46,110 - synapse.http.client - 440 - INFO - as-sender-telegram-0 - Received response to PUT http://localhost:29317/transactions/558?access_token=<redacted>: 200
+2021-09-07 10:24:48,806 - synapse.access.http.8008 - 389 - INFO - PUT-23 - 127.0.0.1 - 8008 - {@telegram_508734081:lenovo} Processed request: 2.873sec/-0.000sec (0.052sec, 0.001sec) (1.050sec/0.822sec/13) 2B 200 "PUT /_matrix/client/r0/profile/%40telegram_508734081%3Alenovo/displayname?user_id=@telegram_508734081:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:49,241 - synapse.access.http.8008 - 389 - INFO - GET-24 - 127.0.0.1 - 8008 - {@telegrambot:lenovo} Processed request: 0.022sec/-0.000sec (0.002sec, 0.000sec) (0.008sec/0.011sec/1) 12955B 200 "GET /_matrix/client/r0/rooms/%21ybCdPrJCBsayVXPmVm%3Alenovo/joined_members?user_id=@telegrambot:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 10:24:51,379 - synapse.http.client - 440 - INFO - as-sender-telegram-1 - Received response to PUT http://localhost:29317/transactions/559?access_token=<redacted>: 200
+2021-09-07 10:26:49,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:27:22,488 - synapse.access.http.8008 - 389 - INFO - PUT-25 - 127.0.0.1 - 8008 - {@whatsappbot:lenovo} Processed request: 0.461sec/-0.000sec (0.026sec, 0.005sec) (0.008sec/0.106sec/6) 59B 200 "PUT /_matrix/client/r0/rooms/%21qkCVTLOPoYWQxilDXU:lenovo/send/m.room.message/mautrix-go_1631021242023116707_1?user_id=%40whatsappbot%3Alenovo HTTP/1.1" "mautrix-whatsapp/0.1.7+dev.unknown mautrix-go/v0.9.13" [2 dbevts]
+2021-09-07 10:27:22,615 - synapse.logging.context - 70 - WARNING - PUT-25 - Re-starting finished log context PUT-25
+2021-09-07 10:27:22,616 - synapse.logging.context - 70 - WARNING - PUT-25 - Re-starting finished log context PUT-25
+2021-09-07 10:27:23,087 - synapse.http.client - 440 - INFO - as-sender-whatsapp-0 - Received response to PUT http://localhost:29318/transactions/386?access_token=<redacted>: 200
+2021-09-07 10:27:23,251 - synapse.logging.context - 70 - WARNING - PUT-25 - Re-starting finished log context PUT-25
+2021-09-07 10:28:22,489 - twisted - 258 - INFO - sentinel - Timing out client: IPv4Address(type='TCP', host='127.0.0.1', port=56590)
+2021-09-07 10:29:20,471 - synapse.app.homeserver - 45 - INFO - phone_stats_home-0 - Gathering stats for reporting
+2021-09-07 10:29:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-0 - Calling _generate_user_daily_visits
+2021-09-07 10:29:20,551 - synapse.app.homeserver - 128 - INFO - phone_stats_home-0 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 90600, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1631021360, 'uptime_seconds': 301, 'python_version': '3.8.9', 'total_users': 287, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 1, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 1, 'daily_sent_messages': 1, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-07 10:29:21,409 - synapse.http.client - 440 - INFO - phone_stats_home-0 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-07 10:32:59,934 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:34:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-0 - Searching for stream ordering 1 month ago
+2021-09-07 10:34:19,907 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-0 - Found stream ordering 1 month ago: it's 677
+2021-09-07 10:34:19,908 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-0 - Searching for stream ordering 1 day ago
+2021-09-07 10:34:19,914 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-0 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 10:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-1 - Calling _generate_user_daily_visits
+2021-09-07 10:39:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-2 - Calling _generate_user_daily_visits
+2021-09-07 10:40:19,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-1 - Searching for stream ordering 1 month ago
+2021-09-07 10:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-1 - Found stream ordering 1 month ago: it's 677
+2021-09-07 10:44:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-1 - Searching for stream ordering 1 day ago
+2021-09-07 10:44:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-1 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 10:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-3 - Calling _generate_user_daily_visits
+2021-09-07 10:48:14,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-4 - Calling _generate_user_daily_visits
+2021-09-07 10:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-0 - Rotating notifications
+2021-09-07 10:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-2 - Searching for stream ordering 1 month ago
+2021-09-07 10:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-2 - Found stream ordering 1 month ago: it's 677
+2021-09-07 10:54:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-2 - Searching for stream ordering 1 day ago
+2021-09-07 10:54:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-2 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 10:54:19,928 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-0 - Rotating notifications up to: 1157
+2021-09-07 10:54:19,947 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-0 - Rotating notifications, handling 1 rows
+2021-09-07 10:54:19,949 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-0 - Rotating notifications, deleted 1 push actions
+2021-09-07 10:54:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-5 - Calling _generate_user_daily_visits
+2021-09-07 10:55:29,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 10:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-6 - Calling _generate_user_daily_visits
+2021-09-07 11:03:19,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:04:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-3 - Searching for stream ordering 1 month ago
+2021-09-07 11:04:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-3 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-3 - Searching for stream ordering 1 day ago
+2021-09-07 11:04:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-3 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-7 - Calling _generate_user_daily_visits
+2021-09-07 11:09:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-8 - Calling _generate_user_daily_visits
+2021-09-07 11:10:49,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:14:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-4 - Searching for stream ordering 1 month ago
+2021-09-07 11:14:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-4 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:14:19,905 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-4 - Searching for stream ordering 1 day ago
+2021-09-07 11:14:19,909 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-4 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-9 - Calling _generate_user_daily_visits
+2021-09-07 11:18:44,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-10 - Calling _generate_user_daily_visits
+2021-09-07 11:24:19,896 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-1 - Rotating notifications
+2021-09-07 11:24:19,900 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-5 - Searching for stream ordering 1 month ago
+2021-09-07 11:24:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-5 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:24:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-5 - Searching for stream ordering 1 day ago
+2021-09-07 11:24:19,905 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-5 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:24:19,909 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-1 - Rotating notifications up to: 1157
+2021-09-07 11:24:19,914 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-1 - Rotating notifications, handling 0 rows
+2021-09-07 11:24:19,915 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-1 - Rotating notifications, deleted 0 push actions
+2021-09-07 11:24:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-11 - Calling _generate_user_daily_visits
+2021-09-07 11:25:49,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:29:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-12 - Calling _generate_user_daily_visits
+2021-09-07 11:33:20,456 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:33:20,470 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 11:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-6 - Searching for stream ordering 1 month ago
+2021-09-07 11:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-6 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:34:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-6 - Searching for stream ordering 1 day ago
+2021-09-07 11:34:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-6 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-13 - Calling _generate_user_daily_visits
+2021-09-07 11:39:20,451 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:39:20,469 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-14 - Calling _generate_user_daily_visits
+2021-09-07 11:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-7 - Searching for stream ordering 1 month ago
+2021-09-07 11:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-7 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-7 - Searching for stream ordering 1 day ago
+2021-09-07 11:44:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-7 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-15 - Calling _generate_user_daily_visits
+2021-09-07 11:46:49,233 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:46:49,241 - synapse.access.http.8008 - 389 - INFO - PUT-26 - 127.0.0.1 - 8008 - {@telegram_917264250:lenovo} Processed request: 0.090sec/-0.000sec (0.006sec, 0.001sec) (0.003sec/0.078sec/4) 2B 200 "PUT /_matrix/client/r0/presence/%40telegram_917264250%3Alenovo/status?user_id=@telegram_917264250:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 11:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-16 - Calling _generate_user_daily_visits
+2021-09-07 11:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-2 - Rotating notifications
+2021-09-07 11:54:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-8 - Searching for stream ordering 1 month ago
+2021-09-07 11:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-8 - Found stream ordering 1 month ago: it's 677
+2021-09-07 11:54:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-8 - Searching for stream ordering 1 day ago
+2021-09-07 11:54:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-8 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 11:54:19,902 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 11:54:19,902 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-2 - Rotating notifications up to: 1157
+2021-09-07 11:54:19,929 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-2 - Rotating notifications, handling 0 rows
+2021-09-07 11:54:19,930 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-2 - Rotating notifications, deleted 0 push actions
+2021-09-07 11:54:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-17 - Calling _generate_user_daily_visits
+2021-09-07 11:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-18 - Calling _generate_user_daily_visits
+2021-09-07 12:01:49,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:04:19,895 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-9 - Searching for stream ordering 1 month ago
+2021-09-07 12:04:19,896 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-9 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:04:19,896 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-9 - Searching for stream ordering 1 day ago
+2021-09-07 12:04:19,896 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-9 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:04:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-19 - Calling _generate_user_daily_visits
+2021-09-07 12:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-20 - Calling _generate_user_daily_visits
+2021-09-07 12:09:39,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-10 - Searching for stream ordering 1 month ago
+2021-09-07 12:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-10 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:14:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-10 - Searching for stream ordering 1 day ago
+2021-09-07 12:14:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-10 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-21 - Calling _generate_user_daily_visits
+2021-09-07 12:17:24,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:19:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-22 - Calling _generate_user_daily_visits
+2021-09-07 12:24:19,895 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-3 - Rotating notifications
+2021-09-07 12:24:19,896 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-11 - Searching for stream ordering 1 month ago
+2021-09-07 12:24:19,897 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-11 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:24:19,898 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-11 - Searching for stream ordering 1 day ago
+2021-09-07 12:24:19,898 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-11 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:24:19,899 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-3 - Rotating notifications up to: 1157
+2021-09-07 12:24:19,900 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-3 - Rotating notifications, handling 0 rows
+2021-09-07 12:24:19,900 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-3 - Rotating notifications, deleted 0 push actions
+2021-09-07 12:24:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-23 - Calling _generate_user_daily_visits
+2021-09-07 12:24:34,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:29:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-24 - Calling _generate_user_daily_visits
+2021-09-07 12:32:14,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:34:19,944 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-12 - Searching for stream ordering 1 month ago
+2021-09-07 12:34:20,031 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-12 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:34:20,031 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-12 - Searching for stream ordering 1 day ago
+2021-09-07 12:34:20,032 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-12 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:34:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-25 - Calling _generate_user_daily_visits
+2021-09-07 12:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-26 - Calling _generate_user_daily_visits
+2021-09-07 12:39:39,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-13 - Searching for stream ordering 1 month ago
+2021-09-07 12:44:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-13 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:44:19,992 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-13 - Searching for stream ordering 1 day ago
+2021-09-07 12:44:19,994 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-13 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:44:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-27 - Calling _generate_user_daily_visits
+2021-09-07 12:47:24,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:49:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-28 - Calling _generate_user_daily_visits
+2021-09-07 12:54:19,899 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-4 - Rotating notifications
+2021-09-07 12:54:19,900 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-14 - Searching for stream ordering 1 month ago
+2021-09-07 12:54:19,903 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-14 - Found stream ordering 1 month ago: it's 677
+2021-09-07 12:54:19,904 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-14 - Searching for stream ordering 1 day ago
+2021-09-07 12:54:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-14 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 12:54:19,920 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-4 - Rotating notifications up to: 1157
+2021-09-07 12:54:19,928 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-4 - Rotating notifications, handling 0 rows
+2021-09-07 12:54:19,930 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-4 - Rotating notifications, deleted 0 push actions
+2021-09-07 12:54:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-29 - Calling _generate_user_daily_visits
+2021-09-07 12:54:49,929 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 12:54:50,284 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 12:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-30 - Calling _generate_user_daily_visits
+2021-09-07 13:00:59,927 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-15 - Searching for stream ordering 1 month ago
+2021-09-07 13:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-15 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-15 - Searching for stream ordering 1 day ago
+2021-09-07 13:04:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-15 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:04:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-31 - Calling _generate_user_daily_visits
+2021-09-07 13:08:34,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-32 - Calling _generate_user_daily_visits
+2021-09-07 13:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-16 - Searching for stream ordering 1 month ago
+2021-09-07 13:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-16 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-16 - Searching for stream ordering 1 day ago
+2021-09-07 13:14:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-16 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-33 - Calling _generate_user_daily_visits
+2021-09-07 13:15:59,933 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:19:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-34 - Calling _generate_user_daily_visits
+2021-09-07 13:23:34,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:24:19,895 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-5 - Rotating notifications
+2021-09-07 13:24:19,896 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-17 - Searching for stream ordering 1 month ago
+2021-09-07 13:24:19,896 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-17 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:24:19,896 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-17 - Searching for stream ordering 1 day ago
+2021-09-07 13:24:19,897 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-17 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:24:19,898 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-5 - Rotating notifications up to: 1157
+2021-09-07 13:24:19,898 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-5 - Rotating notifications, handling 0 rows
+2021-09-07 13:24:19,899 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-5 - Rotating notifications, deleted 0 push actions
+2021-09-07 13:24:20,471 - synapse.app.homeserver - 45 - INFO - phone_stats_home-1 - Gathering stats for reporting
+2021-09-07 13:24:20,476 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-35 - Calling _generate_user_daily_visits
+2021-09-07 13:24:20,516 - synapse.app.homeserver - 128 - INFO - phone_stats_home-1 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 91856, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1631031860, 'uptime_seconds': 10801, 'python_version': '3.8.9', 'total_users': 287, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 1, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 1, 'daily_sent_messages': 1, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-07 13:24:21,119 - synapse.http.client - 440 - INFO - phone_stats_home-1 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-07 13:29:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-36 - Calling _generate_user_daily_visits
+2021-09-07 13:30:54,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-18 - Searching for stream ordering 1 month ago
+2021-09-07 13:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-18 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:34:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-18 - Searching for stream ordering 1 day ago
+2021-09-07 13:34:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-18 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-37 - Calling _generate_user_daily_visits
+2021-09-07 13:38:34,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-38 - Calling _generate_user_daily_visits
+2021-09-07 13:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-19 - Searching for stream ordering 1 month ago
+2021-09-07 13:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-19 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-19 - Searching for stream ordering 1 day ago
+2021-09-07 13:44:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-19 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-39 - Calling _generate_user_daily_visits
+2021-09-07 13:46:09,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:49:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-40 - Calling _generate_user_daily_visits
+2021-09-07 13:53:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 13:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-6 - Rotating notifications
+2021-09-07 13:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-20 - Searching for stream ordering 1 month ago
+2021-09-07 13:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-20 - Found stream ordering 1 month ago: it's 677
+2021-09-07 13:54:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-20 - Searching for stream ordering 1 day ago
+2021-09-07 13:54:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-20 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 13:54:19,907 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-6 - Rotating notifications up to: 1157
+2021-09-07 13:54:19,909 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-6 - Rotating notifications, handling 0 rows
+2021-09-07 13:54:19,915 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-6 - Rotating notifications, deleted 0 push actions
+2021-09-07 13:54:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-41 - Calling _generate_user_daily_visits
+2021-09-07 13:59:20,469 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-42 - Calling _generate_user_daily_visits
+2021-09-07 14:01:09,927 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:04:19,896 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-21 - Searching for stream ordering 1 month ago
+2021-09-07 14:04:19,897 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-21 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:04:19,897 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-21 - Searching for stream ordering 1 day ago
+2021-09-07 14:04:19,898 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-21 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:04:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-43 - Calling _generate_user_daily_visits
+2021-09-07 14:08:34,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-44 - Calling _generate_user_daily_visits
+2021-09-07 14:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-22 - Searching for stream ordering 1 month ago
+2021-09-07 14:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-22 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-22 - Searching for stream ordering 1 day ago
+2021-09-07 14:14:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-22 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-45 - Calling _generate_user_daily_visits
+2021-09-07 14:16:20,456 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:16:20,469 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 14:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-46 - Calling _generate_user_daily_visits
+2021-09-07 14:22:20,456 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:24:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-7 - Rotating notifications
+2021-09-07 14:24:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-23 - Searching for stream ordering 1 month ago
+2021-09-07 14:24:19,904 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-23 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:24:19,904 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-23 - Searching for stream ordering 1 day ago
+2021-09-07 14:24:19,907 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-23 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:24:19,907 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-7 - Rotating notifications up to: 1157
+2021-09-07 14:24:19,908 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-7 - Rotating notifications, handling 0 rows
+2021-09-07 14:24:19,908 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-7 - Rotating notifications, deleted 0 push actions
+2021-09-07 14:24:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-47 - Calling _generate_user_daily_visits
+2021-09-07 14:29:20,469 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-48 - Calling _generate_user_daily_visits
+2021-09-07 14:29:34,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:34:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-24 - Searching for stream ordering 1 month ago
+2021-09-07 14:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-24 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:34:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-24 - Searching for stream ordering 1 day ago
+2021-09-07 14:34:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-24 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-49 - Calling _generate_user_daily_visits
+2021-09-07 14:37:09,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:39:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-50 - Calling _generate_user_daily_visits
+2021-09-07 14:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-25 - Searching for stream ordering 1 month ago
+2021-09-07 14:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-25 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-25 - Searching for stream ordering 1 day ago
+2021-09-07 14:44:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-25 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:44:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-51 - Calling _generate_user_daily_visits
+2021-09-07 14:44:44,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-52 - Calling _generate_user_daily_visits
+2021-09-07 14:52:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 14:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-8 - Rotating notifications
+2021-09-07 14:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-26 - Searching for stream ordering 1 month ago
+2021-09-07 14:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-26 - Found stream ordering 1 month ago: it's 677
+2021-09-07 14:54:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-26 - Searching for stream ordering 1 day ago
+2021-09-07 14:54:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-26 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 14:54:19,904 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-8 - Rotating notifications up to: 1157
+2021-09-07 14:54:19,904 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-8 - Rotating notifications, handling 0 rows
+2021-09-07 14:54:19,904 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-8 - Rotating notifications, deleted 0 push actions
+2021-09-07 14:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-53 - Calling _generate_user_daily_visits
+2021-09-07 14:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-54 - Calling _generate_user_daily_visits
+2021-09-07 15:00:29,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:04:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-27 - Searching for stream ordering 1 month ago
+2021-09-07 15:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-27 - Found stream ordering 1 month ago: it's 677
+2021-09-07 15:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-27 - Searching for stream ordering 1 day ago
+2021-09-07 15:04:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-27 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 15:04:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-55 - Calling _generate_user_daily_visits
+2021-09-07 15:08:19,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:09:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-56 - Calling _generate_user_daily_visits
+2021-09-07 15:35:03,252 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-9 - Rotating notifications
+2021-09-07 15:35:03,268 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-28 - Searching for stream ordering 1 month ago
+2021-09-07 15:35:03,270 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-28 - Found stream ordering 1 month ago: it's 677
+2021-09-07 15:35:03,270 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-28 - Searching for stream ordering 1 day ago
+2021-09-07 15:35:03,271 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-28 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 15:35:03,276 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-57 - Calling _generate_user_daily_visits
+2021-09-07 15:35:03,281 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-9 - Rotating notifications up to: 1157
+2021-09-07 15:35:03,283 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-9 - Rotating notifications, handling 0 rows
+2021-09-07 15:35:03,284 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-9 - Rotating notifications, deleted 0 push actions
+2021-09-07 15:37:09,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-58 - Calling _generate_user_daily_visits
+2021-09-07 15:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-29 - Searching for stream ordering 1 month ago
+2021-09-07 15:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-29 - Found stream ordering 1 month ago: it's 677
+2021-09-07 15:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-29 - Searching for stream ordering 1 day ago
+2021-09-07 15:44:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-29 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 15:44:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-59 - Calling _generate_user_daily_visits
+2021-09-07 15:44:44,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:44:51,355 - synapse.access.http.8008 - 389 - INFO - PUT-27 - 127.0.0.1 - 8008 - {@telegram_1521657062:lenovo} Processed request: 0.215sec/-0.000sec (0.010sec, 0.036sec) (0.009sec/0.084sec/4) 2B 200 "PUT /_matrix/client/r0/presence/%40telegram_1521657062%3Alenovo/status?user_id=@telegram_1521657062:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 15:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-60 - Calling _generate_user_daily_visits
+2021-09-07 15:52:09,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:54:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-10 - Rotating notifications
+2021-09-07 15:54:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-30 - Searching for stream ordering 1 month ago
+2021-09-07 15:54:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-30 - Found stream ordering 1 month ago: it's 677
+2021-09-07 15:54:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-30 - Searching for stream ordering 1 day ago
+2021-09-07 15:54:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-30 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 15:54:19,907 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-10 - Rotating notifications up to: 1157
+2021-09-07 15:54:19,909 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-10 - Rotating notifications, handling 0 rows
+2021-09-07 15:54:19,917 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-10 - Rotating notifications, deleted 0 push actions
+2021-09-07 15:54:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-61 - Calling _generate_user_daily_visits
+2021-09-07 15:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-62 - Calling _generate_user_daily_visits
+2021-09-07 15:59:29,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 15:59:30,392 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 16:04:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-31 - Searching for stream ordering 1 month ago
+2021-09-07 16:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-31 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-31 - Searching for stream ordering 1 day ago
+2021-09-07 16:04:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-31 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-63 - Calling _generate_user_daily_visits
+2021-09-07 16:05:44,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:09:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-64 - Calling _generate_user_daily_visits
+2021-09-07 16:13:19,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-32 - Searching for stream ordering 1 month ago
+2021-09-07 16:14:19,898 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-32 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:14:19,898 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-32 - Searching for stream ordering 1 day ago
+2021-09-07 16:14:19,899 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-32 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-65 - Calling _generate_user_daily_visits
+2021-09-07 16:19:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-66 - Calling _generate_user_daily_visits
+2021-09-07 16:20:54,006 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:20:54,189 - synapse.access.http.8008 - 389 - INFO - PUT-28 - 127.0.0.1 - 8008 - {@telegram_1249853684:lenovo} Processed request: 0.190sec/-0.000sec (0.007sec, 0.000sec) (0.006sec/0.169sec/4) 2B 200 "PUT /_matrix/client/r0/presence/%40telegram_1249853684%3Alenovo/status?user_id=@telegram_1249853684:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 16:24:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-11 - Rotating notifications
+2021-09-07 16:24:19,901 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-33 - Searching for stream ordering 1 month ago
+2021-09-07 16:24:19,903 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-33 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:24:19,903 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-33 - Searching for stream ordering 1 day ago
+2021-09-07 16:24:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-33 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:24:19,909 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-11 - Rotating notifications up to: 1157
+2021-09-07 16:24:19,915 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-11 - Rotating notifications, handling 0 rows
+2021-09-07 16:24:19,916 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-11 - Rotating notifications, deleted 0 push actions
+2021-09-07 16:24:20,472 - synapse.app.homeserver - 45 - INFO - phone_stats_home-2 - Gathering stats for reporting
+2021-09-07 16:24:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-67 - Calling _generate_user_daily_visits
+2021-09-07 16:24:20,512 - synapse.app.homeserver - 128 - INFO - phone_stats_home-2 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 91856, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1631042660, 'uptime_seconds': 21601, 'python_version': '3.8.9', 'total_users': 287, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 1, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 1, 'daily_sent_messages': 1, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-07 16:24:20,796 - synapse.http.client - 440 - INFO - phone_stats_home-2 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-07 16:28:09,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:29:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-68 - Calling _generate_user_daily_visits
+2021-09-07 16:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-34 - Searching for stream ordering 1 month ago
+2021-09-07 16:34:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-34 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:34:19,899 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-34 - Searching for stream ordering 1 day ago
+2021-09-07 16:34:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-34 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:34:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-69 - Calling _generate_user_daily_visits
+2021-09-07 16:35:34,928 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:39:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-70 - Calling _generate_user_daily_visits
+2021-09-07 16:43:24,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:44:19,896 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-35 - Searching for stream ordering 1 month ago
+2021-09-07 16:44:19,898 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-35 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:44:19,898 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-35 - Searching for stream ordering 1 day ago
+2021-09-07 16:44:19,898 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-35 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-71 - Calling _generate_user_daily_visits
+2021-09-07 16:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-72 - Calling _generate_user_daily_visits
+2021-09-07 16:51:09,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:54:19,896 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-12 - Rotating notifications
+2021-09-07 16:54:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-36 - Searching for stream ordering 1 month ago
+2021-09-07 16:54:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-36 - Found stream ordering 1 month ago: it's 677
+2021-09-07 16:54:19,899 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-36 - Searching for stream ordering 1 day ago
+2021-09-07 16:54:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-36 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 16:54:19,905 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-12 - Rotating notifications up to: 1157
+2021-09-07 16:54:19,907 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-12 - Rotating notifications, handling 0 rows
+2021-09-07 16:54:19,908 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-12 - Rotating notifications, deleted 0 push actions
+2021-09-07 16:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-73 - Calling _generate_user_daily_visits
+2021-09-07 16:58:39,928 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 16:59:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-74 - Calling _generate_user_daily_visits
+2021-09-07 17:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-37 - Searching for stream ordering 1 month ago
+2021-09-07 17:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-37 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:04:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-37 - Searching for stream ordering 1 day ago
+2021-09-07 17:04:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-37 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:04:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-75 - Calling _generate_user_daily_visits
+2021-09-07 17:06:19,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-76 - Calling _generate_user_daily_visits
+2021-09-07 17:10:10,355 - synapse.handlers.auth - 821 - INFO - POST-29 - Logging in user @telegram_928138941:lenovo on device XJRXJYEZTA
+2021-09-07 17:10:10,573 - synapse.http.server - 88 - INFO - POST-30 - <XForwardedForRequest at 0x7f2028248460 method='POST' uri='/_matrix/client/r0/register?kind=user&user_id=@telegram_928138941:lenovo' clientproto='HTTP/1.1' site='8008'> SynapseError: 400 - User ID already taken.
+2021-09-07 17:10:10,578 - synapse.access.http.8008 - 389 - INFO - POST-30 - 127.0.0.1 - 8008 - {@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo} Processed request: 0.051sec/-0.000sec (0.013sec, 0.000sec) (0.028sec/0.007sec/1) 60B 400 "POST /_matrix/client/r0/register?kind=user&user_id=@telegram_928138941:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 17:10:10,584 - synapse.access.http.8008 - 389 - INFO - POST-29 - 127.0.0.1 - 8008 - {@VOXvZZhAyDhDsZndBTIqvo-yTnBnBcD61HfUCnZjbRleQ6zcNNT3SboqoRlAkwVI:lenovo} Processed request: 0.627sec/-0.000sec (0.017sec, 0.027sec) (0.014sec/0.540sec/6) 162B 200 "POST /_matrix/client/r0/register?kind=user&user_id=@telegram_928138941:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 17:10:10,691 - synapse.access.http.8008 - 389 - INFO - GET-32 - 127.0.0.1 - 8008 - {None} Processed request: 0.012sec/-0.000sec (0.002sec, 0.000sec) (0.000sec/0.007sec/1) 36B 200 "GET /_matrix/client/r0/profile/%40telegram_928138941%3Alenovo/displayname?user_id=@telegram_928138941:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 17:10:11,131 - synapse.access.http.8008 - 389 - INFO - PUT-33 - 127.0.0.1 - 8008 - {@telegram_928138941:lenovo} Processed request: 0.438sec/-0.000sec (0.008sec, 0.000sec) (0.007sec/0.407sec/3) 2B 200 "PUT /_matrix/client/r0/profile/%40telegram_928138941%3Alenovo/displayname?user_id=@telegram_928138941:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 17:10:11,722 - synapse.access.http.8008 - 389 - INFO - POST-31 - 127.0.0.1 - 8008 - {@telegram_928138941:lenovo} Processed request: 1.047sec/-0.000sec (0.061sec, 0.020sec) (0.397sec/0.116sec/9) 40B 200 "POST /_matrix/client/r0/join/%21ybCdPrJCBsayVXPmVm%3Alenovo?user_id=@telegram_928138941:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 17:10:12,421 - synapse.http.client - 440 - INFO - as-sender-telegram-2 - Received response to PUT http://localhost:29317/transactions/560?access_token=<redacted>: 200
+2021-09-07 17:12:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:14:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-38 - Searching for stream ordering 1 month ago
+2021-09-07 17:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-38 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-38 - Searching for stream ordering 1 day ago
+2021-09-07 17:14:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-38 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-77 - Calling _generate_user_daily_visits
+2021-09-07 17:19:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-78 - Calling _generate_user_daily_visits
+2021-09-07 17:20:44,929 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:20:45,103 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 17:24:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-13 - Rotating notifications
+2021-09-07 17:24:19,901 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-39 - Searching for stream ordering 1 month ago
+2021-09-07 17:24:19,904 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-39 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:24:19,904 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-39 - Searching for stream ordering 1 day ago
+2021-09-07 17:24:19,907 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-39 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:24:19,914 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-13 - Rotating notifications up to: 1157
+2021-09-07 17:24:19,917 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-13 - Rotating notifications, handling 0 rows
+2021-09-07 17:24:19,918 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-13 - Rotating notifications, deleted 0 push actions
+2021-09-07 17:24:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-79 - Calling _generate_user_daily_visits
+2021-09-07 17:26:34,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:29:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-80 - Calling _generate_user_daily_visits
+2021-09-07 17:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-40 - Searching for stream ordering 1 month ago
+2021-09-07 17:34:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-40 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:34:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-40 - Searching for stream ordering 1 day ago
+2021-09-07 17:34:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-40 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-81 - Calling _generate_user_daily_visits
+2021-09-07 17:34:24,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:39:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-82 - Calling _generate_user_daily_visits
+2021-09-07 17:42:09,928 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:44:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-41 - Searching for stream ordering 1 month ago
+2021-09-07 17:44:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-41 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:44:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-41 - Searching for stream ordering 1 day ago
+2021-09-07 17:44:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-41 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-83 - Calling _generate_user_daily_visits
+2021-09-07 17:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-84 - Calling _generate_user_daily_visits
+2021-09-07 17:49:44,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-14 - Rotating notifications
+2021-09-07 17:54:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-42 - Searching for stream ordering 1 month ago
+2021-09-07 17:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-42 - Found stream ordering 1 month ago: it's 677
+2021-09-07 17:54:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-42 - Searching for stream ordering 1 day ago
+2021-09-07 17:54:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-42 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 17:54:19,905 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-14 - Rotating notifications up to: 1157
+2021-09-07 17:54:19,905 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-14 - Rotating notifications, handling 0 rows
+2021-09-07 17:54:19,905 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-14 - Rotating notifications, deleted 0 push actions
+2021-09-07 17:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-85 - Calling _generate_user_daily_visits
+2021-09-07 17:57:19,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 17:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-86 - Calling _generate_user_daily_visits
+2021-09-07 18:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-43 - Searching for stream ordering 1 month ago
+2021-09-07 18:04:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-43 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:04:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-43 - Searching for stream ordering 1 day ago
+2021-09-07 18:04:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-43 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-87 - Calling _generate_user_daily_visits
+2021-09-07 18:04:54,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:09:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-88 - Calling _generate_user_daily_visits
+2021-09-07 18:12:39,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:14:19,895 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-44 - Searching for stream ordering 1 month ago
+2021-09-07 18:14:19,896 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-44 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:14:19,896 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-44 - Searching for stream ordering 1 day ago
+2021-09-07 18:14:19,897 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-44 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-89 - Calling _generate_user_daily_visits
+2021-09-07 18:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-90 - Calling _generate_user_daily_visits
+2021-09-07 18:20:24,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:24:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-15 - Rotating notifications
+2021-09-07 18:24:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-45 - Searching for stream ordering 1 month ago
+2021-09-07 18:24:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-45 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:24:19,903 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-45 - Searching for stream ordering 1 day ago
+2021-09-07 18:24:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-45 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:24:19,908 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-15 - Rotating notifications up to: 1157
+2021-09-07 18:24:19,914 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-15 - Rotating notifications, handling 0 rows
+2021-09-07 18:24:19,915 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-15 - Rotating notifications, deleted 0 push actions
+2021-09-07 18:24:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-91 - Calling _generate_user_daily_visits
+2021-09-07 18:27:29,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:29:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-92 - Calling _generate_user_daily_visits
+2021-09-07 18:34:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-46 - Searching for stream ordering 1 month ago
+2021-09-07 18:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-46 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:34:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-46 - Searching for stream ordering 1 day ago
+2021-09-07 18:34:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-46 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-93 - Calling _generate_user_daily_visits
+2021-09-07 18:35:14,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:39:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-94 - Calling _generate_user_daily_visits
+2021-09-07 18:42:54,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:42:55,388 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 18:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-47 - Searching for stream ordering 1 month ago
+2021-09-07 18:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-47 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-47 - Searching for stream ordering 1 day ago
+2021-09-07 18:44:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-47 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-95 - Calling _generate_user_daily_visits
+2021-09-07 18:48:54,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-96 - Calling _generate_user_daily_visits
+2021-09-07 18:49:30,680 - synapse.access.http.8008 - 389 - INFO - PUT-34 - 127.0.0.1 - 8008 - {@telegram_1690810074:lenovo} Processed request: 0.233sec/-0.000sec (0.005sec, 0.000sec) (0.006sec/0.211sec/4) 2B 200 "PUT /_matrix/client/r0/presence/%40telegram_1690810074%3Alenovo/status?user_id=@telegram_1690810074:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 18:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-16 - Rotating notifications
+2021-09-07 18:54:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-48 - Searching for stream ordering 1 month ago
+2021-09-07 18:54:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-48 - Found stream ordering 1 month ago: it's 677
+2021-09-07 18:54:19,899 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-48 - Searching for stream ordering 1 day ago
+2021-09-07 18:54:19,900 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-48 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 18:54:19,902 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-16 - Rotating notifications up to: 1157
+2021-09-07 18:54:19,903 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-16 - Rotating notifications, handling 0 rows
+2021-09-07 18:54:19,904 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-16 - Rotating notifications, deleted 0 push actions
+2021-09-07 18:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-97 - Calling _generate_user_daily_visits
+2021-09-07 18:56:34,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 18:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-98 - Calling _generate_user_daily_visits
+2021-09-07 19:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-49 - Searching for stream ordering 1 month ago
+2021-09-07 19:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-49 - Found stream ordering 1 month ago: it's 677
+2021-09-07 19:04:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-49 - Searching for stream ordering 1 day ago
+2021-09-07 19:04:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-49 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:04:20,289 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-99 - Calling _generate_user_daily_visits
+2021-09-07 19:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-100 - Calling _generate_user_daily_visits
+2021-09-07 19:11:54,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-50 - Searching for stream ordering 1 month ago
+2021-09-07 19:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-50 - Found stream ordering 1 month ago: it's 677
+2021-09-07 19:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-50 - Searching for stream ordering 1 day ago
+2021-09-07 19:14:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-50 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-101 - Calling _generate_user_daily_visits
+2021-09-07 19:19:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-102 - Calling _generate_user_daily_visits
+2021-09-07 19:19:20,477 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:24:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-17 - Rotating notifications
+2021-09-07 19:24:19,901 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-51 - Searching for stream ordering 1 month ago
+2021-09-07 19:24:19,904 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-51 - Found stream ordering 1 month ago: it's 677
+2021-09-07 19:24:19,904 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-51 - Searching for stream ordering 1 day ago
+2021-09-07 19:24:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-51 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:24:19,909 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-17 - Rotating notifications up to: 1157
+2021-09-07 19:24:19,915 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-17 - Rotating notifications, handling 0 rows
+2021-09-07 19:24:19,916 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-17 - Rotating notifications, deleted 0 push actions
+2021-09-07 19:24:20,472 - synapse.app.homeserver - 45 - INFO - phone_stats_home-3 - Gathering stats for reporting
+2021-09-07 19:24:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-103 - Calling _generate_user_daily_visits
+2021-09-07 19:24:20,511 - synapse.app.homeserver - 128 - INFO - phone_stats_home-3 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 91856, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1631053460, 'uptime_seconds': 32401, 'python_version': '3.8.9', 'total_users': 288, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 2, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 1, 'daily_messages': 1, 'daily_sent_messages': 1, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-07 19:24:20,832 - synapse.http.client - 440 - INFO - phone_stats_home-3 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-07 19:26:29,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:29:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-104 - Calling _generate_user_daily_visits
+2021-09-07 19:34:14,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:34:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-52 - Searching for stream ordering 1 month ago
+2021-09-07 19:34:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-52 - Found stream ordering 1 month ago: it's 677
+2021-09-07 19:34:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-52 - Searching for stream ordering 1 day ago
+2021-09-07 19:34:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-52 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-105 - Calling _generate_user_daily_visits
+2021-09-07 19:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-106 - Calling _generate_user_daily_visits
+2021-09-07 19:41:49,927 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:44:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-53 - Searching for stream ordering 1 month ago
+2021-09-07 19:44:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-53 - Found stream ordering 1 month ago: it's 677
+2021-09-07 19:44:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-53 - Searching for stream ordering 1 day ago
+2021-09-07 19:44:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-53 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-107 - Calling _generate_user_daily_visits
+2021-09-07 19:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-108 - Calling _generate_user_daily_visits
+2021-09-07 19:49:29,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-18 - Rotating notifications
+2021-09-07 19:54:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-54 - Searching for stream ordering 1 month ago
+2021-09-07 19:54:20,006 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-54 - Found stream ordering 1 month ago: it's 749
+2021-09-07 19:54:20,006 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-54 - Searching for stream ordering 1 day ago
+2021-09-07 19:54:20,008 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-54 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 19:54:20,011 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-18 - Rotating notifications up to: 1157
+2021-09-07 19:54:20,013 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-18 - Rotating notifications, handling 0 rows
+2021-09-07 19:54:20,014 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-18 - Rotating notifications, deleted 0 push actions
+2021-09-07 19:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-109 - Calling _generate_user_daily_visits
+2021-09-07 19:56:59,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 19:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-110 - Calling _generate_user_daily_visits
+2021-09-07 20:04:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-55 - Searching for stream ordering 1 month ago
+2021-09-07 20:04:19,998 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-55 - Found stream ordering 1 month ago: it's 866
+2021-09-07 20:04:19,998 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-55 - Searching for stream ordering 1 day ago
+2021-09-07 20:04:20,001 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-55 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-111 - Calling _generate_user_daily_visits
+2021-09-07 20:04:29,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:04:30,217 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 20:06:48,021 - synapse.access.http.8008 - 389 - INFO - PUT-35 - 127.0.0.1 - 8008 - {@telegram_1348510109:lenovo} Processed request: 0.170sec/-0.000sec (0.006sec, 0.000sec) (0.002sec/0.161sec/4) 2B 200 "PUT /_matrix/client/r0/presence/%40telegram_1348510109%3Alenovo/status?user_id=@telegram_1348510109:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 20:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-112 - Calling _generate_user_daily_visits
+2021-09-07 20:10:14,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-56 - Searching for stream ordering 1 month ago
+2021-09-07 20:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-56 - Found stream ordering 1 month ago: it's 872
+2021-09-07 20:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-56 - Searching for stream ordering 1 day ago
+2021-09-07 20:14:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-56 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-113 - Calling _generate_user_daily_visits
+2021-09-07 20:17:59,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-114 - Calling _generate_user_daily_visits
+2021-09-07 20:24:19,898 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-19 - Rotating notifications
+2021-09-07 20:24:19,900 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-57 - Searching for stream ordering 1 month ago
+2021-09-07 20:24:20,009 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-57 - Found stream ordering 1 month ago: it's 874
+2021-09-07 20:24:20,009 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-57 - Searching for stream ordering 1 day ago
+2021-09-07 20:24:20,012 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-57 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:24:20,015 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-19 - Rotating notifications up to: 1157
+2021-09-07 20:24:20,017 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-19 - Rotating notifications, handling 0 rows
+2021-09-07 20:24:20,018 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-19 - Rotating notifications, deleted 0 push actions
+2021-09-07 20:24:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-115 - Calling _generate_user_daily_visits
+2021-09-07 20:24:59,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:29:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-116 - Calling _generate_user_daily_visits
+2021-09-07 20:32:49,927 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:33:49,598 - synapse.access.http.8008 - 389 - INFO - PUT-36 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 0.428sec/-0.000sec (0.036sec, 0.004sec) (0.017sec/0.087sec/12) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/send/m.room.message/mautrix-python_R1%40T1631057629150?ts=1631057628000&user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [3 dbevts]
+2021-09-07 20:33:50,305 - synapse.logging.context - 70 - WARNING - PUT-36 - Re-starting finished log context PUT-36
+2021-09-07 20:33:50,306 - synapse.logging.context - 70 - WARNING - PUT-36 - Re-starting finished log context PUT-36
+2021-09-07 20:33:50,691 - synapse.logging.context - 70 - WARNING - PUT-36 - Re-starting finished log context PUT-36
+2021-09-07 20:33:50,712 - synapse.http.client - 440 - INFO - as-sender-telegram-3 - Received response to PUT http://localhost:29317/transactions/561?access_token=<redacted>: 200
+2021-09-07 20:34:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-58 - Searching for stream ordering 1 month ago
+2021-09-07 20:34:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-58 - Found stream ordering 1 month ago: it's 874
+2021-09-07 20:34:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-58 - Searching for stream ordering 1 day ago
+2021-09-07 20:34:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-58 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-117 - Calling _generate_user_daily_visits
+2021-09-07 20:39:20,292 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-118 - Calling _generate_user_daily_visits
+2021-09-07 20:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-59 - Searching for stream ordering 1 month ago
+2021-09-07 20:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-59 - Found stream ordering 1 month ago: it's 874
+2021-09-07 20:44:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-59 - Searching for stream ordering 1 day ago
+2021-09-07 20:44:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-59 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-119 - Calling _generate_user_daily_visits
+2021-09-07 20:47:09,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:48:09,650 - synapse.access.http.8008 - 389 - INFO - PUT-37 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 0.150sec/-0.000sec (0.003sec, 0.000sec) (0.001sec/0.000sec/2) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/send/m.room.message/mautrix-python_R2%40T1631058489495?ts=1631058489000&user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 20:48:09,883 - synapse.logging.context - 70 - WARNING - PUT-37 - Re-starting finished log context PUT-37
+2021-09-07 20:48:10,377 - synapse.http.client - 440 - INFO - as-sender-telegram-4 - Received response to PUT http://localhost:29317/transactions/562?access_token=<redacted>: 200
+2021-09-07 20:48:19,740 - synapse.access.http.8008 - 389 - INFO - PUT-38 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 0.232sec/-0.000sec (0.008sec, 0.000sec) (0.001sec/0.000sec/2) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/send/m.room.message/mautrix-python_R3%40T1631058499502?ts=1631058496000&user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 20:48:20,393 - synapse.handlers.presence - 755 - INFO - persist_presence_changes-601 - Persisting 1 unpersisted presence updates
+2021-09-07 20:48:20,829 - synapse.http.client - 440 - INFO - as-sender-telegram-5 - Received response to PUT http://localhost:29317/transactions/563?access_token=<redacted>: 200
+2021-09-07 20:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-120 - Calling _generate_user_daily_visits
+2021-09-07 20:53:54,932 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 20:54:19,896 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-20 - Rotating notifications
+2021-09-07 20:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-60 - Searching for stream ordering 1 month ago
+2021-09-07 20:54:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-60 - Found stream ordering 1 month ago: it's 874
+2021-09-07 20:54:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-60 - Searching for stream ordering 1 day ago
+2021-09-07 20:54:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-60 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 20:54:19,907 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-20 - Rotating notifications up to: 1157
+2021-09-07 20:54:19,909 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-20 - Rotating notifications, handling 0 rows
+2021-09-07 20:54:19,914 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-20 - Rotating notifications, deleted 0 push actions
+2021-09-07 20:54:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-121 - Calling _generate_user_daily_visits
+2021-09-07 20:59:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-122 - Calling _generate_user_daily_visits
+2021-09-07 21:01:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-61 - Searching for stream ordering 1 month ago
+2021-09-07 21:04:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-61 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-61 - Searching for stream ordering 1 day ago
+2021-09-07 21:04:19,905 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-61 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-123 - Calling _generate_user_daily_visits
+2021-09-07 21:09:20,289 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-124 - Calling _generate_user_daily_visits
+2021-09-07 21:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-62 - Searching for stream ordering 1 month ago
+2021-09-07 21:14:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-62 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:14:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-62 - Searching for stream ordering 1 day ago
+2021-09-07 21:14:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-62 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-125 - Calling _generate_user_daily_visits
+2021-09-07 21:16:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-126 - Calling _generate_user_daily_visits
+2021-09-07 21:24:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-21 - Rotating notifications
+2021-09-07 21:24:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-63 - Searching for stream ordering 1 month ago
+2021-09-07 21:24:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-63 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:24:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-63 - Searching for stream ordering 1 day ago
+2021-09-07 21:24:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-63 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:24:19,906 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-21 - Rotating notifications up to: 1157
+2021-09-07 21:24:19,908 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-21 - Rotating notifications, handling 0 rows
+2021-09-07 21:24:19,909 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-21 - Rotating notifications, deleted 0 push actions
+2021-09-07 21:24:19,916 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:24:19,922 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 21:24:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-127 - Calling _generate_user_daily_visits
+2021-09-07 21:29:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-128 - Calling _generate_user_daily_visits
+2021-09-07 21:30:19,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-64 - Searching for stream ordering 1 month ago
+2021-09-07 21:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-64 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:34:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-64 - Searching for stream ordering 1 day ago
+2021-09-07 21:34:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-64 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:34:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-129 - Calling _generate_user_daily_visits
+2021-09-07 21:37:49,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-130 - Calling _generate_user_daily_visits
+2021-09-07 21:44:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-65 - Searching for stream ordering 1 month ago
+2021-09-07 21:44:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-65 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:44:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-65 - Searching for stream ordering 1 day ago
+2021-09-07 21:44:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-65 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-131 - Calling _generate_user_daily_visits
+2021-09-07 21:45:34,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:49:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-132 - Calling _generate_user_daily_visits
+2021-09-07 21:53:20,455 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-22 - Rotating notifications
+2021-09-07 21:54:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-66 - Searching for stream ordering 1 month ago
+2021-09-07 21:54:19,905 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-66 - Found stream ordering 1 month ago: it's 875
+2021-09-07 21:54:19,905 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-66 - Searching for stream ordering 1 day ago
+2021-09-07 21:54:19,908 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-66 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 21:54:19,913 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-22 - Rotating notifications up to: 1157
+2021-09-07 21:54:19,916 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-22 - Rotating notifications, handling 0 rows
+2021-09-07 21:54:19,917 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-22 - Rotating notifications, deleted 0 push actions
+2021-09-07 21:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-133 - Calling _generate_user_daily_visits
+2021-09-07 21:58:03,948 - synapse.access.http.8008 - 389 - INFO - PUT-39 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 0.279sec/-0.000sec (0.009sec, 0.003sec) (0.002sec/0.001sec/2) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/redact/%244EbkU_UD_BYf9Y0phkTC0rq2XJRUoQonCFvU1dihBkA/mautrix-python_R4%40T1631062683660?user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 21:58:05,392 - synapse.http.client - 440 - INFO - as-sender-telegram-6 - Received response to PUT http://localhost:29317/transactions/564?access_token=<redacted>: 200
+2021-09-07 21:58:05,902 - synapse.access.http.8008 - 389 - INFO - PUT-40 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 1.413sec/-0.000sec (0.004sec, 0.000sec) (0.423sec/0.002sec/2) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/redact/%24RdB2ErnGd_WVXk28C-Bf0HTdv8f44ccqKQn8KxcEMTY/mautrix-python_R5%40T1631062684486?user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 21:58:07,415 - synapse.http.client - 440 - INFO - as-sender-telegram-7 - Received response to PUT http://localhost:29317/transactions/565?access_token=<redacted>: 200
+2021-09-07 21:58:07,908 - synapse.access.http.8008 - 389 - INFO - PUT-41 - 127.0.0.1 - 8008 - {@telegram_854694606:lenovo} Processed request: 1.064sec/-0.000sec (0.009sec, 0.000sec) (0.444sec/0.008sec/2) 59B 200 "PUT /_matrix/client/r0/rooms/%21ssSdKdWrcfFGkaZceX%3Alenovo/redact/%240dZcEVU5wKrXyuf8bTyXg0eCZRy81C5ZUpmK3GZC2q8/mautrix-python_R6%40T1631062686841?user_id=@telegram_854694606:lenovo HTTP/1.1" "mautrix-telegram/0.10.0+dev.unknown mautrix-python/0.9.6 aiohttp/3.7.4.post0 Python/3.8.9" [0 dbevts]
+2021-09-07 21:58:09,488 - synapse.http.client - 440 - INFO - as-sender-telegram-8 - Received response to PUT http://localhost:29317/transactions/566?access_token=<redacted>: 200
+2021-09-07 21:59:19,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 21:59:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-134 - Calling _generate_user_daily_visits
+2021-09-07 22:04:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-67 - Searching for stream ordering 1 month ago
+2021-09-07 22:04:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-67 - Found stream ordering 1 month ago: it's 876
+2021-09-07 22:04:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-67 - Searching for stream ordering 1 day ago
+2021-09-07 22:04:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-67 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-135 - Calling _generate_user_daily_visits
+2021-09-07 22:06:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:09:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-136 - Calling _generate_user_daily_visits
+2021-09-07 22:14:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-68 - Searching for stream ordering 1 month ago
+2021-09-07 22:14:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-68 - Found stream ordering 1 month ago: it's 876
+2021-09-07 22:14:19,903 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-68 - Searching for stream ordering 1 day ago
+2021-09-07 22:14:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-68 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:14:20,289 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:14:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-137 - Calling _generate_user_daily_visits
+2021-09-07 22:19:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-138 - Calling _generate_user_daily_visits
+2021-09-07 22:21:54,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:24:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-23 - Rotating notifications
+2021-09-07 22:24:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-69 - Searching for stream ordering 1 month ago
+2021-09-07 22:24:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-69 - Found stream ordering 1 month ago: it's 876
+2021-09-07 22:24:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-69 - Searching for stream ordering 1 day ago
+2021-09-07 22:24:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-69 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:24:19,905 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-23 - Rotating notifications up to: 1157
+2021-09-07 22:24:19,905 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-23 - Rotating notifications, handling 0 rows
+2021-09-07 22:24:19,905 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-23 - Rotating notifications, deleted 0 push actions
+2021-09-07 22:24:20,472 - synapse.app.homeserver - 45 - INFO - phone_stats_home-4 - Gathering stats for reporting
+2021-09-07 22:24:20,474 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-139 - Calling _generate_user_daily_visits
+2021-09-07 22:24:20,511 - synapse.app.homeserver - 128 - INFO - phone_stats_home-4 - Reporting stats to https://matrix.org/report-usage-stats/push: {'memory_rss': 91856, 'cpu_average': 0, 'homeserver': 'lenovo', 'server_context': None, 'timestamp': 1631064260, 'uptime_seconds': 43201, 'python_version': '3.8.9', 'total_users': 288, 'total_nonbridged_users': 1, 'daily_user_type_native': 0, 'daily_user_type_guest': 0, 'daily_user_type_bridged': 2, 'total_room_count': 21, 'daily_active_users': 0, 'monthly_active_users': 0, 'daily_active_e2ee_rooms': 0, 'daily_e2ee_messages': 0, 'daily_sent_e2ee_messages': 0, 'daily_active_rooms': 2, 'daily_messages': 4, 'daily_sent_messages': 4, 'r30_users_all': 0, 'cache_factor': 0.5, 'event_cache_size': 10240, 'database_engine': 'sqlite3', 'database_server_version': '3.35.5', 'log_level': 'INFO'}
+2021-09-07 22:24:20,888 - synapse.http.client - 440 - INFO - phone_stats_home-4 - Received response to PUT https://matrix.org/report-usage-stats/push: 200
+2021-09-07 22:29:09,926 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:29:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-140 - Calling _generate_user_daily_visits
+2021-09-07 22:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-70 - Searching for stream ordering 1 month ago
+2021-09-07 22:34:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-70 - Found stream ordering 1 month ago: it's 877
+2021-09-07 22:34:19,899 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-70 - Searching for stream ordering 1 day ago
+2021-09-07 22:34:19,900 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-70 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:34:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-141 - Calling _generate_user_daily_visits
+2021-09-07 22:36:49,934 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-142 - Calling _generate_user_daily_visits
+2021-09-07 22:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-71 - Searching for stream ordering 1 month ago
+2021-09-07 22:44:19,899 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-71 - Found stream ordering 1 month ago: it's 878
+2021-09-07 22:44:19,899 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-71 - Searching for stream ordering 1 day ago
+2021-09-07 22:44:19,901 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-71 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:44:20,294 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:44:20,297 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 2
+2021-09-07 22:44:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-143 - Calling _generate_user_daily_visits
+2021-09-07 22:49:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-144 - Calling _generate_user_daily_visits
+2021-09-07 22:50:24,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:54:19,896 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-24 - Rotating notifications
+2021-09-07 22:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-72 - Searching for stream ordering 1 month ago
+2021-09-07 22:54:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-72 - Found stream ordering 1 month ago: it's 883
+2021-09-07 22:54:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-72 - Searching for stream ordering 1 day ago
+2021-09-07 22:54:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-72 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 22:54:19,906 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-24 - Rotating notifications up to: 1157
+2021-09-07 22:54:19,909 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-24 - Rotating notifications, handling 0 rows
+2021-09-07 22:54:19,913 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-24 - Rotating notifications, deleted 0 push actions
+2021-09-07 22:54:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-145 - Calling _generate_user_daily_visits
+2021-09-07 22:57:54,934 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 22:59:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-146 - Calling _generate_user_daily_visits
+2021-09-07 23:04:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-73 - Searching for stream ordering 1 month ago
+2021-09-07 23:04:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-73 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:04:19,901 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-73 - Searching for stream ordering 1 day ago
+2021-09-07 23:04:19,903 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-73 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:04:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-147 - Calling _generate_user_daily_visits
+2021-09-07 23:05:34,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:09:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-148 - Calling _generate_user_daily_visits
+2021-09-07 23:13:14,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:14:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-74 - Searching for stream ordering 1 month ago
+2021-09-07 23:14:19,901 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-74 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:14:19,902 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-74 - Searching for stream ordering 1 day ago
+2021-09-07 23:14:19,904 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-74 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:14:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-149 - Calling _generate_user_daily_visits
+2021-09-07 23:19:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-150 - Calling _generate_user_daily_visits
+2021-09-07 23:20:54,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:24:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-25 - Rotating notifications
+2021-09-07 23:24:19,899 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-75 - Searching for stream ordering 1 month ago
+2021-09-07 23:24:19,902 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-75 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:24:19,905 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-75 - Searching for stream ordering 1 day ago
+2021-09-07 23:24:19,908 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-75 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:24:19,914 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-25 - Rotating notifications up to: 1157
+2021-09-07 23:24:19,918 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-25 - Rotating notifications, handling 0 rows
+2021-09-07 23:24:19,919 - synapse.storage.databases.main.event_push_actions - 838 - INFO - rotate_notifs-25 - Rotating notifications, deleted 0 push actions
+2021-09-07 23:24:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-151 - Calling _generate_user_daily_visits
+2021-09-07 23:28:29,930 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:29:20,469 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-152 - Calling _generate_user_daily_visits
+2021-09-07 23:34:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-76 - Searching for stream ordering 1 month ago
+2021-09-07 23:34:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-76 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:34:19,903 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-76 - Searching for stream ordering 1 day ago
+2021-09-07 23:34:19,906 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-76 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:34:20,470 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-153 - Calling _generate_user_daily_visits
+2021-09-07 23:36:09,933 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:39:20,471 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-154 - Calling _generate_user_daily_visits
+2021-09-07 23:43:49,931 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:44:19,897 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-77 - Searching for stream ordering 1 month ago
+2021-09-07 23:44:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-77 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:44:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-77 - Searching for stream ordering 1 day ago
+2021-09-07 23:44:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-77 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:44:20,473 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-155 - Calling _generate_user_daily_visits
+2021-09-07 23:49:20,472 - synapse.storage.databases.main.metrics - 334 - INFO - generate_user_daily_visits-156 - Calling _generate_user_daily_visits
+2021-09-07 23:51:20,453 - synapse.metrics - 598 - INFO - sentinel - Collecting gc 1
+2021-09-07 23:54:19,897 - synapse.storage.databases.main.event_push_actions - 674 - INFO - rotate_notifs-26 - Rotating notifications
+2021-09-07 23:54:19,898 - synapse.storage.databases.main.event_push_actions - 537 - INFO - event_push_action_stream_orderings-78 - Searching for stream ordering 1 month ago
+2021-09-07 23:54:19,900 - synapse.storage.databases.main.event_push_actions - 541 - INFO - event_push_action_stream_orderings-78 - Found stream ordering 1 month ago: it's 883
+2021-09-07 23:54:19,900 - synapse.storage.databases.main.event_push_actions - 544 - INFO - event_push_action_stream_orderings-78 - Searching for stream ordering 1 day ago
+2021-09-07 23:54:19,902 - synapse.storage.databases.main.event_push_actions - 548 - INFO - event_push_action_stream_orderings-78 - Found stream ordering 1 day ago: it's 1157
+2021-09-07 23:54:19,905 - synapse.storage.databases.main.event_push_actions - 718 - INFO - rotate_notifs-26 - Rotating notifications up to: 1157
+2021-09-07 23:54:19,908 - synapse.storage.databases.main.event_push_actions - 792 - INFO - rotate_notifs-26 - Rotating notifications, handling 0 rows
