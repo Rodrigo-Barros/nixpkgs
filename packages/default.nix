@@ -8,6 +8,7 @@
 	awesome = pkgs.callPackage ./awesome {};
 	drivesync = pkgs.callPackage ./drivesync {};
 	nvim = pkgs.callPackage ./nvim {};
+	remind = pkgs.callPackage ./remind.nix {};
 	php = pkgs.php.buildEnv {
 		extensions = {all, enabled}: with all; [xdebug];
 		extraConfig = ''

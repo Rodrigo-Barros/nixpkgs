@@ -20,16 +20,6 @@
      #    ${builtins.readFile ./utils/nix-env-builder }
      #  '';
     
-     #  # Jekyll helper script
-     #  post = pkgs.writeScriptBin "post" ''
-     #   ${builtins.readFile ./jekyll/jekyll }
-     #  '';
-
-     #  taskremind = pkgs.writeScriptBin "taskremind" ''
-     #   ${builtins.readFile ./scripts/taskremind}
-     #  '';
-
-
      # my custom packages	
      packages = with repo;[
         php
@@ -40,6 +30,7 @@
 	    matrix
 	    jekyll
 		intelephense
+		remind
      ];
 
      home = pkgs.buildEnv {
