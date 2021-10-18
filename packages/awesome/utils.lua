@@ -9,4 +9,8 @@ init.enable_dbus = function()
 	os.execute('dbus-launch --exit-with-session awesome')
 end
 
+init.setup_second_monitor = function()
+	os.execute('xrandr --output eDP-1-1 --right-of HDMI-1-1')
+end
+
 return init

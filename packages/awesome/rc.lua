@@ -1,7 +1,7 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-package.path = package.path .. ";/home/rodrigo/.config/nixpkgs/awesome/?.lua"
+package.path = package.path .. ";/home/rodrigo/.config/nixpkgs/packages/awesome/?.lua"
 
 -- Standard awesome library
 local gears = require("gears")
@@ -185,6 +185,7 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 
+awful.screen.connect_for_each_screen(function(s)
 	local tags = {  "","", "", "", "", "", ""  }
     -- awful.tag(tags, s, awful.layout.layouts[1])
 
@@ -198,10 +199,10 @@ awful.layout.layouts = {
         gap = 2.5,
         gap_single_client = false,
         selected = selected,
+		screen = s
       })
   	end
 
-awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 

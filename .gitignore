@@ -1,2 +1,6 @@
 matrix/server/*
 matrix/bridges/*
+
+packages/matrix/bridges/mautrix-whatsapp/logs/2021-10-05-2.log
+packages/matrix/bridges/mautrix-telegram
+packages/matrix/bridges/mautrix-whatsapp/logs/2021-10-05-2.log

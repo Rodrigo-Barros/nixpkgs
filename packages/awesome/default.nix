@@ -1,7 +1,7 @@
 {
 	pkgs ? import <nixpkgs> {},
 	stdenv ? pkgs.stdenv,
-	config_file ? "${builtins.getEnv "HOME"}/.config/nixpkgs/awesome/rc.lua",
+	config_file ? "${builtins.getEnv "HOME"}/.config/nixpkgs/packages/awesome/rc.lua",
 	lgi ? pkgs.luaPackages.lgi,
 	lua ? pkgs.luaPackages.lua,
 	which ? pkgs.which

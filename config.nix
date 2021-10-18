@@ -23,13 +23,13 @@
      # my custom packages	
      packages = with repo;[
         php
-	    awesome
+		awesome
 	    nvim
 	    drivesync
 	    awesome
 	    matrix
 	    jekyll
-		intelephense
+	    intelephense
 		remind
      ];
 
@@ -92,6 +92,7 @@
 	     rofi
 	     #others
 	     zathura
+		 nix-index
          # post
           
          # time control
