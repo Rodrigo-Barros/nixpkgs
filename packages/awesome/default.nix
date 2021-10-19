@@ -16,7 +16,8 @@ pkgs.awesome.overrideAttrs(oldAttrs: {
       --add-flags '--search ${lgi}/lib/lua/${lua.luaversion}' \
       --add-flags '--search ${lgi}/share/lua/${lua.luaversion}' \
 	  --add-flags '-c ${config_file}' \
-      --prefix GI_TYPELIB_PATH : "$GI_TYPELIB_PATH"
+      --prefix GI_TYPELIB_PATH : "$GI_TYPELIB_PATH" \
+	  --prefix FONTCONFIG_FILE : "${pkgs.fontconfig.out}/etc/fonts/fonts.conf"
 
     wrapProgram $out/bin/awesome-client \
       --prefix PATH : "${which}/bin"

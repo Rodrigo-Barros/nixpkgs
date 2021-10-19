@@ -161,12 +161,6 @@ local function set_wallpaper(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end
-local function list_screens(s)
-	naughty.notify({
-		title=gears.debug.dump_return(screen.count());
-		screen=s
-	})
-end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
