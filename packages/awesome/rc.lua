@@ -1,7 +1,7 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-package.path = package.path .. ";/home/rodrigo/.config/nixpkgs/packages/awesome/?.lua"
+	package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/nixpkgs/packages/awesome/?.lua"
 
 -- Standard awesome library
 local gears = require("gears")
@@ -15,6 +15,7 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+local battery = require("widgets/battery")
 
 require('startup')
 
@@ -224,17 +225,22 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.noempty,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+		style = {
+			font ="Font Awesome 12"
+		}
     }
 
-	local calendar = awful.widget.calendar_popup.month()
+	local calendar = awful.widget.calendar_popup.month({
+		start_sunday = true
+	})
 	calendar:attach(mytextclock)
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.focused,
-        buttons = tasklist_buttons,
+        buttons = tasklist_buttons
     }
 
 	local player_text = wibox.widget.textbox()
@@ -280,6 +286,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+			battery,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock
@@ -422,9 +429,9 @@ end)
 		end
 
 		if player.PlaybackStatus == "Paused" then
-			scr.player.set_control(' > ')
+			scr.player.set_control('  ')
 		elseif player.PlaybackStatus == "Playing" then
-			scr.player.set_control(' | ')
+			scr.player.set_control('  ')
 		end
 
 		-- naughty.notify({
@@ -433,6 +440,18 @@ end)
 		-- })
 	end)
 	dbus.add_match("session","path=/org/mpris/MediaPlayer2")
+
+	-- Bateria via dbus
+	-- connected = dbus.connect_signal("org.freedesktop.DBus.Properties",function(args,interface,power)
+	-- 	naughty.notify({
+	-- 		title=gears.debug.dump_return(power),
+	-- 		timeout = 0
+	-- 	})
+	-- end)
+	-- dbus.add_match("system","path=/org/freedesktop/UPower/devices/battery_BAT0")
+	-- naughty.notify({
+	-- 	title = gears.debug.dump_return(connected)
+	-- })
 
 -- }}}
 -- vim: set foldmethod=marker:
