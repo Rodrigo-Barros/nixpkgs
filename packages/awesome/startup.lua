@@ -10,12 +10,14 @@ function os.capture(cmd, raw)
 end
 
 local utils = require("utils")
+local awful = require("awful")
 local screen_count = screen:instances()
 local naughty = require("naughty")
 local dump = require("gears").debug.dump_return
 -- startup
 utils.enable_touchpad()
 utils.enable_dbus()
+utils.enable_picom()
 
 local displays = tonumber(os.capture("xrandr -q | grep connected | wc -l"))
 if displays == 2 then

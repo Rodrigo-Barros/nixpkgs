@@ -1,20 +1,21 @@
 local init = {}
+local execute = require("awful").spawn.with_shell
 
 init.enable_touchpad = function()
 	-- Enable touchpad
-	os.execute('xinput set-prop "$(xinput list --name-only | grep -i touch)" "libinput Tapping Enabled" 1')
+	execute('xinput set-prop "$(xinput list --name-only | grep -i touch)" "libinput Tapping Enabled" 1')
 end
 
 init.enable_dbus = function()
-	os.execute('dbus-launch --exit-with-session awesome')
+	execute('dbus-launch --exit-with-session awesome')
 end
 
 init.setup_second_monitor = function()
-	os.execute('xrandr --output eDP-1-1 --right-of HDMI-1-1')
+	execute('xrandr --output eDP-1-1 --right-of HDMI-1-1')
 end
 
 init.enable_picom = function()
-	os.execute('picom')
+	execute('sleep 10 && nixGL picom --config $HOME/.config/compton/compton.conf -f -b')
 end
 
 return init
