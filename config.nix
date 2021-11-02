@@ -33,6 +33,13 @@
 		remind
      ];
 
+	 tools = with scripts; [
+		 post
+		 taskremind
+		 remind
+		 bindPrinter
+	 ];
+
      home = pkgs.buildEnv {
        name = "home-env";
        paths = with pkgs; [
@@ -41,6 +48,7 @@
          # nix-garbage-collector 
          services
          profile
+		 compton
 
          glibcLocales
 
@@ -100,11 +108,7 @@
          timewarrior
 
 		 # Scripts
-		 scripts.post
-		 scripts.taskremind
-		 scripts.remind
-		 scripts.bindPrinter
-       ] ++ packages;
+       ] ++ packages ++ tools;
 
         postBuild = ''
           substituteInPlace $prefix/share/applications/kitty.desktop \
@@ -112,6 +116,7 @@
 
             substituteInPlace $prefix/share/applications/chiaki.desktop \
            --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
+			
         '';
 
      };

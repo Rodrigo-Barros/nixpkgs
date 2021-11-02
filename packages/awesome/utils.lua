@@ -13,4 +13,8 @@ init.setup_second_monitor = function()
 	os.execute('xrandr --output eDP-1-1 --right-of HDMI-1-1')
 end
 
+init.enable_picom = function()
+	os.execute('picom')
+end
+
 return init

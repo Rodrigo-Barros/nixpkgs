@@ -240,11 +240,30 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.focused,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+		widget_template = {
+			{
+				{
+					{
+						widget = wibox.widget.imagebox,
+						id = 'icon_role'
+					},
+					right = 7,
+					widget = wibox.container.margin,
+				},
+				{
+					widget = wibox.widget.textbox,
+					align = "center",
+					id = 'text_role'
+				},
+				layout = wibox.layout.fixed.horizontal,
+			},
+			widget = wibox.container.place,
+		}
     }
 
 	local player_text = wibox.widget.textbox()
-	local player_controls = wibox.widget.textbox()
+	player_text.align = 'center'
 
 	s.player_stage = awful.wibar({
 		position='bottom', 
@@ -257,15 +276,15 @@ awful.screen.connect_for_each_screen(function(s)
 		set_text = function(text)
 			player_text:set_text(text)
 		end,
-		set_control = function(text)
-			player_controls:set_text(text)
+		set_control = function(play_status)
+			local current_text = string.gsub(player_text.text,"%W","")
+			player_text:set_text(current_text .. play_status)
 		end
 	}
 
 	s.player_stage:setup{
 		player_text,
-		player_controls,
-		layout = wibox.layout.fixed.horizontal
+		layout = wibox.layout.constraint
 	}
 
 	-- Pread (Awesome freezes  while waiting for response)
@@ -426,6 +445,7 @@ end)
 			end
 
 			scr.player.set_text(player_text)
+			player_info = 'teste'
 		end
 
 		if player.PlaybackStatus == "Paused" then

@@ -6,7 +6,7 @@ args="$@"
 tabs="\t\t\t"
 
 [ -z $EDITOR ] && EDITOR=nano # more user friendly
-[ -z $MATRIX_INSTALL_PATH ] && MATRIX_INSTALL_PATH="$HOME/.config/nixpkgs/matrix"
+[ -z $MATRIX_INSTALL_PATH ] && MATRIX_INSTALL_PATH="$HOME/.config/nixpkgs/packages/matrix"
 [ -z $MATRIX_BRIDGES_PATH ] && MATRIX_BRIDGES_PATH=$MATRIX_INSTALL_PATH/bridges
 [ -z $HOSTNAME ] && HOSTNAME=$(hostname)
 
