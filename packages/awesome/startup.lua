@@ -18,6 +18,7 @@ local dump = require("gears").debug.dump_return
 utils.enable_touchpad()
 utils.enable_dbus()
 utils.enable_picom()
+utils.enable_remind_service()
 
 local displays = tonumber(os.capture("xrandr -q | grep connected | wc -l"))
 if displays == 2 then

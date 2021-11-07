@@ -38,6 +38,7 @@
 		 taskremind
 		 remind
 		 bindPrinter
+		 rofi-launcher
 	 ];
 
      home = pkgs.buildEnv {

@@ -36,12 +36,18 @@ local widget = awful.widget.watch(
 		local state  = bat_now.state:gsub('%W','')
 		local icon = ''
 		local warning_level = 15
+		-- require('naughty').notify({
+		-- 	title=require('gears').debug.dump_return(state == 'charging'),
+		-- 	timout=0
+		-- })
 
 		-- localização
 		if state == 'charging' then
 			state = 'carregando'
-		else
+		elseif state == 'discharging' then
 			state = 'descarregando'
+		else
+			state = 'carregado'
 		end
 
 		if state == 'descarregando' and percentage <= warning_level then
@@ -63,8 +69,14 @@ local widget = awful.widget.watch(
 			icon = ''
 		end
         -- customize here
-		local widget_text = " " .. icon .. " " .. percentage .. "% "
+		local widget_text = ''
+		if percentage >= 75 then
+			widget_text = " " .. icon .. " "
+		else
+			widget_text = " " .. icon .. " " .. percentage .. "% "
+		end
         widget:set_text(widget_text)
+
 		widget:connect_signal("mouse::enter", function(w)
 			w.text = state
 		end)

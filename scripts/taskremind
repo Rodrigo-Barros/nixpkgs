@@ -1,17 +1,14 @@
 #!/bin/bash
-export LC_ALL=en_US.UTF-8
-taskwarrior="task add "
-remind="REM "
-
 desc=""
 tags=""
 project=""
 due=""
 rem_date=""
 
-#task="corrigir +bug em @blueweb &21 10+14:00 1w"
-#task="corrigir +bug em @blueweb &21 10+14:00 08-07-2022"
-task="arrumar problema de transferencia de ligações +bug +frontend +backend @blueweb &23 14:00 7+7m"
+remind_file="$HOME/.config/nixpkgs/packages/remind/tarefas"
+
+# here we type our task description
+task="$@"
 
 #printf "Informe os detalhes da tarefa:"
 #read task
@@ -112,6 +109,20 @@ for word in $task; do
 	fi
 done
 
+
+# append AT in front of remind time only if we have any text
 remind_time="$notification_before_time $hour"
+if [ ! -z $remind_time ]; then
+	remind_time="AT $remind_time"
+fi
+
+#debug
 echo taskwarrior: task add $desc $tags $project $depends $due
-echo remind: REM $rem_date $days MSG $desc $rem_proj AT $remind_time
+echo remind: REM $rem_date $days MSG $desc $rem_proj $remind_time
+
+
+# add task on taskwarrior
+task add $desc $tags $project $depends $due
+
+# add reminder in remind
+echo REM $rem_date $days MSG $desc $rem_proj $remind_time >> $remind_file

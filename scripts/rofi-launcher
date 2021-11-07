@@ -1,0 +1,69 @@
+#!/bin/bash
+set -e
+function main(){
+	local options=()
+	append_menu options "Tarefas"
+	append_menu options "Sair"
+	# local option=$(get_option options)
+	choose=$(get_option options "Tarefas"| cut -d " " -f1)
+
+	case $choose in
+		1)
+			task;;
+		2)
+			exit 0;;
+	esac
+}
+
+function get_option(){
+	array=$1
+	[ -z "$2" ] && prompt='dmenu' || prompt=$2
+	values=""
+	eval "
+		IFS=$'\n'
+		for option in \${!$array[@]};do
+			display_option=\$(expr \$option + 1)
+			if [ \$option -ne \$(expr \${#$array[@]} - 1) ];then
+				values+=\"\$display_option \${$array[\$option]}\n\"
+			else
+				values+=\"\$display_option \${$array[\$option]}\"
+			fi
+		done
+	"
+	echo -e $values | rofi -dmenu -p $prompt
+}
+
+function task(){
+	local options=()
+	append_menu options "Adicionar Nova tarefa/Lembrete"
+	append_menu options "Listar Tarefas"
+	append_menu options "Voltar"
+	choose=$(get_option options | cut -d " " -f1)
+
+	case $choose in
+		1)
+			taskadd;;
+	esac
+}
+
+function taskadd(){
+	local task=$(rofi -dmenu -p "Nova Tarefa")
+	/home/rodrigo/.config/nixpkgs/scripts/taskremind $task
+}
+
+function eval_echo(){
+	cmd=$@
+	eval echo "$cmd"
+}
+
+function append_menu(){
+	array=$1
+	value=$2
+	# echo $value
+	local nl=$'\n'
+	array_lenght=$(eval_echo "\${#$array[@]}")
+	# echo $array[$array_lenght]=\"$value\\n\"
+	eval $array[$array_lenght]=\"$value\"
+}
+
+main

@@ -2,6 +2,7 @@
 	pkgs ? import <nixpkgs> {}
 }:
 {
+
 	bindPrinter = pkgs.writeScriptBin "bind-printer.sh" ''                                                                                   
 		${builtins.readFile ./bind-printer.sh }                                                                                          
 	'';
@@ -15,6 +16,10 @@
 
 	post = pkgs.writeScriptBin "post" ''
 		${builtins.readFile ./jekyll }                                                                                          
+	'';
+
+	rofi-launcher = pkgs.writeScriptBin "rofi-launcher" ''
+		${builtins.readFile ./rofi-launcher }
 	'';
 
 }

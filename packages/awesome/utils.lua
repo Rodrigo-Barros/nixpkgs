@@ -15,7 +15,11 @@ init.setup_second_monitor = function()
 end
 
 init.enable_picom = function()
-	execute('sleep 10 && nixGL picom --config $HOME/.config/compton/compton.conf -f -b')
+	execute('sleep 10 && nixGL picom --config $HOME/.config/compton/compton.conf -f -b --dbus')
+end
+
+init.enable_remind_service = function()
+	execute("$HOME/.config/nixpkgs/scripts/remind.sh")
 end
 
 return init
