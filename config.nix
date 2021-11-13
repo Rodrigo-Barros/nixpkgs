@@ -6,14 +6,14 @@
   GL ? import ( fetchTarball "https://github.com/guibou/nixGL/archive/main.tar.gz" ) {},
 
   profile ? (pkgs.callPackage ./profile.nix {}).profile,
-  services ? pkgs.callPackage services/default.nix {},
+  systemd ? pkgs.callPackage ./packages/utils/default.nix {},
   repo ? pkgs.callPackage ./packages {},
   scripts ? pkgs.callPackage ./scripts {}
 }:
 {
    # allow comercial programs like chrome
    allowUnfree = true;
-
+   android_sdk.accept_license = true;
    packageOverrides = pkgs: rec{
 
      #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
@@ -39,7 +39,45 @@
 		 remind
 		 bindPrinter
 		 rofi-launcher
+		 nix-build-env
 	 ];
+
+
+	services = [
+		# matrix
+		(systemd.service {
+			name="matrix";
+			execStartPre="${repo.matrix}/bin/matrix --start-irc-db";
+			execStart="${repo.matrix}/bin/matrix --start-server --start telegram";
+			execStopPost="${repo.matrix}/bin/matrix --stop-irc-db";
+			type="forking";
+		})
+		(systemd.timer {
+			name="matrix";
+			delayOnBoot="5min";
+		})
+
+		# Nix Garbage Collector
+		(systemd.service{
+			name="nix-garbage-collector";
+			execStart="${pkgs.nix}/bin/nix-garbage-collector";
+		})
+		(systemd.timer{
+			name="nix-garbage-collector";
+			onCalendar="*-*-1/3 17..22:00:00";
+		})
+
+		# Nix updater repo
+		(systemd.service{
+			name="nix-updater";
+			execStart="${pkgs.nix}/bin/nix-channel --update nixpkgs && ${scripts.nix-build-env}/bin/build-env --build";
+		})
+		(systemd.timer{
+			name="nix-updater";
+			onCalendar="*-*-1/3 17..22:00:00";
+		})
+
+	];
 
      home = pkgs.buildEnv {
        name = "home-env";
@@ -47,7 +85,6 @@
          # flatpak-updater from system
          # nix-update channel and packages
          # nix-garbage-collector 
-         services
          profile
 		 compton
 
@@ -108,8 +145,8 @@
          taskwarrior
          timewarrior
 
-		 # Scripts
-       ] ++ packages ++ tools;
+		# Custom env
+       ] ++ packages ++ tools ++ services;
 
         postBuild = ''
           substituteInPlace $prefix/share/applications/kitty.desktop \
@@ -117,7 +154,7 @@
 
             substituteInPlace $prefix/share/applications/chiaki.desktop \
            --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
-			
+		
         '';
 
      };

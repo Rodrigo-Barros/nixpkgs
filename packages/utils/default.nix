@@ -1,6 +1,8 @@
 {
   systemdUser ? import ./systemd-user.nix {}
+  pkgs ? import <nixpkgs> {}
 }:
 {
-  inherit systemdUser;
+  service = systemdUser.service;
+  timer = systemdUser.timer;
 }

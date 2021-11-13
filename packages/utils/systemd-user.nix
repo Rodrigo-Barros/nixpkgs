@@ -1,8 +1,11 @@
 # units
-{pkgs ? import <nixpkgs> {} }:
+{ 
+  pkgs ? import <nixpkgs> {},
+  lib ? pkgs.lib
+}:
 {
   service = {
-    name ? "service",
+    name , # nome do serviço
     description ? "service description",
     execStartPre ? "",
     execStart ? "",
@@ -10,42 +13,66 @@
     target ? "default.target",
     type ? "simple",
     log ? "syslog"
-  }:{
-    inherit name description execStartPre execStart execStopPost target type log;
-    unitFile=''
-      [Unit]
-      Description=${description}
-
-      [Service]
-      ExecStartPre=${execStartPre}
-      ExecStart=${execStart}
-      ExecStopPost=${execStopPost}
-      Type=${type}
-      SyslogIdentifier=${name}
-      StandardOutput=${log}
-      StandardError=${log}
-
-      [Install]
-      WantedBy=${target}
-    '';
-  };
+  }:
+    pkgs.writeTextFile {
+        name="${name}";
+        text=''
+            [Unit]
+            Description=${description}
+            
+            [Service]
+            ExecStartPre=${execStartPre}
+            ExecStart=${execStart}
+            ExecStopPost=${execStopPost}
+            Type=${type}
+            SyslogIdentifier=${name}
+            StandardOutput=${log}
+            StandardError=${log}
+            
+            [Install]
+            WantedBy=${target}
+        '';
+        destination ="/share/systemd/user/${name}.service";
+	};
 
   timer = {
+  	name,
     description ? "generic timer",
     delayOnBoot ? "", # 5min
-    delayAfterActive ? "", # 5min
-    target ? "timers.target"
-  }: {
-    inherit description delayOnBoot delayAfterActive target;
-    unitFile=''
+	  delayAfterActive ? "", # 15min repeat after first execution
+    target ? "timers.target",
+	  onCalendar ? ""
+  }: 
+  pkgs.writeTextFile {
+    name="";
+    text=''
       [Unit]
       Description=${description}
-
+      
       [Timer]
+    ''
+    + (if delayOnBoot != "" then  
+    ''
       OnBootSec=${delayOnBoot}
+    '' 
+    else "")
 
+    + (if onCalendar != "" then 
+    ''
+      OnCalendar=${onCalendar}
+    ''
+    else "")
+
+    + (if delayAfterActive != "" then ''
+      OnUnitActiveSec=${delayAfterActive}
+    '' 
+    else "")
+    +
+    ''
+      
       [Install]
       WantedBy=${target}
     '';
+    destination="/share/systemd/user/${name}.timer";
   };
 }

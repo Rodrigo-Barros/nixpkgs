@@ -22,4 +22,7 @@
 		${builtins.readFile ./rofi-launcher }
 	'';
 
+	nix-build-env = pkgs.writeScriptBin "build-env" ''
+		${builtins.readFile ./nix-env-builder}
+	'';
 }

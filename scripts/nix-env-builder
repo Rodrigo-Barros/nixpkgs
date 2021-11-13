@@ -18,7 +18,7 @@ link_user_services(){
 }
 
 build_env(){
-  nix-env -iA nixpkgs.packages && link_user_services &&  echo "\nBuild finializado com Sucesso" || \
+  nix-env -iA nixpkgs.home && link_user_services &&  echo "\nBuild finializado com Sucesso" || \
     echo "\nHouveram Erros ao finalizar o build, código de saída $?" && exit 0
 }
 
