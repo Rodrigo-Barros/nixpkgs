@@ -17,7 +17,6 @@ let
 	source $HOME/.nix-profile/etc/profile.d/command-not-found.sh
   '';
   profileText = pkgs.writeText "profile" ''
-    LOCALE_ARCHIVE=/home/rodrigo/.nix-profile/lib/locale/locale-archive
     export PATH=$PATH:$HOME/.local/bin:$HOME/.nix-profile/bin
 
     export EDITOR="nvim"
@@ -41,12 +40,18 @@ let
 
     export DOTFILES=$( [ -e $HOME/Documentos/Git/Personal/dotfiles ] && echo  $HOME/Documentos/Git/Personal/dotfiles || echo $HOME/.dotfiles )
 
+    #LOCALE_ARCHIVE=/home/rodrigo/.nix-profile/lib/locale/locale-archive
     export LOCALE_ARCHIVE="${pkgs.glibcLocales}/lib/locale/locale-archive"
+	export LANG=pt_BR.UTF-8
 
     # ALIASES
     ${aliases}
 	# SOURCES
 	${sources}
+
+	# FIX SYSTEM GTK APPS NOT OPENNING
+	unset GI_TYPELIB_PATH
+	unset GDK_PIXBUF_MODULE_FILE
   '';
 in {
  profile = pkgs.runCommand "profile" {}  ''

@@ -38,7 +38,7 @@ function task(){
 	append_menu options "Adicionar Nova tarefa/Lembrete"
 	append_menu options "Listar Tarefas"
 	append_menu options "Voltar"
-	choose=$(get_option options | cut -d " " -f1)
+	choose=$(get_option options "Tarefas" | cut -d " " -f1)
 
 	case $choose in
 		1)

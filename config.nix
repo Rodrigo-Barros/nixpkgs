@@ -30,7 +30,7 @@
 	    matrix
 	    jekyll
 	    intelephense
-		remind
+		# remind
      ];
 
 	 tools = with scripts; [
