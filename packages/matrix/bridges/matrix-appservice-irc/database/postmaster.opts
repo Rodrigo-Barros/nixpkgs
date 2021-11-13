@@ -1,1 +1,0 @@
-/nix/store/in02q6hlc7i0xaj1r8pwx6j83vazmz3x-postgresql-11.12/bin/postgres "--unix_socket_directories=/home/rodrigo/.config/nixpkgs/matrix/bridges/matrix-appservice-irc/database"

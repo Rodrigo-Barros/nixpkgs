@@ -40,7 +40,8 @@ cmd("colorscheme onedark")
 -- {{{
 create_augroup({
 	{'FileType','php,javascript,python,sql,lua','DBSetOption','profile=mySQL'},
-	{'BufEnter','*nix','set','filetype=nix'}
+	{'BufEnter','*nix','set','filetype=nix'},
+	{'BufEnter','*php','set','autoindent','cindent'}
 },"startup")
 
 -- create_augroup({
@@ -295,7 +296,7 @@ vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''
 dap.adapters.php = {
   type = 'executable',
   command = 'node',
-  args = {'/home/rodrigo/.config/nixpkgs/nvim/dap/vscode-php-debug/out/phpDebug.js' }
+  args = {'/home/rodrigo/.config/nixpkgs/packages/nvim/dap/vscode-php-debug/out/phpDebug.js' }
 }
 
 dap.configurations.php = {
@@ -303,7 +304,47 @@ dap.configurations.php = {
     type = 'php',
     request = 'launch',
     name = 'Listen for Xdebug',
-    port = 9003
+    port = 9003,
+	stopOnEntry = true,
+	log = true
+  },
+  {
+	  type = 'php',
+	  request = 'launch',
+	  name = 'Launch currently open script',
+	  port = 8080,
+	  log = true,
+	  program = "${file}",
+	  cwd = "${fileDirname}",
+	  stopOnEntry = true,
+	  runtimeArgs = {
+		"-dxdebug.start_with_request=yes",
+		"-dxdebug.mode=debug"
+	  },
+	  env = {
+		  [ "XDEBUG_MODE" ] = "debug,develop",
+		  [ "XDEBUG_CONFIG" ] = "client_port=${port}"
+	  }
+  },
+  {
+    name="Launch Bult-in web server",
+	type = "php",
+	request = "launch",
+	runtimeExecutable = "/nix/store/6j7slsdicijlwrd6vppqryd0zv6wp73k-user-environment/bin/php",
+	runtimeArgs = {
+	"-dxdebug.mode=debug",
+    "-dxdebug.start_with_request=yes",
+    "-S",
+    "localhost:8080"
+	},
+	program = "",
+	cwd = "${workspaceRoot}",
+	port = 9003,
+	serverReadyAction = {
+		[ "pattern" ] = "Development Server \\(http://localhost:([0-9]+)\\) started",
+		[ "uriFormat" ] = "http://localhost:%s",
+		[ "action" ] = "openExternally"
+	}
   }
 }
 
