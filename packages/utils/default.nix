@@ -1,5 +1,5 @@
 {
-  systemdUser ? import ./systemd-user.nix {}
+  systemdUser ? import ./systemd-user.nix {},
   pkgs ? import <nixpkgs> {}
 }:
 {

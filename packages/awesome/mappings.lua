@@ -3,7 +3,50 @@ local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local menubar = require("menubar")
 local naughty = require("naughty")
+local utils = require("utils")
 
+-- fix window key
+local now = function()
+	return tonumber(utils.os_capture("date +%s.%N"))
+end
+
+local key_press = {
+	last_press = nil,
+	current_press = now()
+}
+
+local function press_key()
+	local last_press
+
+	if key_press.last_press == nil then
+		last_press = now()
+		key_press.last_press, key_press.current_press = last_press,last_press
+	else
+		last_press = key_press.last_press
+		key_press.current_press = now()
+		key_press.last_press = key_press.current_press
+	end
+
+end
+
+-- if the release time was less then our time passed to callback
+-- then function passed to our callback is executed
+-- otherwise nothing happen and is assumed another keybind is being
+-- executed
+local function release_super(time,callback)
+		return function ()
+			local release_key_time=time or 0.2
+			key_press.current_press = now()
+			-- press_key()
+			if key_press.current_press - key_press.last_press < release_key_time then
+				callback()
+			end
+		end
+end
+
+key.connect_signal("press",press_key)
+
+-- default keys 
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -106,6 +149,16 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
+	-- Super key
+	-- awful.key({ } , "Super_R",_),
+
+	-- awful.key({"Mod4"}, "Super_R",_,
+	-- release_super(0.2,function()
+	-- 	awful.spawn("nixGL kitty -- /bin/sh -c rofi-launcher",{
+	-- 		hidden=true
+	-- 	})
+	-- end)),
+
 	-- Media
 	awful.key({ }, "XF86AudioRaiseVolume", function ()
        awful.util.spawn("amixer set Master 9%+") end),
@@ -165,6 +218,19 @@ local clientkeys = gears.table.join(
 			client.sticky = not client.sticky
 		end,
 		{description="toggle sticky mode", group="client"}
+	),
+	awful.key({modkey, "Shift"}, "period",
+		function()
+			local screens = screen:instances()
+			local current_screen = mouse.screen.index
+
+			-- only for two screens
+			if current_screen == screens then
+				awful.screen.focus(screens - 1)
+			else
+				awful.screen.focus(current_screen + 1)
+			end
+		end
 	)
 )
 

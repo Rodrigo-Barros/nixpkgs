@@ -1,1 +1,2 @@
-packages/matrix
+packages/matrix/bridges
+packages/matrix/server/

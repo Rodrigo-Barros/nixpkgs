@@ -15,7 +15,8 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-local battery = require("widgets/battery")
+local battery = require("widgets.battery")
+local wifi = require("widgets.wifi")
 
 require('startup')
 
@@ -305,6 +306,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+			wifi,
 			battery,
             mykeyboardlayout,
             wibox.widget.systray(),
@@ -445,7 +447,6 @@ end)
 			end
 
 			scr.player.set_text(player_text)
-			player_info = 'teste'
 		end
 
 		if player.PlaybackStatus == "Paused" then

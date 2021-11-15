@@ -59,11 +59,11 @@
 
 		# Nix Garbage Collector
 		(systemd.service{
-			name="nix-garbage-collector";
-			execStart="${pkgs.nix}/bin/nix-garbage-collector";
+			name="nix-collect-garbage";
+			execStart="${pkgs.nix}/bin/nix-collect-garbage";
 		})
 		(systemd.timer{
-			name="nix-garbage-collector";
+			name="nix-collect-garbage";
 			onCalendar="*-*-1/3 17..22:00:00";
 		})
 
