@@ -404,12 +404,23 @@ client.connect_signal("mouse::enter", function(c)
 end)
 
 client.connect_signal("focus", function(c) 
-	local clients = screen[1].get_clients()
-	if #clients > 1 then 
+	local clients = awful.screen.focused().get_clients()
+
+	if #clients > 1 and c.maximized == false then
 		c.border_color = beautiful.border_focus
 	end
 end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("unfocus", function(c)
+	c.border_color = beautiful.border_normal
+end)
+client.connect_signal("request::geometry", function(c)
+	c.border_color = beautiful.border_normal
+	local clients = awful.screen.focused().get_clients()
+
+	if #clients > 1 and c.maximized == false then
+		c.border_color = beautiful.border_focus
+	end
+end)
 
 client.connect_signal("property::fullscreen",function(c)
 	local text=""
