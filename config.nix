@@ -15,6 +15,9 @@
    allowUnfree = true;
    android_sdk.accept_license = true;
    packageOverrides = pkgs: rec{
+	fonts = pkgs.nerdfonts.override {
+		fonts=[ "FiraCode" ];
+	};
 
      #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
      #    ${builtins.readFile ./utils/nix-env-builder }
@@ -42,16 +45,19 @@
 		 nix-build-env
 	 ];
 
-
-	services = [
-		# matrix
-		(systemd.service {
+	user-services = {
+		matrix = systemd.service {
 			name="matrix";
 			execStartPre="${repo.matrix}/bin/matrix --start-irc-db";
 			execStart="${repo.matrix}/bin/matrix --start-server --start telegram";
 			execStopPost="${repo.matrix}/bin/matrix --stop-irc-db";
 			type="forking";
-		})
+		};
+	};
+
+	services = [
+		# matrix
+		user-services.matrix
 		(systemd.timer {
 			name="matrix";
 			delayOnBoot="5min";
@@ -100,7 +106,7 @@
 		 ueberzug
          bat ripgrep
          nodejs 
-	     nerdfonts 
+	     fonts
 	     line-awesome
          #LSP nodeps for nvim
          nodePackages.bash-language-server

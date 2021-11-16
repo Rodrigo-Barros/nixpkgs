@@ -53,6 +53,13 @@ awful.rules.rules = {
     { rule_any = {type = { "normal", "dialog","Dialog" }
       }, properties = { titlebars_enabled = false, placement = awful.placement.centered }
     },
+	{
+		rule_any = {
+			class = { 
+				"Firefox",
+			}
+		}, properties = { maximized=true }
+	}
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
