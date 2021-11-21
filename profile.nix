@@ -8,7 +8,7 @@ let
     alias grep="grep --color"
     alias j="z"
 
-	lib="$(nix eval --raw nixpkgs.stdenv.cc.cc.lib)/lib64"
+	lib="$(nix-build --no-out-link '<nixpkgs>' -A stdenv.cc.cc.lib)/lib64"
 	alias nvim="LD_LIBRARY_PATH=$lib nvim"
 	alias vim="LD_LIBRARY_PATH=$lib vim"
 	unset lib

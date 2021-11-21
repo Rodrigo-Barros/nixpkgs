@@ -107,7 +107,10 @@
          bat ripgrep
          nodejs 
 	     fonts
+		 fontconfig
+		 font-awesome_4
 	     line-awesome
+
          #LSP nodeps for nvim
          nodePackages.bash-language-server
          sumneko-lua-language-server
@@ -160,7 +163,6 @@
 
             substituteInPlace $prefix/share/applications/chiaki.desktop \
            --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
-		
         '';
 
      };

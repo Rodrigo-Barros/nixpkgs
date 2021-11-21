@@ -17,9 +17,20 @@ link_user_services(){
   done
 }
 
+update_fonts(){
+	fc-cache -v -f
+}
+
 build_env(){
-  nix-env -iA nixpkgs.home && link_user_services &&  echo "\nBuild finializado com Sucesso" || \
-    echo "\nHouveram Erros ao finalizar o build, código de saída $?" && exit 0
+  nix-env -iA nixpkgs.home 
+  error=$?
+  if [ $? -eq 0 ];then
+  	link_user_services
+	update_fonts
+	echo "\nBuild finializado com Sucesso"
+  else
+    echo "\nHouveram Erros ao finalizar o build, código de saída $error"
+  fi
 }
 
 case "$@" in 

@@ -71,7 +71,16 @@ lsp_server.sumneko = {
 		root_dir = function(fname)
       		return util.find_git_ancestor(fname) or util.path.dirname(fname)
     	end;
-	};
+	},
+	settings = {
+		Lua = {
+			workspace = {
+				library = {
+					['/nix/store/mgjmb01qnnmivwj1q4bh0zf87dxbzm5j-awesome-4.3/share/awesome/lib'] = true
+				}
+			}
+		}
+	}
 }
 
 -- Use an on_attach function to only map the following keys
