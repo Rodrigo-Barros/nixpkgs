@@ -55,6 +55,7 @@ local function setup(values)
 	settings.no_wifi=values.no_wifi or "no wifi"
 	settings.wifi_tool_cmd=values.wifi_tool_cmd or "nixGL kitty -- /bin/bash -c 'LANG=pt_BR nmtui' "
 	settings.icon_font = values.icon_font or "Font Awesome 11"
+	settings.disconnected_popup_text = values.disconnected_popup_text or "You are disconneted :("
 end
 
 setup()
@@ -65,8 +66,7 @@ function get_wifi_info()
 
 		local prepare_interface_power = "echo 'scale=2;' $(iwconfig %s | grep Link | awk '{print $2}'| cut -d '=' -f2 ) |  bc "
 		local wifi_power = utils.os_capture(string.format(prepare_interface_power,settings.interface))
-		
-		if type(wifi_power) == number then
+		if type(tonumber(wifi_power)) == "number" then
 			wifi_power = wifi_power * 100
 		end
 
@@ -83,6 +83,7 @@ function update_widget()
 		widget:set_text(settings.icon)
 	else
 		widget:set_text(settings.no_wifi)
+		popup.widget:get_children_by_id("popup_text")[1]:set_text(settings.disconnected_popup_text)
 	end
 end
 
