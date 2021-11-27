@@ -1,5 +1,7 @@
-#!/bin/bash
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p taskwarrior
 set -e
+REMIND_FILE="$HOME/.config/nixpkgs/packages/remind/tarefas"
 function main(){
 	local options=()
 	append_menu options "Tarefas"
@@ -9,7 +11,7 @@ function main(){
 
 	case $choose in
 		1)
-			task;;
+			taskmenu;;
 		2)
 			exit 0;;
 	esac
@@ -18,6 +20,7 @@ function main(){
 function get_option(){
 	array=$1
 	[ -z "$2" ] && prompt='dmenu' || prompt=$2
+	[ -z "$3" ] && mesg='' || mesg="$3"
 	values=""
 	eval "
 		IFS=$'\n'
@@ -30,10 +33,16 @@ function get_option(){
 			fi
 		done
 	"
-	echo -e $values | rofi -dmenu -p $prompt
+	echo -e $values | rofi -dmenu -p $prompt -mesg $3
 }
 
-function task(){
+function get_text_input(){
+	prompt=$@
+	[ -z "$prompt" ] && prompt=rofi
+	rofi -dmenu -p "$prompt"
+}
+
+function taskmenu(){
 	local options=()
 	append_menu options "Adicionar Nova tarefa/Lembrete"
 	append_menu options "Listar Tarefas"
@@ -43,12 +52,100 @@ function task(){
 	case $choose in
 		1)
 			taskadd;;
+		2)
+			tasklist;;
+		3) 
+			main;;
 	esac
 }
 
 function taskadd(){
-	local task=$(rofi -dmenu -p "Nova Tarefa")
+	#local task=$(rofi -dmenu -p "Nova Tarefa")
+	local task=$(get_text_input "Nova Tarefa")
 	/home/rodrigo/.config/nixpkgs/scripts/taskremind $task
+	notify-send "Remind Warrior:" "Tarefa adicionada"
+	taskmenu
+}
+
+function tasklist(){
+	local options=()
+	local lines=$(expr $(task list | wc -l) - 3)
+	local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1,3d | sed $(expr $lines - 1),${lines}d)
+
+	echo lines $lines
+	IFS=$'\n'
+	for task in $tasks; do
+		task_name=$(echo $task | cut -d " " -f3-)
+		append_menu options "$task_name"
+	done
+	tasklen=${#options[@]}
+	
+	# add menu when there no tasks
+	if [ $tasklen -eq 0 ];then
+		mesg="Você não possui tarefas"
+		append_menu options "Voltar"
+	fi
+
+	#read user input
+	choose=$(get_option options "Tarefas" "$mesg")
+	[ $tasklen -eq 0 ] && taskmenu 
+
+	taskview "$choose"
+}
+
+function taskview(){
+	local taskdescription="$1"
+	local taskid=$(echo $1 | awk '{print $1}')
+	local taskname=$(echo $1 | cut -d " " -f2- )
+	local options=()
+	append_menu options "Iniciar Tarefa"
+	append_menu options "Pausar Tarefa"
+	append_menu options "Finalizar Tarefa"
+	append_menu options "Excluir Tarefa"
+	append_menu options "Voltar"
+	choose=$(get_option options "Tarefa $taskid" | cut -d " " -f1)
+	case $choose in
+		1)
+			taskstart $taskid;;
+		2)
+			taskstop $taskid;;
+		3)
+			taskdone $taskid "$taskname";;
+		4)
+			taskdel $taskid "$taskname";;
+		5)
+			taskmenu;;
+	esac
+}
+
+
+function taskdone(){
+	local taskid=$1
+	local taskname=$2
+	sed "/$taskname/d" $REMIND_FILE -i
+	task done $taskid
+	tasklist
+}
+
+function taskdel(){
+	local taskid=$1
+	local taskname=$2
+	local task_options="rc.confirmation=false"
+	sed "/$taskname/d" $REMIND_FILE -i 
+	task delete $taskid $task_options
+	tasklist
+}
+
+function taskstart(){
+	local taskid=$1
+	task start $taskid
+	tasklist
+}
+
+function taskstop(){
+	local taskid=$1
+	task stop $taskid
+	tasklist
 }
 
 function eval_echo(){

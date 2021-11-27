@@ -18,3 +18,5 @@ end
 beautiful.border_width = 2
 beautiful.border_focus = "#ffffff00"
 beautiful.notification_shape = rounded(10)
+beautiful.notification_max_width = 300
+ beautiful.notification_icon_size = 200

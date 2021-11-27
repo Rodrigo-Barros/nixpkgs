@@ -5,46 +5,14 @@ local menubar = require("menubar")
 local naughty = require("naughty")
 local utils = require("utils")
 
--- fix window key
-local now = function()
-	return tonumber(utils.os_capture("date +%s.%N"))
-end
-
-local key_press = {
-	last_press = nil,
-	current_press = now()
-}
-
-local function press_key()
-	local last_press
-
-	if key_press.last_press == nil then
-		last_press = now()
-		key_press.last_press, key_press.current_press = last_press,last_press
-	else
-		last_press = key_press.last_press
-		key_press.current_press = now()
-		key_press.last_press = key_press.current_press
+menubar.prompt_args = {
+	exe_callback = function(arg,varg)
+		awful.spawn.with_shell([[
+			unset GDK_PIXBUF_MODULE_FILE
+			unset GI_TYPELIB_PATH
+		]])
 	end
-
-end
-
--- if the release time was less then our time passed to callback
--- then function passed to our callback is executed
--- otherwise nothing happen and is assumed another keybind is being
--- executed
-local function release_super(time,callback)
-		return function ()
-			local release_key_time=time or 0.2
-			key_press.current_press = now()
-			-- press_key()
-			if key_press.current_press - key_press.last_press < release_key_time then
-				callback()
-			end
-		end
-end
-
-key.connect_signal("press",press_key)
+}
 
 -- default keys 
 globalkeys = gears.table.join(
@@ -149,15 +117,14 @@ globalkeys = gears.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"}),
 
-	-- Super key
-	-- awful.key({ } , "Super_R",_),
-
-	-- awful.key({"Mod4"}, "Super_R",_,
-	-- release_super(0.2,function()
-	-- 	awful.spawn("nixGL kitty -- /bin/sh -c rofi-launcher",{
-	-- 		hidden=true
-	-- 	})
-	-- end)),
+	-- super key using xcape like kde
+	awful.key({"Mod1"},"F1",function()
+		awful.util.spawn("nixGL kitty -- /bin/sh -c 'rofi-launcher'",{
+			hidden=true,
+			focusable=false,
+			switch_to_tags=false
+		})
+	end),
 
 	-- Media
 	awful.key({ }, "XF86AudioRaiseVolume", function ()

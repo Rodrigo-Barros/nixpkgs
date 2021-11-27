@@ -17,6 +17,8 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local battery = require("widgets.battery")
 local wifi = require("widgets.wifi")
+local settings = require("settings")
+local tags = settings.tags
 
 require('startup')
 
@@ -188,7 +190,6 @@ awful.layout.layouts = {
 }
 
 awful.screen.connect_for_each_screen(function(s)
-	local tags = {  "","", "", "", "", "", ""  }
     -- awful.tag(tags, s, awful.layout.layouts[1])
 
     for i =1,7 do

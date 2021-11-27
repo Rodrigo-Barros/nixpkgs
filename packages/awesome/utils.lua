@@ -50,4 +50,8 @@ utils.enable_remind_service = function()
 	execute("$HOME/.config/nixpkgs/scripts/remind.sh")
 end
 
+utils.fix_super_key=function()
+	execute('xcape -e "Super_L=Alt_L|F1"')
+end
+
 return utils

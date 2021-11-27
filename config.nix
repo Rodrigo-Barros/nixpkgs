@@ -154,6 +154,8 @@
          taskwarrior
          timewarrior
 
+		 xcape
+
 		# Custom env
        ] ++ packages ++ tools ++ services;
 

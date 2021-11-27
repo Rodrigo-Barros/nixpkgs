@@ -3,6 +3,8 @@ local beautiful = require("beautiful")
 local keybinds = require("mappings")
 local clientkeys = keybinds.clientkeys
 local clientbuttons = keybinds.clientbuttons
+local settings = require("settings")
+local tags = settings.tags
 
 awful.rules.rules = {
     -- All clients will match this rule.
@@ -55,10 +57,38 @@ awful.rules.rules = {
     },
 	{
 		rule_any = {
-			class = { 
+			class = {
 				"Firefox",
 			}
-		}, properties = { maximized=true }
+		}, properties = { maximized=true, tag=tags[2], switch_to_tags=true }
+	},
+	{
+		rule_any = {
+			class = {
+				"Element",
+			}
+		}, properties = { maximized=true, tag=tags[4] }
+	},
+	{
+		rule_any = {
+			class = {
+				"kitty",
+			}
+		}, properties = { tag=tags[3], switch_to_tags=true }
+	},
+	{
+		rule_any = {
+			class = {
+				"Steam"
+			}
+		}, properties = { tag=tags[6]}
+	},
+	{
+		rule_any = {
+			class = {
+				"Org.gnome.Nautilus"
+			}
+		}, properties = { tag=tags[7] }
 	}
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
