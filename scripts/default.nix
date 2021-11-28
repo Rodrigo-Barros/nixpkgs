@@ -5,7 +5,7 @@
 
 	bindPrinter = pkgs.writeScriptBin "bind-printer.sh" "${builtins.readFile ./bind-printer.sh }";
 
-	remind = pkgs.writeScriptBin "remind.sh" "${builtins.readFile ./remind.sh}";
+	remind-notifier = pkgs.writeScriptBin "remind-notifier" "${builtins.readFile ./remind-notifier}";
 	taskremind = pkgs.writeScriptBin "taskremind" "${builtins.readFile ./taskremind }";
 
 	post = pkgs.writeScriptBin "post" "${builtins.readFile ./jekyll }";
