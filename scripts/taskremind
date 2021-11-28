@@ -121,10 +121,11 @@ fi
 
 #debug
 echo taskwarrior: task add $desc $tags $project $depends $due
-echo remind: REM $rem_date $days MSG $desc $rem_proj $remind_time
+echo remind: REM $rem_date $days $remind_time MSG $desc $rem_proj
 
 # add task on taskwarrior
 task add $desc $tags $project $depends $due
 [ $? -ne 0 ] && exit 1
+
 # add reminder in remind
-echo REM $rem_date $days MSG $desc $rem_proj $remind_time >> $remind_file
+echo REM $rem_date $days $remind_time MSG $desc $rem_proj  >> $remind_file

@@ -34,6 +34,7 @@
        jekyll
        intelephense
        remind
+       ical2rem
     ];
     
     tools = with scripts; [

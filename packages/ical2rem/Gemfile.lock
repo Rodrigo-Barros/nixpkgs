@@ -1,0 +1,16 @@
+GEM
+  specs:
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ri_cal (0.8.8)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  ri_cal!
+
+BUNDLED WITH
+   2.2.24

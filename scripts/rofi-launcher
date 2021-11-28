@@ -1,4 +1,5 @@
 #!/bin/bash
+. $HOME/.nix-profile/etc/profile.d/profile.sh
 set -e
 REMIND_FILE="$HOME/.config/nixpkgs/packages/remind/tarefas"
 function main(){
@@ -68,9 +69,10 @@ function taskadd(){
 
 function tasklist(){
 	local options=()
-    local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1d | sed '$d' | sed 2d)
+    local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1d | sed '$d' | sed 2d )
 
-    echo -e "$tasks" | sed 2d
+    echo -e "$tasks"
+
 	IFS=$'\n'
     local index=0
 	for task in $tasks; do

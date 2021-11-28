@@ -9,6 +9,7 @@
 	drivesync = pkgs.callPackage ./drivesync {};
 	nvim = pkgs.callPackage ./nvim {};
 	remind = pkgs.callPackage ./remind {};
+    ical2rem = pkgs.callPackage ./ical2rem {};
 	php = pkgs.php.buildEnv {
 		extensions = {all, enabled}: with all; [xdebug];
 		extraConfig = ''
