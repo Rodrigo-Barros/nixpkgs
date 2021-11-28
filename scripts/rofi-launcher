@@ -1,5 +1,4 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -i bash -p taskwarrior
+#!/bin/bash
 set -e
 REMIND_FILE="$HOME/.config/nixpkgs/packages/remind/tarefas"
 function main(){
@@ -69,12 +68,17 @@ function taskadd(){
 
 function tasklist(){
 	local options=()
-	local lines=$(expr $(task list | wc -l) - 3)
-	local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1,3d | sed $(expr $lines - 1),${lines}d)
+    local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1d | sed '$d' | sed 2d)
 
-	echo lines $lines
+    echo -e "$tasks" | sed 2d
 	IFS=$'\n'
+    local index=0
 	for task in $tasks; do
+        if [ $index -eq 0 ];then
+            mesg=$task
+            let index+=1
+            continue
+        fi
 		task_name=$(echo $task | cut -d " " -f3-)
 		append_menu options "$task_name"
 	done
@@ -89,7 +93,7 @@ function tasklist(){
 	#read user input
 	choose=$(get_option options "Tarefas" "$mesg")
 	[ $tasklen -eq 0 ] && taskmenu 
-
+    cat $REMIND_FILE
 	taskview "$choose"
 }
 
@@ -100,7 +104,7 @@ function taskview(){
 	local options=()
 	append_menu options "Iniciar Tarefa"
 	append_menu options "Pausar Tarefa"
-	append_menu options "Finalizar Tarefa"
+	append_menu options "Concluir Tarefa"
 	append_menu options "Excluir Tarefa"
 	append_menu options "Voltar"
 	choose=$(get_option options "Tarefa $taskid" | cut -d " " -f1)

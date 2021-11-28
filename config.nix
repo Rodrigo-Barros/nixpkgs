@@ -11,203 +11,201 @@
   scripts ? pkgs.callPackage ./scripts {}
 }:
 {
-   # allow comercial programs like chrome
-   allowUnfree = true;
-   android_sdk.accept_license = true;
-   packageOverrides = pkgs: rec{
-	fonts = pkgs.nerdfonts.override {
-		fonts=[ "FiraCode" ];
-	};
-
-     #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
-     #    ${builtins.readFile ./utils/nix-env-builder }
-     #  '';
+  # allow comercial programs like chrome
+  allowUnfree = true;
+  android_sdk.accept_license = true;
+  packageOverrides = pkgs: rec{
+    fonts = pkgs.nerdfonts.override {
+        fonts=[ "FiraCode" ];
+    };
     
-     # my custom packages	
-     packages = with repo;[
-        php
-	 	awesome
-	    nvim
-	    drivesync
-	    awesome
-	    matrix
-	    jekyll
-	    intelephense
-	 	remind
-     ];
-
-	 tools = with scripts; [
-		 post
-		 taskremind
-		 remind-notifier
-		 bindPrinter
-		 rofi-launcher
-		 nix-build-env
-	 ];
-
-	services = {
-		# Matrix
-		matrix = systemd.service {
-			name="matrix";
-			execStartPre="${repo.matrix}/bin/matrix --start-irc-db";
-			execStart="${repo.matrix}/bin/matrix --start-server --start telegram";
-			execStopPost="${repo.matrix}/bin/matrix --stop-irc-db";
-			type="forking";
-		};
-
-		# Nix Garbage Collector
-		nix-collect-garbage = systemd.service{
-			name="nix-collect-garbage";
-			execStart="${pkgs.nix}/bin/nix-collect-garbage";
-		};
-
-		# Nix updater repo
-		nix-updater = systemd.service{
-			name="nix-updater";
-			execStart="${pkgs.nix}/bin/nix-channel --update nixpkgs && ${scripts.nix-build-env}/bin/build-env --build";
-		};
-
-		# Remind-Notifier
-		remind-notifier = systemd.service{
-			name="remind-notifier";
-			execStart="${scripts.remind-notifier}/bin/remind-notifier";
-		};
-
-	};
-
-	timers = {
-
-		# Matrix
-		matrix = systemd.timer {
-			name="matrix";
-			delayOnBoot="5min";
-		};
-
-		# Nix Garbage Collector
-		nix-collect-garbage = systemd.timer{
-			name="nix-collect-garbage";
-			onCalendar="*-*-1/3 17..22:00:00";
-		};
-
-		# Nix updater 
-		nix-updater = systemd.timer{
-			name="nix-updater";
-			onCalendar="*-*-1/3 17..22:00:00";
-		};
-
-	};
-
-	units = [
-		# Matrix
-		services.matrix
-		timers.matrix
-		
-		# Nix Garbage Collector
-		services.nix-collect-garbage
-		timers.nix-collect-garbage
-
-		# Nix updater
-		services.nix-updater
-		timers.nix-updater
-
-		# Remind Notifier
-		services.remind-notifier
-	];
-
-     home = pkgs.buildEnv {
-       name = "home-env";
-       paths = with pkgs; [
-         # flatpak-updater from system
-         # nix-update channel and packages
-         # nix-garbage-collector 
-         profile
-	 	 compton
-	     
-         glibcLocales
-	     
-         #authenticator
+    #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
+    #    ${builtins.readFile ./utils/nix-env-builder }
+    #  '';
+    
+    # my custom packages   
+    packages = with repo;[
+       php
+       awesome
+       nvim
+       drivesync
+       awesome
+       matrix
+       jekyll
+       intelephense
+       remind
+    ];
+    
+    tools = with scripts; [
+        post
+        taskremind
+        remind-notifier
+        bindPrinter
+        rofi-launcher
+        nix-build-env
+    ];
+    
+    services = {
+        # Matrix
+        matrix = systemd.service {
+            name="matrix";
+            execStartPre="${repo.matrix}/bin/matrix --start-irc-db";
+            execStart="${repo.matrix}/bin/matrix --start-server --start telegram";
+            execStopPost="${repo.matrix}/bin/matrix --stop-irc-db";
+            type="forking";
+        };
+        
+        # Nix Garbage Collector
+        nix-collect-garbage = systemd.service{
+            name="nix-collect-garbage";
+            execStart="${pkgs.nix}/bin/nix-collect-garbage";
+        };
+        
+        # Nix updater repo
+        nix-updater = systemd.service{
+            name="nix-updater";
+            execStart="${pkgs.nix}/bin/nix-channel --update nixpkgs && ${scripts.nix-build-env}/bin/build-env --build";
+        };
+        
+        # Remind-Notifier
+        remind-notifier = systemd.service{
+            name="remind-notifier";
+            execStart="${scripts.remind-notifier}/bin/remind-notifier";
+        };
+      
+    };
+    
+    timers = {
+    
+        # Matrix
+        matrix = systemd.timer {
+            name="matrix";
+            delayOnBoot="5min";
+        };
+        
+        # Nix Garbage Collector
+        nix-collect-garbage = systemd.timer{
+            name="nix-collect-garbage";
+            onCalendar="*-*-1/3 17..22:00:00";
+        };
+    
+        # Nix updater 
+        nix-updater = systemd.timer{
+            name="nix-updater";
+            onCalendar="*-*-1/3 17..22:00:00";
+        };
+      
+    };
+    
+    units = [
+      # Matrix
+      services.matrix
+      timers.matrix
+     
+      # Nix Garbage Collector
+      services.nix-collect-garbage
+      timers.nix-collect-garbage
+      
+      # Nix updater
+      services.nix-updater
+      timers.nix-updater
+      
+      # Remind Notifier
+      services.remind-notifier
+    ];
+    
+    home = pkgs.buildEnv {
+      name = "home-env";
+      paths = with pkgs; [
+        # flatpak-updater from system
+        # nix-update channel and packages
+        # nix-garbage-collector 
+        profile
+        compton
+        
+        glibcLocales
+        
+        #authenticator
+        
+        # printer over usb
+        # linuxPackages.usbip
+        GL.auto.nixGLDefault
+        
+        # editor config 
+        ueberzug
+        bat ripgrep
+        nodejs 
+        fonts
+        fontconfig
+        font-awesome_4
+        line-awesome
+        
+        #LSP nodeps for nvim
+        nodePackages.bash-language-server
+        sumneko-lua-language-server
+        rnix-lsp
+        
+        # vcs
+        git lazygit
+        
+        # web dev
+        # php74 php74Extensions.pdo mysql80 apacheHttpd
+        
+        # dev mobile
+        
+        # communication
+       
+        # network-tools
+        nmap firefox
+        
+        # terminal
+        fzf kitty
+        zsh zinit
+        tmux
+        zsh-z
+        
+        # games
+        chiaki lutris
+        
+        # Scripts
+        # nixEnvBuilder
+        # taskremind
+                
+        #desktop
+        dmenu
+        rofi
+        #others
+        zathura
+        nix-index
+        # post
          
-         # printer over usb
-         # linuxPackages.usbip
-         GL.auto.nixGLDefault
-
-         # editor config 
-	 	 ueberzug
-         bat ripgrep
-         nodejs 
-	     fonts
-	 	 fontconfig
-	 	 font-awesome_4
-	     line-awesome
-         
-         #LSP nodeps for nvim
-         nodePackages.bash-language-server
-         sumneko-lua-language-server
-	     rnix-lsp
-	     
-         # vcs
-         git lazygit
-         
-         # web dev
-         # php74 php74Extensions.pdo mysql80 apacheHttpd
-         
-         # dev mobile
-         
-         # communication
-
-         # network-tools
-         nmap firefox
-         
-         # terminal
-	     fzf kitty
-	     zsh zinit
-         tmux
-	     zsh-z
-
-         # games
-         chiaki lutris
-
-         # Scripts
-         # nixEnvBuilder
-         # taskremind
-				 
-         #desktop
-         dmenu
-	     rofi
-	     #others
-	     zathura
-		 nix-index
-         # post
+        # time control
+        taskwarrior
+        timewarrior
+        
+        xcape
+        
+       # Custom env
+      ] ++ packages ++ tools ++ units;
+      
+      postBuild = ''
+        substituteInPlace $prefix/share/applications/kitty.desktop \
+         --replace 'Exec=kitty' 'Exec=sh -c "nixGL kitty"'
           
-         # time control
-         taskwarrior
-         timewarrior
-
-		 xcape
-
-		# Custom env
-       ] ++ packages ++ tools ++ units;
-
-        postBuild = ''
-          substituteInPlace $prefix/share/applications/kitty.desktop \
-           --replace 'Exec=kitty' 'Exec=sh -c "nixGL kitty"'
-
-            substituteInPlace $prefix/share/applications/chiaki.desktop \
-           --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
-        '';
-
-     };
-
-	work = pkgs.buildEnv {
-			name = "work-env";
-			paths = with pkgs; [			
-				squid
-				ueberzug
-				nginx
-				asterisk
-			];
-
-		 };
-
-   };
+          substituteInPlace $prefix/share/applications/chiaki.desktop \
+         --replace 'Exec=chiaki' 'Exec=bash -c "nixGL chiaki"'
+      '';
+      
+    };
+    
+    work = pkgs.buildEnv {
+        name = "work-env";
+        paths = with pkgs; [            
+            squid
+            ueberzug
+            nginx
+            asterisk
+        ];
+    };
+  };
 }

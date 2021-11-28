@@ -26,6 +26,7 @@ opt.relativenumber = true
 opt.number = true
 -- opt.autoindent = true
 -- opt.cindent=true
+opt.expandtab=true
 opt.termguicolors = true -- enable devicons, found at :https://github.com/nvim-telescope/telescope.nvim/issues/652#issuecomment-798766661
 opt.signcolumn = "yes"
 opt.updatetime = 1000
@@ -153,7 +154,11 @@ ts.setup{
 	ensure_installed = "maintained",
 	highlight = {
 		enable = true,
-	}
+		disable = {"php","bash"},
+	},
+	indent ={
+		enable = true
+	},
 }
 -- local ts = require('nvim-treesitter.configs')
 -- ts.setup{
