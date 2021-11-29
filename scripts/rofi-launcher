@@ -3,170 +3,170 @@
 set -e
 REMIND_FILE="$HOME/.config/nixpkgs/packages/remind/tarefas"
 function main(){
-	local options=()
-	append_menu options "Tarefas"
-	append_menu options "Sair"
-	# local option=$(get_option options)
-	choose=$(get_option options "Tarefas"| cut -d " " -f1)
+    local options=()
+    append_menu options "Tarefas"
+    append_menu options "Sair"
+    # local option=$(get_option options)
+    choose=$(get_option options "Tarefas"| cut -d " " -f1)
 
-	case $choose in
-		1)
-			taskmenu;;
-		2)
-			exit 0;;
-	esac
+    case $choose in
+        1)
+            taskmenu;;
+        2)
+            exit 0;;
+    esac
 }
 
 function get_option(){
-	array=$1
-	[ -z "$2" ] && prompt='dmenu' || prompt=$2
-	[ -z "$3" ] && mesg='' || mesg="$3"
-	values=""
-	eval "
-		IFS=$'\n'
-		for option in \${!$array[@]};do
-			display_option=\$(expr \$option + 1)
-			if [ \$option -ne \$(expr \${#$array[@]} - 1) ];then
-				values+=\"\$display_option \${$array[\$option]}\n\"
-			else
-				values+=\"\$display_option \${$array[\$option]}\"
-			fi
-		done
-	"
-	echo -e $values | rofi -dmenu -p $prompt -mesg $3
+    array=$1
+    [ -z "$2" ] && prompt='dmenu' || prompt=$2
+    [ -z "$3" ] && mesg='' || mesg="$3"
+    values=""
+    eval "
+        IFS=$'\n'
+        for option in \${!$array[@]};do
+            display_option=\$(expr \$option + 1)
+            if [ \$option -ne \$(expr \${#$array[@]} - 1) ];then
+                values+=\"\$display_option \${$array[\$option]}\n\"
+            else
+                values+=\"\$display_option \${$array[\$option]}\"
+            fi
+        done
+    "
+    echo -e $values | rofi -dmenu -p $prompt -mesg $3
 }
 
 function get_text_input(){
-	prompt=$@
-	[ -z "$prompt" ] && prompt=rofi
-	rofi -dmenu -p "$prompt"
+    prompt=$@
+    [ -z "$prompt" ] && prompt=rofi
+    rofi -dmenu -p "$prompt"
 }
 
 function taskmenu(){
-	local options=()
-	append_menu options "Adicionar Nova tarefa/Lembrete"
-	append_menu options "Listar Tarefas"
-	append_menu options "Voltar"
-	choose=$(get_option options "Tarefas" | cut -d " " -f1)
+    local options=()
+    append_menu options "Adicionar Nova tarefa/Lembrete"
+    append_menu options "Listar Tarefas"
+    append_menu options "Voltar"
+    choose=$(get_option options "Tarefas" | cut -d " " -f1)
 
-	case $choose in
-		1)
-			taskadd;;
-		2)
-			tasklist;;
-		3) 
-			main;;
-	esac
+    case $choose in
+        1)
+            taskadd;;
+        2)
+            tasklist;;
+        3) 
+            main;;
+    esac
 }
 
 function taskadd(){
-	#local task=$(rofi -dmenu -p "Nova Tarefa")
-	local task=$(get_text_input "Nova Tarefa")
-	/home/rodrigo/.config/nixpkgs/scripts/taskremind $task
-	notify-send "Remind Warrior:" "Tarefa adicionada"
-	taskmenu
+    #local task=$(rofi -dmenu -p "Nova Tarefa")
+    local task=$(get_text_input "Nova Tarefa")
+    /home/rodrigo/.config/nixpkgs/scripts/taskremind $task
+    notify-send "Remind Warrior:" "Tarefa adicionada"
+    taskmenu
 }
 
 function tasklist(){
-	local options=()
+    local options=()
     local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1d | sed '$d' | sed 2d )
 
-    echo -e "$tasks"
+    #echo -e "$tasks"
 
-	IFS=$'\n'
+    IFS=$'\n'
     local index=0
-	for task in $tasks; do
+    for task in $tasks; do
         if [ $index -eq 0 ];then
             mesg=$task
             let index+=1
             continue
         fi
-		task_name=$(echo $task | cut -d " " -f3-)
-		append_menu options "$task_name"
-	done
-	tasklen=${#options[@]}
-	
-	# add menu when there no tasks
-	if [ $tasklen -eq 0 ];then
-		mesg="Você não possui tarefas"
-		append_menu options "Voltar"
-	fi
+        task_name=$(echo $task | cut -d " " -f2- | sed -r "s/[0-9]+\s+//g")
+        append_menu options "$task_name"
+    done
+    tasklen=${#options[@]}
+    
+    # add menu when there no tasks
+    if [ $tasklen -eq 0 ];then
+        mesg="Você não possui tarefas"
+        append_menu options "Voltar"
+    fi
 
-	#read user input
-	choose=$(get_option options "Tarefas" "$mesg")
-	[ $tasklen -eq 0 ] && taskmenu 
-    cat $REMIND_FILE
-	taskview "$choose"
+    #read user input
+    choose=$(get_option options "Tarefas" "$mesg")
+    [ $tasklen -eq 0 ] && taskmenu 
+    #cat $REMIND_FILE
+    taskview "$choose"
 }
 
 function taskview(){
-	local taskdescription="$1"
-	local taskid=$(echo $1 | awk '{print $1}')
-	local taskname=$(echo $1 | cut -d " " -f2- )
-	local options=()
-	append_menu options "Iniciar Tarefa"
-	append_menu options "Pausar Tarefa"
-	append_menu options "Concluir Tarefa"
-	append_menu options "Excluir Tarefa"
-	append_menu options "Voltar"
-	choose=$(get_option options "Tarefa $taskid" | cut -d " " -f1)
-	case $choose in
-		1)
-			taskstart $taskid;;
-		2)
-			taskstop $taskid;;
-		3)
-			taskdone $taskid "$taskname";;
-		4)
-			taskdel $taskid "$taskname";;
-		5)
-			taskmenu;;
-	esac
+    local taskdescription="$1"
+    local taskid=$(echo $1 | awk '{print $1}')
+    local taskname=$(echo $1 | cut -d " " -f2- )
+    local options=()
+    append_menu options "Iniciar Tarefa"
+    append_menu options "Pausar Tarefa"
+    append_menu options "Concluir Tarefa"
+    append_menu options "Excluir Tarefa"
+    append_menu options "Voltar"
+    choose=$(get_option options "Tarefa $taskid" "tarefa: $task_name" | cut -d " " -f1)
+    case $choose in
+        1)
+            taskstart $taskid;;
+        2)
+            taskstop $taskid;;
+        3)
+            taskdone $taskid "$taskname";;
+        4)
+            taskdel $taskid "$taskname";;
+        5)
+            taskmenu;;
+    esac
 }
 
 
 function taskdone(){
-	local taskid=$1
-	local taskname=$2
-	sed "/$taskname/d" $REMIND_FILE -i
-	task done $taskid
-	tasklist
+    local taskid=$1
+    local taskname=$2
+    sed "/$taskname/d" $REMIND_FILE -i
+    task done $taskid
+    tasklist
 }
 
 function taskdel(){
-	local taskid=$1
-	local taskname=$2
-	local task_options="rc.confirmation=false"
-	sed "/$taskname/d" $REMIND_FILE -i 
-	task delete $taskid $task_options
-	tasklist
+    local taskid=$1
+    local taskname=$2
+    local task_options="rc.confirmation=false"
+    sed "/$taskname/d" $REMIND_FILE -i 
+    task delete $taskid $task_options
+    tasklist
 }
 
 function taskstart(){
-	local taskid=$1
-	task start $taskid
-	tasklist
+    local taskid=$1
+    task start $taskid
+    tasklist
 }
 
 function taskstop(){
-	local taskid=$1
-	task stop $taskid
-	tasklist
+    local taskid=$1
+    task stop $taskid
+    tasklist
 }
 
 function eval_echo(){
-	cmd=$@
-	eval echo "$cmd"
+    cmd=$@
+    eval echo "$cmd"
 }
 
 function append_menu(){
-	array=$1
-	value=$2
-	# echo $value
-	local nl=$'\n'
-	array_lenght=$(eval_echo "\${#$array[@]}")
-	# echo $array[$array_lenght]=\"$value\\n\"
-	eval $array[$array_lenght]=\"$value\"
+    array=$1
+    value=$2
+    # echo $value
+    local nl=$'\n'
+    array_lenght=$(eval_echo "\${#$array[@]}")
+    # echo $array[$array_lenght]=\"$value\\n\"
+    eval $array[$array_lenght]=\"$value\"
 }
 
 main
