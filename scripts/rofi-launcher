@@ -112,7 +112,7 @@ function tasklist(){
         local taskid=$(expr $task | awk '{print $1}')
         task_name=$(echo $task | cut -d " " -f2- | sed -r "s/[0-9]+\s+//g")
         
-
+        local focused_task_active
         # current active task
         if [ "$taskid" -eq "$task_active" ];then
             task_name+=" [A]" 
