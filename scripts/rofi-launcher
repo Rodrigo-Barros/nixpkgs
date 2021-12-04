@@ -7,7 +7,7 @@ function main(){
     append_menu options "Tarefas"
     append_menu options "Sair"
     # local option=$(get_option options)
-    choose=$(get_option options "Tarefas"| cut -d " " -f1)
+    choose=$(get_option options "Rofi"| cut -d " " -f1)
 
     case $choose in
         1)
@@ -17,23 +17,57 @@ function main(){
     esac
 }
 
+function has_id(){
+    option=$1
+    id=$(echo $option | awk '{print $1}')
+    echo $id | grep -E "[0-9]+" 1> /dev/null
+}
+
 function get_option(){
-    array=$1
+    array=$1[@]
     [ -z "$2" ] && prompt='dmenu' || prompt=$2
     [ -z "$3" ] && mesg='' || mesg="$3"
-    values=""
-    eval "
-        IFS=$'\n'
-        for option in \${!$array[@]};do
-            display_option=\$(expr \$option + 1)
-            if [ \$option -ne \$(expr \${#$array[@]} - 1) ];then
-                values+=\"\$display_option \${$array[\$option]}\n\"
-            else
-                values+=\"\$display_option \${$array[\$option]}\"
-            fi
-        done
-    "
-    echo -e $values | rofi -dmenu -p $prompt -mesg $3
+    [ -z "$4" ] && parms='' || parms="$4"
+
+    array_name=$array
+    array_values="\${$array[@]}"
+    array_lenght=$(eval echo "\${#$1[@]}")
+
+    local use_index=true
+    local index=0
+
+    for option in "${!array}";do
+        has_id "$option" && use_index=false 
+        local description=$(echo $option | cut -d ' ' -f1-)
+
+        let index+=1
+        if [ "$use_index" = "false" ];then
+            id=$(echo $option|awk '{print $1}')
+            description=$(echo $description | sed -r "s/\s?$id\s//g")
+        else
+            id=$index
+        fi
+
+
+        if [ $index -eq $array_lenght ];then
+            values+="$id $description"
+        else
+            values+="$id $description\n"
+        fi
+    done
+
+    # eval "
+    #     IFS=$'\n'
+    #     for option in \${!$array[@]};do
+    #         display_option=\$(expr \$option + 1)
+    #         if [ \$option -ne \$(expr \${#$array[@]} - 1) ];then
+    #             values+=\"\$display_option \${$array[\$option]}\n\"
+    #         else
+    #             values+=\"\$display_option \${$array[\$option]}\"
+    #         fi
+    #     done
+    # "
+    echo -e $values | rofi -dmenu -p $prompt -mesg "$3" "$4"
 }
 
 function get_text_input(){
@@ -69,21 +103,24 @@ function taskadd(){
 
 function tasklist(){
     local options=()
+    local task_active=$(task export active | jq '.[] | .id')
     local tasks=$(task list rc.report.list.columns=id,description.count rc.report.list.labels=ID,Description | sed 1d | sed '$d' | sed 2d )
+    [ -z $task_active ] && task_active=-1
 
-    #echo -e "$tasks"
-
-    IFS=$'\n'
     local index=0
-    for task in $tasks; do
+    IFS=$'\n'
+    for task in $tasks;do
         if [ $index -eq 0 ];then
-            mesg=$task
             let index+=1
+            mesg="$task"
             continue
         fi
+        local taskid=$(expr $task | awk '{print $1}')
         task_name=$(echo $task | cut -d " " -f2- | sed -r "s/[0-9]+\s+//g")
-        append_menu options "$task_name"
+        [ "$taskid" -eq "$task_active" ] && task_name+=" [A]"
+        append_menu options "$taskid $task_name"
     done
+
     tasklen=${#options[@]}
     
     # add menu when there no tasks
@@ -94,6 +131,7 @@ function tasklist(){
 
     #read user input
     choose=$(get_option options "Tarefas" "$mesg")
+
     [ $tasklen -eq 0 ] && taskmenu 
     #cat $REMIND_FILE
     taskview "$choose"
