@@ -52,7 +52,9 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog","Dialog" }
+    { rule_any = {
+        type = { "normal", "dialog","Dialog",
+        },
       }, properties = { titlebars_enabled = false, placement = awful.placement.centered }
     },
 	{
@@ -62,6 +64,12 @@ awful.rules.rules = {
 			}
 		}, properties = { maximized=true, tag=tags[2], switch_to_tags=true }
 	},
+    -- Centered windows
+    {
+        rule_any ={
+            role = { "MigrationWizard", "Organizer" }
+        }, properties = { floating=true, placement = awful.placement.centered,  maximized = false }
+    },
 	{
 		rule_any = {
 			class = {
