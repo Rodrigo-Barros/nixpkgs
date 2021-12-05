@@ -90,7 +90,8 @@ function taskadd(){
     #local task=$(rofi -dmenu -p "Nova Tarefa")
     local task=$(get_text_input "Nova Tarefa")
     /home/rodrigo/.config/nixpkgs/scripts/taskremind $task
-    notify-send "Remind Warrior:" "Tarefa adicionada"
+    systemctl --user restart remind-notifier
+    notify-send "Remind Warrior:" "Tarefa adicionada $?"
     taskmenu
 }
 
@@ -114,7 +115,7 @@ function tasklist(){
         
         local focused_task_active
         # current active task
-        if [ $(echo $tasks_active | grep $taskid ) ];then
+        if [ $(echo $tasks_active | grep $taskid -w ) ];then
             task_name+=" [A]" 
             
             if [ $(echo $focused_task_active | wc -w) -eq 0 ];then
