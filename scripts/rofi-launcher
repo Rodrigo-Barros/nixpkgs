@@ -151,12 +151,13 @@ function taskview(){
     local taskid=$(echo $1 | awk '{print $1}')
     local taskname=$(echo $1 | cut -d " " -f2- )
     local options=()
+    local due=$(task export | jq '.[] | select( .id | contains(10)) .due')
     append_menu options "Iniciar Tarefa"
     append_menu options "Pausar Tarefa"
     append_menu options "Concluir Tarefa"
     append_menu options "Excluir Tarefa"
     append_menu options "Voltar"
-    choose=$(get_option options "Tarefa $taskid" "tarefa: $task_name" | cut -d " " -f1)
+    choose=$(get_option options "'Tarefa $taskid'" "-mesg 'descrição: $task_name '" | cut -d " " -f1)
     case $choose in
         1)
             taskstart $taskid;;

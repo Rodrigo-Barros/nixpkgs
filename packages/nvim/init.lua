@@ -42,7 +42,7 @@ cmd("colorscheme onedark")
 create_augroup({
 	{'FileType','php,javascript,python,sql,lua','DBSetOption','profile=mySQL'},
 	{'BufEnter','*nix','set','filetype=nix'},
-	{'BufEnter','*php','set','autoindent','cindent'}
+	{'BufEnter','*php','set','autoindent','cindent'},
 },"startup")
 
 -- create_augroup({
@@ -338,6 +338,7 @@ dap.configurations.php = {
 	  program = "${file}",
 	  cwd = "${fileDirname}",
 	  stopOnEntry = true,
+      localSourceRoot = '/tmp/tests',
 	  runtimeArgs = {
 		"-dxdebug.start_with_request=yes",
 		"-dxdebug.mode=debug"
@@ -351,7 +352,7 @@ dap.configurations.php = {
     name="Launch Bult-in web server",
 	type = "php",
 	request = "launch",
-	runtimeExecutable = "/nix/store/6j7slsdicijlwrd6vppqryd0zv6wp73k-user-environment/bin/php",
+	-- runtimeExecutable = "/nix/store/04dswvfvlgsmva4aa1iq6hpvsah3hfbi-php-with-extensions-8.0.12/bin/php",
 	runtimeArgs = {
 	"-dxdebug.mode=debug",
     "-dxdebug.start_with_request=yes",
@@ -457,6 +458,7 @@ wk.register({
 -- {{{
 local barbar = require('bufferline.state')
 local nvim_tree = require('nvim-tree')
+nvim_tree.setup{}
 local opened=false
 
 tree ={}
