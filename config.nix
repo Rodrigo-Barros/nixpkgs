@@ -65,7 +65,9 @@
         # Nix updater repo
         nix-updater = systemd.service{
             name="nix-updater";
-            execStart="${pkgs.nix}/bin/nix-channel --update nixpkgs && ${scripts.nix-build-env}/bin/build-env --build";
+            execStart="${pkgs.nix}/bin/nix-channel --update nixpkgs";
+            execStopPost="${scripts.nix-build-env}/bin/build-env --build";
+            timeoutSec="600";
         };
         
         # Remind-Notifier
@@ -87,13 +89,15 @@
         # Nix Garbage Collector
         nix-collect-garbage = systemd.timer{
             name="nix-collect-garbage";
-            onCalendar="*-*-1/3 17..22:00:00";
+            onCalendar="*-*-1/3 12:00:00";
+            persistent="true";
         };
     
         # Nix updater 
         nix-updater = systemd.timer{
             name="nix-updater";
-            onCalendar="*-*-1/3 17..22:00:00";
+            onCalendar="*-*-1/3 12:00:00";
+            persistent="true";
         };
       
     };

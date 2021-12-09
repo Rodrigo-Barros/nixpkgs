@@ -62,27 +62,6 @@ local nvim_lsp = require('lspconfig')
 local lsp_server = require'lspconfig/configs'
 local util = nvim_lsp.util
 
--- Custom servers
-
--- sumneko_lua not register setup function for some strange reason
-lsp_server.sumneko = {
-	default_config = {
-		cmd = {'lua-language-server'};
-		filetypes = {'lua'};
-		root_dir = function(fname)
-      		return util.find_git_ancestor(fname) or util.path.dirname(fname)
-    	end;
-	},
-	settings = {
-		Lua = {
-			workspace = {
-				library = {
-					['/nix/store/mgjmb01qnnmivwj1q4bh0zf87dxbzm5j-awesome-4.3/share/awesome/lib'] = true
-				}
-			}
-		}
-	}
-}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -136,7 +115,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'bashls','intelephense','sumneko','rnix' }
+local servers = { 'bashls','intelephense','rnix' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -145,6 +124,27 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- Custom servers
+
+-- sumneko_lua not register setup function for some strange reason
+nvim_lsp.sumneko_lua.setup{
+        on_attach = on_attach,
+		cmd = {'lua-language-server'},
+		filetypes = {'lua'},
+		root_dir = function(fname)
+      		return util.find_git_ancestor(fname) or util.path.dirname(fname)
+    	end,
+	settings = {
+		Lua = {
+			workspace = {
+				library = {
+					['/nix/store/mgjmb01qnnmivwj1q4bh0zf87dxbzm5j-awesome-4.3/share/awesome/lib'] = true
+				}
+			}
+		}
+	}
+}
 -- }}}
 
 -- Treesiter
@@ -296,7 +296,7 @@ var.indentLine_concealcursor = 'inc'
 var.indentLine_conceallevel = 2
 -- }}}
 
--- Which key nvim 
+-- Which key nvim
 -- {{{
 local wk = require('which-key')
 wk.setup{}
@@ -311,13 +311,16 @@ var.bufferline = {
 
 -- Nvim-DAP
 -- {{{
+-- var.vdebug_options = {
+--     ['port'] = 9003
+-- }
+
 dap=require('dap')
-dap.set_log_level('trace')
-vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+
 dap.adapters.php = {
   type = 'executable',
   command = 'node',
-  args = {'/home/rodrigo/.config/nixpkgs/packages/nvim/dap/vscode-php-debug/out/phpDebug.js' }
+  args = { '/home/rodrigo/.config/nixpkgs/packages/nvim/dap/vscode-php-debug/out/phpDebug.js' }
 }
 
 dap.configurations.php = {
@@ -326,51 +329,32 @@ dap.configurations.php = {
     request = 'launch',
     name = 'Listen for Xdebug',
     port = 9003,
-	stopOnEntry = true,
-	log = true
+    log=true
   },
   {
-	  type = 'php',
-	  request = 'launch',
-	  name = 'Launch currently open script',
-	  port = 8080,
-	  log = true,
-	  program = "${file}",
-	  cwd = "${fileDirname}",
-	  stopOnEntry = true,
-      localSourceRoot = '/tmp/tests',
-	  runtimeArgs = {
-		"-dxdebug.start_with_request=yes",
-		"-dxdebug.mode=debug"
-	  },
-	  env = {
-		  [ "XDEBUG_MODE" ] = "debug,develop",
-		  [ "XDEBUG_CONFIG" ] = "client_port=${port}"
-	  }
-  },
-  {
-    name="Launch Bult-in web server",
-	type = "php",
-	request = "launch",
-	-- runtimeExecutable = "/nix/store/04dswvfvlgsmva4aa1iq6hpvsah3hfbi-php-with-extensions-8.0.12/bin/php",
-	runtimeArgs = {
-	"-dxdebug.mode=debug",
-    "-dxdebug.start_with_request=yes",
-    "-S",
-    "localhost:8080"
-	},
-	program = "",
-	cwd = "${workspaceRoot}",
-	port = 9003,
-	serverReadyAction = {
-		[ "pattern" ] = "Development Server \\(http://localhost:([0-9]+)\\) started",
-		[ "uriFormat" ] = "http://localhost:%s",
-		[ "action" ] = "openExternally"
-	}
+    name = "Launch currently open script",
+    type = "php",
+    request = "launch",
+    runtimeExecutable = "/usr/bin/php",
+    program = "${file}",
+    cwd = "${fileDirname}",
+    port = 9003,
+    runtimeArgs = { "-dxdebug.start_with_request=yes" },
+    env = {
+      [ "XDEBUG_MODE" ] = "debug,develop",
+      [ "XDEBUG_CONFIG" ] = "client_port=${port}"
+    }
   }
 }
 
+vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 -- }}}
+
+-- Nvim-Dap-Ui
+-- {{
+dapui=require("dapui")
+dapui.setup()
+-- }}
 
 --- }}}
 
@@ -430,7 +414,7 @@ map('n','<F12>',':lua dap.step_out()<CR>',opts)
 map('n','<leader>d',':lua dap.toggle_breakpoint()<CR>',opts)
 map('n','<leader>B',':lua dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>',opts)
 map('n','<leader>lp',':lua dap.set_breakpoint(nil,nil,vim.fn.input("Log point message: "))<CR>',opts)
-map('n','<leader>dr',':lua dap.repl.open()<CR>',opts)
+map('n','<leader>dr',':lua dapui.toggle()<CR>',opts)
 map('n','<leader>dl',':lua dap.run_last()<CR>',opts)
 -- }}}
 

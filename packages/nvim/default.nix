@@ -12,6 +12,25 @@ let
        sha256 = "1ji23i43x3bhzph14c5cxqavjbhy4xry5yg8886d3i3hh89yy1zr";
      };
    };
+   vim-inspector = pkgs.vimUtils.buildVimPlugin{
+    name ="vim-inspector";
+    src = pkgs.fetchFromGitHub{
+        owner = "puremourning";
+        repo = "vimspector";
+        rev = "a371a162c3378bc50b74a4e5536228c2cc2c9c35";
+        sha256 = "sha256-gVW9sDsxHKFlFY33eMHuhNIvJoLVjNRwSkhcI1Hc0fM=";
+    };
+   };
+   vdebug = pkgs.vimUtils.buildVimPlugin{
+    name ="vdebug";
+    src = pkgs.fetchFromGitHub{
+        owner = "vim-vdebug";
+        repo = "vdebug";
+        rev = "6a21b7df2dae9f202c4920655374978e364d2637";
+        sha256 = "sha256-kobMC6TRFZcEbgFdOaBgXUzoeWQUrVzUKylN1N9nEnc=";
+    };
+   };
+
 # 
 #   whichKey = pkgs.vimUtils.buildVimPlugin{
 #     name="whichKey";
@@ -79,6 +98,15 @@ let
      };
    };
 
+   dap-ui = pkgs.vimUtils.buildVimPlugin{
+     name="nvim-dap-ui";
+     src = pkgs.fetchFromGitHub{
+       owner = "rcarriga";
+       repo = "nvim-dap-ui";
+       rev = "96813c9a42651b729f50f5d880a8919a155e9721";
+       sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
+     };
+   };
 in
 pkgs.neovim.override {
   vimAlias = true;
@@ -103,10 +131,13 @@ pkgs.neovim.override {
 			vim-surround
 			indentLine
 			nvim-dap
-			nvim-dap-ui
+            dap-ui # updated version
+            #nvim-dap-ui
 			which-key-nvim
 			vimwiki
 			vim-floaterm
+            #vim-inspector
+            #vdebug
 
 			# Telescope
 			plenary-nvim

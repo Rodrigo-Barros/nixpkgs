@@ -2,8 +2,7 @@
 { 
   pkgs ? import <nixpkgs> {},
   lib ? pkgs.lib
-}:
-{
+}: {
   service = {
     name , # nome do serviço
     description ? "service description",
@@ -12,7 +11,8 @@
     execStopPost ? "",
     target ? "default.target",
     type ? "simple",
-    log ? "syslog"
+    log ? "syslog",
+    timeoutSec ? "90"
   }:
     pkgs.writeTextFile {
         name="${name}";
@@ -28,6 +28,7 @@
             SyslogIdentifier=${name}
             StandardOutput=${log}
             StandardError=${log}
+            TimeoutSec=${timeoutSec}
             
             [Install]
             WantedBy=${target}
@@ -39,9 +40,10 @@
   	name,
     description ? "generic timer",
     delayOnBoot ? "", # 5min
-	  delayAfterActive ? "", # 15min repeat after first execution
+	delayAfterActive ? "", # 15min repeat after first execution
     target ? "timers.target",
-	  onCalendar ? ""
+	onCalendar ? "",
+    persistent? "false",
   }: 
   pkgs.writeTextFile {
     name="";
@@ -65,6 +67,11 @@
 
     + (if delayAfterActive != "" then ''
       OnUnitActiveSec=${delayAfterActive}
+    '' 
+    else "")
+
+    + (if persistent == "true" then ''
+      Persistent=${persistent}
     '' 
     else "")
     +
