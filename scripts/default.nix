@@ -1,5 +1,6 @@
 {
-	pkgs ? import <nixpkgs> {}
+	pkgs ? import <nixpkgs> {},
+    vscode-php-debug ? import ../packages/nvim/dap/vscode-php-debug {}
 }:
 {
 
@@ -13,4 +14,8 @@
 	rofi-launcher = pkgs.writeScriptBin "rofi-launcher" "${builtins.readFile ./rofi-launcher }";
 
 	nix-build-env = pkgs.writeScriptBin "build-env" "${builtins.readFile ./nix-env-builder}";
+
+    vscode-php-debug = pkgs.writeScriptBin "vscode-php-debug" ''
+        ${pkgs.nodejs}/bin/node ${vscode-php-debug}/lib/phpDebug.js
+    '';
 }

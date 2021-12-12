@@ -319,8 +319,7 @@ dap=require('dap')
 
 dap.adapters.php = {
   type = 'executable',
-  command = 'node',
-  args = { '/home/rodrigo/.config/nixpkgs/packages/nvim/dap/vscode-php-debug/out/phpDebug.js' }
+  command = 'vscode-php-debug'
 }
 
 dap.configurations.php = {

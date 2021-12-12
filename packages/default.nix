@@ -7,7 +7,9 @@
 	matrix = pkgs.callPackage ./matrix {};
 	awesome = pkgs.callPackage ./awesome {};
 	drivesync = pkgs.callPackage ./drivesync {};
+
 	nvim = pkgs.callPackage ./nvim {};
+    vscode-php-debug = pkgs.callPackage ./nvim/dap/vscode-php-debug {};
 	remind = pkgs.callPackage ./remind {};
     ical2rem = pkgs.callPackage ./ical2rem {};
 	php = pkgs.php.buildEnv {

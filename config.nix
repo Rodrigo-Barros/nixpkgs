@@ -19,9 +19,6 @@
         fonts=[ "FiraCode" ];
     };
     
-    #  nixEnvBuilder = pkgs.writeScriptBin "nix-build-env" ''
-    #    ${builtins.readFile ./utils/nix-env-builder }
-    #  '';
     
     # my custom packages   
     packages = with repo;[
@@ -35,6 +32,7 @@
        intelephense
        remind
        ical2rem
+       vscode-php-debug
     ];
     
     tools = with scripts; [
@@ -44,6 +42,7 @@
         bindPrinter
         rofi-launcher
         nix-build-env
+        vscode-php-debug
     ];
     
     services = {

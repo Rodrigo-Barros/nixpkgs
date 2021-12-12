@@ -104,7 +104,7 @@ let
        owner = "rcarriga";
        repo = "nvim-dap-ui";
        rev = "96813c9a42651b729f50f5d880a8919a155e9721";
-       sha256 = "037f9k6pg22yg641yp92bfqnschy5vj692a3bimj75gdkrp16dbj";
+       sha256 = "sha256-sAR8hX9tCUMNwmH3TvtysKOXBDvliSePaRQ5A5lbo/w=";
      };
    };
 in
