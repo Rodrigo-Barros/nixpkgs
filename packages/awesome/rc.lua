@@ -24,7 +24,7 @@ require('startup')
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
---require("awful.hotkeys_popup.keys")
+require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -192,7 +192,7 @@ awful.layout.layouts = {
 awful.screen.connect_for_each_screen(function(s)
     -- awful.tag(tags, s, awful.layout.layouts[1])
 
-    for i =1,7 do
+    for i =1,9 do
       selected = false
       if i == 1 then 
         selected = true

@@ -13,7 +13,7 @@
 	remind = pkgs.callPackage ./remind {};
     ical2rem = pkgs.callPackage ./ical2rem {};
 	php = pkgs.php.buildEnv {
-		extensions = {all, enabled}: with all; [xdebug];
+		extensions = {all, enabled}: with all; [ xdebug pdo_mysql session ];
 		extraConfig = ''
 			xdebug.mode = debug
 			xdebug.start_with_request = yes

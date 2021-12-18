@@ -334,14 +334,14 @@ dap.configurations.php = {
     name = "Launch currently open script",
     type = "php",
     request = "launch",
-    runtimeExecutable = "/usr/bin/php",
     program = "${file}",
     cwd = "${fileDirname}",
     port = 9003,
     runtimeArgs = { "-dxdebug.start_with_request=yes" },
     env = {
       [ "XDEBUG_MODE" ] = "debug,develop",
-      [ "XDEBUG_CONFIG" ] = "client_port=${port}"
+      [ "XDEBUG_CONFIG" ] = "client_port=${port}",
+      [ "PATH" ] = os.getenv("PATH")
     }
   }
 }
