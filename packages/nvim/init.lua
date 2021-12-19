@@ -42,7 +42,8 @@ cmd("colorscheme onedark")
 create_augroup({
 	{'FileType','php,javascript,python,sql,lua','DBSetOption','profile=mySQL'},
 	{'BufEnter','*nix','set','filetype=nix'},
-	{'BufEnter','*php','set','autoindent','cindent'},
+    -- GitSigns
+    {'BufEnter','*','highlight','link','GitSignsCurrentLineBlame','Comment'},
 },"startup")
 
 -- create_augroup({
@@ -91,7 +92,7 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definiinition()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -150,19 +151,50 @@ nvim_lsp.sumneko_lua.setup{
 }
 -- }}}
 
--- Treesiter
+-- Treesitter
 -- {{{
 local ts = require('nvim-treesitter.configs')
 ts.setup{
 	ensure_installed = "maintained",
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "gnn",
+        node_incremental = "grn",
+        scope_incremental = "grc",
+        node_decremental = "grm",
+      },
+    },
 	highlight = {
 		enable = true,
 		disable = {"bash"},
-        additional_vim_regex_highlighting = {"php"}
+        custom_captures = {
+            ["variable"] = "phpIntVar",
+        },
+        additional_vim_regex_highlighting = false
 	},
 	indent ={
 		enable = {"php"}
 	},
+    playground = {
+    enable = true,
+    disable = {},
+    updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+    persist_queries = false, -- Whether the query persists across vim sessions
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
+  }
+
 }
 -- }}}
 
@@ -246,13 +278,6 @@ function _G.smart_shift_tab(fallback)
         fallback()
     end
 end
---
---map('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
---map('i', '<C-j>', 'v:lua.smart_tab()', {expr = true, noremap = true})
-----
---map('i', '<S-Tab>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
---map('i', '<C-k>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
-
 
 local function prequire(...)
 local status, lib = pcall(require, ...)
@@ -299,16 +324,11 @@ _G.s_tab_complete = function()
 end
 
 cmp.setup({
-    snippet = {
-        expand = function (args)
-            luasnip.lsp_expand(args.body)
-        end
-    },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' }, -- For luasnip users.
       { name = 'path' },
-      -- { name = 'buffer' },
+      { name = 'buffer' },
     }),
     mapping = {
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -348,7 +368,17 @@ cmp.setup({
 -- Git Signs
 -- {{{
 local gitsigns = require('gitsigns')
-gitsigns.setup()
+gitsigns.setup({
+    signcolumn = true,
+    word_diff = true,
+    current_line_blame = true,
+    current_line_blame_opts = {
+       virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+    }
+})
 -- }}}
 
 -- NVIM AUTOPAIRS

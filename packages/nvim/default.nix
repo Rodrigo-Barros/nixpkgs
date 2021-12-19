@@ -8,6 +8,7 @@ let
      src = pkgs.fetchFromGitHub{
        owner = "kdheepak";
        repo = "lazygit.nvim";
+
        rev = "71db1e8403dfce884480185be4145eae180b9c77";
        sha256 = "1ji23i43x3bhzph14c5cxqavjbhy4xry5yg8886d3i3hh89yy1zr";
      };
@@ -107,12 +108,35 @@ let
        sha256 = "sha256-sAR8hX9tCUMNwmH3TvtysKOXBDvliSePaRQ5A5lbo/w=";
      };
    };
+    nvim-treesitter-playground = pkgs.vimUtils.buildVimPlugin{
+     name="nvim-blame-line";
+     src = pkgs.fetchFromGitHub{
+       owner = "nvim-treesitter";
+       repo = "playground";
+       rev = "787a7a8d4444e58467d6b3d4b88a497e7d494643";
+       sha256 = "YMINv064VzuzZLuQNY6HN3oCZvYjNQi6IMliQPTijfg=";
+     };
+   };
+
+   gitsigns-nvim = pkgs.vimUtils.buildVimPlugin{
+     name="gitsigns-nvim";
+     src = pkgs.fetchFromGitHub{
+       owner = "lewis6991";
+       repo = "gitsigns.nvim";
+       rev = "4d8a6e0eb38a3715bec45c98c3567b47789e1367";
+       sha256="DuJX8bWI7kP9c8vXEA23OxxU1ZDb5efCEktbKlrpSe4=";
+     };
+     configurePhase = ''
+       rm Makefile 
+     '';
+   };
 in
 pkgs.neovim.override {
   vimAlias = true;
   configure={
     customRC = ''
 	  luafile $HOME/.config/nixpkgs/packages/nvim/init.lua
+      luafile $HOME/.config/nixpkgs/packages/nvim/snippets/php.lua
     '';
     packages.myPlugins = with pkgs.vimPlugins; {
 	start = [ 
@@ -132,6 +156,7 @@ pkgs.neovim.override {
             luasnip
 			gitsigns-nvim
 			nvim-treesitter
+            nvim-treesitter-playground
 			dbext
 			nvim-tree-lua
 			barbar-nvim
@@ -141,13 +166,10 @@ pkgs.neovim.override {
 			vim-surround
 			indentLine
 			nvim-dap
-            dap-ui # updated version
-            #nvim-dap-ui
+            dap-ui
 			which-key-nvim
 			vimwiki
 			vim-floaterm
-            #vim-inspector
-            #vdebug
 
 			# Telescope
 			plenary-nvim
@@ -156,6 +178,7 @@ pkgs.neovim.override {
 			telescope-media-files
 
 			# Customization
+
 			windline
 			onedark
 		];

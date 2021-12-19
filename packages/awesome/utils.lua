@@ -51,7 +51,7 @@ utils.enable_remind_service = function()
 end
 
 utils.fix_super_key=function()
-	spawn_once('xcape -e "Super_L=Alt_L|F1;Super_R=Alt_L|F1"','xcape')
+	spawn_once('xcape -t 250 -e "Super_L=Alt_L|F1;Super_R=Alt_L|F1"','xcape')
 end
 
 return utils
