@@ -119,7 +119,17 @@ pkgs.neovim.override {
 			nvim-autopairs
 			nvim-lspconfig
 			lsp_signature-nvim
-			nvim-compe
+			#nvim-compe
+            
+            # cmp env
+            nvim-cmp
+            cmp-nvim-lsp
+            cmp-buffer
+            cmp-path
+            cmp-cmdline
+            cmp_luasnip
+
+            luasnip
 			gitsigns-nvim
 			nvim-treesitter
 			dbext

@@ -31,7 +31,7 @@ opt.termguicolors = true -- enable devicons, found at :https://github.com/nvim-t
 opt.signcolumn = "yes"
 opt.updatetime = 1000
 opt.mouse = "n"
-opt.completeopt = "menuone,noselect"
+opt.completeopt = "menu,menuone,noselect"
 cmd("colorscheme onedark")
 -- }}}
 
@@ -61,7 +61,8 @@ create_augroup({
 local nvim_lsp = require('lspconfig')
 local lsp_server = require'lspconfig/configs'
 local util = nvim_lsp.util
-
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -90,7 +91,7 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definiinition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -118,6 +119,7 @@ end
 local servers = { 'bashls','intelephense','rnix' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
+    capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
@@ -129,6 +131,7 @@ end
 
 -- sumneko_lua not register setup function for some strange reason
 nvim_lsp.sumneko_lua.setup{
+        capabilities= capabilities,
         on_attach = on_attach,
 		cmd = {'lua-language-server'},
 		filetypes = {'lua'},
@@ -154,76 +157,191 @@ ts.setup{
 	ensure_installed = "maintained",
 	highlight = {
 		enable = true,
-		disable = {"php","bash"},
+		disable = {"bash"},
+        additional_vim_regex_highlighting = {"php"}
 	},
 	indent ={
-		enable = true
+		enable = {"php"}
 	},
 }
--- local ts = require('nvim-treesitter.configs')
--- ts.setup{
--- 	ensure_installed = "maintained",
--- 	highlight = {
--- 		enable = true,
--- 	}
--- }
 -- }}}
 
 -- Compe
 -- {{{
-local compe=require('compe')
-compe.setup {
-  enabled = true;
-  autocomplete = true;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  resolve_timeout = 800;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = {
-    border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  };
+-- local compe=require('compe')
+-- compe.setup {
+--   enabled = true;
+--   autocomplete = true;
+--   debug = false;
+--   min_length = 1;
+--   preselect = 'enable';
+--   throttle_time = 80;
+--   source_timeout = 200;
+--   resolve_timeout = 800;
+--   incomplete_delay = 400;
+--   max_abbr_width = 100;
+--   max_kind_width = 100;
+--   max_menu_width = 100;
+--   documentation = {
+--     border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+--     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+--     max_width = 120,
+--     min_width = 60,
+--     max_height = math.floor(vim.o.lines * 0.3),
+--     min_height = 1,
+--   };
+-- 
+--   source = {
+--     path = true;
+--     buffer = true;
+--     calc = true;
+--     nvim_lsp = true;
+--     nvim_lua = true;
+--     vsnip = true;
+--     ultisnips = true;
+--     luasnip = true;
+--   };
+-- }
+-- 
 
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    vsnip = true;
-    ultisnips = true;
-    luasnip = true;
-  };
-}
+-- }}}
+
+
+-- nvim-cmp / luasnip
+-- {{{
+
+local luasnip = require('luasnip')
+
+local cmp = require('cmp')
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
+--
+function _G.smart_tab(fallback)
+    -- return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+    if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+    elseif cmp.visible() then
+        cmp.select_next_item()
+    elseif has_words_before() then
+        cmp.confirm()
+    else
+        fallback()
+    end
+end
+--
+function _G.smart_shift_tab(fallback)
+    -- return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
+    if cmp.visible() then
+        cmp.select_prev_item()
+    elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+    else
+        fallback()
+    end
+end
+--
+--map('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+--map('i', '<C-j>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+----
+--map('i', '<S-Tab>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
+--map('i', '<C-k>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
 
-function _G.smart_tab()
-    return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
+
+local function prequire(...)
+local status, lib = pcall(require, ...)
+if (status) then return lib end
+    return nil
 end
 
+local luasnip = prequire('luasnip')
+local cmp = prequire("cmp")
 
-function _G.smart_shift_tab()
-    return vim.fn.pumvisible() == 1 and t'<C-p>' or t'<S-Tab>'
+local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-map('i', '<Tab>', 'v:lua.smart_tab()', {expr = true, noremap = true})
-map('i', '<C-j>', 'v:lua.smart_tab()', {expr = true, noremap = true})
+local check_back_space = function()
+    local col = vim.fn.col('.') - 1
+    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+        return true
+    else
+        return false
+    end
+end
 
-map('i', '<S-Tab>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
-map('i', '<C-k>', 'v:lua.smart_shift_tab()', {expr = true, noremap = true})
+_G.tab_complete = function(fallback)
+    if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback()
+      end
+end
+_G.s_tab_complete = function()
+    if cmp and cmp.visible() then
+        cmp.select_prev_item()
+    elseif luasnip and luasnip.jumpable(-1) then
+        return t("<Plug>luasnip-jump-prev")
+    else
+        return t "<S-Tab>"
+    end
+    return ""
+end
+
+cmp.setup({
+    snippet = {
+        expand = function (args)
+            luasnip.lsp_expand(args.body)
+        end
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+      { name = 'path' },
+      -- { name = 'buffer' },
+    }),
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<Tab>'] = cmp.mapping(smart_tab, {'i','s'}),
+      ['<S-Tab>'] = cmp.mapping(smart_shift_tab, { "i", "s" }),
+      ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','s'}),
+      ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','s'})
+    }
+})
+
+
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 
 -- }}}
 
@@ -236,11 +354,11 @@ gitsigns.setup()
 -- NVIM AUTOPAIRS
 -- {{{
 require('nvim-autopairs').setup{}
-require("nvim-autopairs.completion.compe").setup({
-  map_cr = true, --  map <CR> on insert mode
-  map_complete = true, -- it will auto insert `(` after select function or method item
-  auto_select = false,  -- auto select first item
-})
+-- require("nvim-autopairs.completion.compe").setup({
+--   map_cr = true, --  map <CR> on insert mode
+--   map_complete = true, -- it will auto insert `(` after select function or method item
+--   auto_select = false,  -- auto select first item
+-- })
 -- }}}
 
 -- Telescope
@@ -306,6 +424,7 @@ wk.setup{}
 -- {{{
 var.bufferline = {
 	auto_hide = true,
+    exclude_name = { '[dap-repl]' }
 }
 -- }}}
 
@@ -473,8 +592,8 @@ map('n','<leader>b',maplua('tree.toggle()'),opts)
 
 -- Vim commentary
 -- {{{
-map('n',';',':Commentary<CR>',opts)
-map('v',';',':Commentary<CR>',opts)
+map('n','gc',':Commentary<CR>',opts)
+map('v','gc',':Commentary<CR>',opts)
 -- }}}
 
 -- Lazygit
