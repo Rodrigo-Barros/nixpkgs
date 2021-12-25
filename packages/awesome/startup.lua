@@ -7,7 +7,6 @@ local dump = require("gears").debug.dump_return
 utils.enable_touchpad()
 utils.enable_dbus()
 utils.enable_picom()
-utils.enable_remind_service()
 utils.fix_super_key()
 
 local displays = tonumber(utils.os_capture("xrandr -q | grep connected | wc -l"))

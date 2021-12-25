@@ -46,10 +46,6 @@ utils.enable_picom = function()
 	spawn_once('sleep 10 && nixGL picom --config $HOME/.config/compton/compton.conf -f -b --dbus',{'picom','compton'})
 end
 
-utils.enable_remind_service = function()
-	execute("$HOME/.config/nixpkgs/scripts/remind.sh")
-end
-
 utils.fix_super_key=function()
 	spawn_once('xcape -t 250 -e "Super_L=Alt_L|F1;Super_R=Alt_L|F1"','xcape')
 end

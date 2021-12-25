@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+setxkbmap br
 . $HOME/.nix-profile/etc/profile.d/profile.sh
 REMIND_FILE="$HOME/.config/nixpkgs/packages/remind/tarefas"
 function main(){

@@ -1,7 +1,7 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-	package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/nixpkgs/packages/awesome/?.lua"
+package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/nixpkgs/packages/awesome/?.lua"
 
 -- Standard awesome library
 local gears = require("gears")
@@ -11,6 +11,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local utils = require('utils')
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -19,6 +20,21 @@ local battery = require("widgets.battery")
 local wifi = require("widgets.wifi")
 local settings = require("settings")
 local tags = settings.tags
+
+-- nix fixes 
+
+local function patch_volume_icon_dir()
+    local awesome_path = os.getenv('HOME') .. '.config/nixpkgs/packages/awesome'
+    local cmd = "nix build --no-out-link " .. awesome_path .. "/default.nix -A awesome"
+    local icon_dir = utils.os_capture(cmd) .. "/share/awesome/lib/awesome-wm-widgets/volume-widget/icons/"
+    return icon_dir
+end
+
+-- awesome-wm-widgets
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+volume_widget = volume_widget({})
+
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
 
 require('startup')
 
@@ -309,9 +325,11 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
 			wifi,
 			battery,
-            mykeyboardlayout,
+            volume_widget,
             wibox.widget.systray(),
-            mytextclock
+            mykeyboardlayout,
+            mytextclock,
+            -- /nix/store/mk22s9fgd9054v6223avrsi4q95v0c6i-awesome-4.3/share/awesome/lib/awesome-wm-widgets/volume-widget/icons/
         },
     }
 end)

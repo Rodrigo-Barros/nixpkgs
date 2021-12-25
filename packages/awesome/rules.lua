@@ -67,7 +67,7 @@ awful.rules.rules = {
     -- Centered windows
     {
         rule_any ={
-            role = { "MigrationWizard", "Organizer", "Dialog" }
+            role = { "MigrationWizard", "Organizer", "Dialog", "About" }
         }, properties = { floating=true, placement = awful.placement.centered,  maximized = false }
     },
 	{

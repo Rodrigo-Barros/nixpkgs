@@ -5,6 +5,8 @@ local menubar = require("menubar")
 local naughty = require("naughty")
 local utils = require("utils")
 
+local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
+
 menubar.prompt_args = {
 	exe_callback = function(arg,varg)
 		awful.spawn.with_shell([[
@@ -133,7 +135,8 @@ globalkeys = gears.table.join(
        awful.util.spawn("amixer set Master 9%-") end),
    awful.key({}, "XF86AudioMute", function ()
        awful.util.spawn("amixer -q -D pulse sset Master toggle")
-   end)
+   end),
+    awful.key({ modkey }, "q", function() logout_popup.launch() end, {description = "Show logout screen", group = "custom"})
 
 )
 
