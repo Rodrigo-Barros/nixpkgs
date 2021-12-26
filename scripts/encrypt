@@ -1,0 +1,85 @@
+#!/bin/bash
+#set -x
+
+WORKING_DIR="$HOME/.config/nixpkgs/scripts"
+
+# MAP MD5 HASH TO PATH
+MD5FILE="$WORKING_DIR/encrypt_files/md5sum"
+
+# MD5SUM PATH GOES IN THIS PATH
+ENCRYPTED_FILES="$WORKING_DIR/encrypt_files"
+
+
+# crypt and put file in encrypt_files folder put md5sum in md5file
+crypt(){
+    local file_added=1
+    local file="$1"
+    local hash=$(md5sum $file | awk '{print $1}')
+    local name="$(basename $file)"
+
+    [ -e "$MD5FILE" ] && cat $MD5FILE | grep $hash 1> /dev/null
+    local file_added=$?
+    [ $file_added -eq 0 ] && echo "Arquivo $name já foi encriptado" && exit 1
+    read -sp "Insira a senha para encryptar o arquivo:" pass
+    printf "\n"
+    GPG_ENCRYPT_COMMAND="gpg --symmetric --batch --yes --passphrase $pass"
+    # name of file
+
+    # expanded path of file to write in MD5FILE
+    local resolve_path_file=""
+
+    [ $(echo $file | grep -E "^[a-z]") ] && resolve_path_file="$PWD/$file" || resolve_path_file="$file"
+
+    # CREATE FOLDER IF NOT EXISTIS
+    mkdir -p $(dirname $MD5FILE)
+
+
+    # WRITE md5sum on MD5FILE
+    echo -e "$file\t$hash" >> $MD5FILE
+    cat $file | $GPG_ENCRYPT_COMMAND > $ENCRYPTED_FILES/$name.gpg
+}
+
+# decrypt all files at once
+decrypt(){
+    read -sp "Insira a senha para descriptografar seus arquivos:" pass
+    printf "\n"
+    GPG_DECRYPT_COMMAND="gpg --decrypt --batch --yes --passphrase $pass"
+    while read -r line;do
+        local file=$(echo $line | awk '{print $1}')
+        local file_hash=$(echo $line | awk '{print $2}')
+        
+        local compare_file=$(echo $WORKING_DIR/encrypt_files/$(basename $file).gpg)
+        local compare_file_hash=$(cat $compare_file | $GPG_DECRYPT_COMMAND | md5sum | awk '{print $1}')
+        local name=$(basename $file)
+
+        if [ "$file_hash" = "$compare_file_hash" ];then
+            cat $compare_file | $GPG_DECRYPT_COMMAND > $file
+
+            [ $? -eq 0 ] && echo "Arquivo $name descriptografado com sucesso"
+        fi
+    done < $ENCRYPTED_FILES/md5sum
+}
+
+
+usage(){
+cat <<EOL
+Ajuda:
+
+--crypt              adiciona o arquivo para ser encryptado
+--decrypt            descriptografa os arquivos armazenados e restaura para seus caminhos originais
+--help, -h           exibe esse arquivo de ajuda
+EOL
+}
+
+[ $# -eq 0 ] && usage
+for arg in "$@";do
+    case $arg in
+        --crypt|-c)
+            shift 1
+            crypt $1;;
+        --help|-h)
+            usage;;
+        --decrypt)
+            decrypt;;
+    esac
+done

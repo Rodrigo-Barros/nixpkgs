@@ -43,6 +43,7 @@
         rofi-launcher
         nix-build-env
         vscode-php-debug
+        encrypt-tool
     ];
     
     services = {

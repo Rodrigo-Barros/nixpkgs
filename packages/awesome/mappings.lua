@@ -136,7 +136,12 @@ globalkeys = gears.table.join(
    awful.key({}, "XF86AudioMute", function ()
        awful.util.spawn("amixer -q -D pulse sset Master toggle")
    end),
-    awful.key({ modkey }, "q", function() logout_popup.launch() end, {description = "Show logout screen", group = "custom"})
+    awful.key({ modkey }, "q", function() logout_popup.launch{
+        phrases = {"I Will Be Back","Hasta la vista Baby !!!"},
+        onsupend = function()
+            awful.spawn.with_shell("systemctl hybrid-sleep")
+        end
+    } end)
 
 )
 

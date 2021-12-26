@@ -13,6 +13,10 @@
 
 	rofi-launcher = pkgs.writeScriptBin "rofi-launcher" "${builtins.readFile ./rofi-launcher }";
 
+    encrypt-tool = pkgs.writeScriptBin "encrypt" ''
+    #!${pkgs.bash}/bin/bash
+    ${builtins.getEnv "HOME"}/.config/nixpkgs/scripts/encrypt "$@"
+    '';
 	nix-build-env = pkgs.writeScriptBin "build-env" "${builtins.readFile ./nix-env-builder}";
 
     vscode-php-debug = pkgs.writeScriptBin "vscode-php-debug" ''

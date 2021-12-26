@@ -4,6 +4,8 @@ local bo = vim.bo
 local map = vim.api.nvim_set_keymap 
 local var = vim.g
 
+
+
 -- Found at: https://icyphox.sh/blog/nvim-lua/
 function create_augroup(autocmds, name)
 	cmd('augroup ' .. name)
@@ -258,12 +260,16 @@ end
 function _G.smart_tab(fallback)
     -- return vim.fn.pumvisible() == 1 and t'<C-n>' or t'<Tab>'
     if luasnip.expand_or_jumpable() then
+        print('expandindo snipes')
         luasnip.expand_or_jump()
     elseif cmp.visible() then
+        print('cmp visivel')
         cmp.select_next_item()
     elseif has_words_before() then
+        print('cmp confirm')
         cmp.confirm()
     else
+        print('default')
         fallback()
     end
 end
@@ -330,6 +336,12 @@ cmp.setup({
       { name = 'path' },
       { name = 'buffer' },
     }),
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        luasnip.lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
     mapping = {
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
