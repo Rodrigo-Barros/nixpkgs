@@ -6,6 +6,7 @@ package.path = package.path .. ";" .. os.getenv("HOME") .. "/.config/nixpkgs/pac
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
+
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -21,7 +22,7 @@ local wifi = require("widgets.wifi")
 local settings = require("settings")
 local tags = settings.tags
 
--- nix fixes 
+-- nix fixes
 
 local function patch_volume_icon_dir()
     local awesome_path = os.getenv('HOME') .. '.config/nixpkgs/packages/awesome'
@@ -149,17 +150,17 @@ local taglist_buttons = gears.table.join(
                 )
 
 local tasklist_buttons = gears.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  c:emit_signal(
-                                                      "request::activate",
-                                                      "tasklist",
-                                                      {raise = true}
-                                                  )
-                                              end
-                                          end),
+                     -- awful.button({ }, 1, function (c)
+                     --                          if c == client.focus then
+                     --                              c.minimized = true
+                     --                          else
+                     --                              c:emit_signal(
+                     --                                  "request::activate",
+                     --                                  "tasklist",
+                     --                                  {raise = true}
+                     --                              )
+                     --                          end
+                     --                      end),
                      awful.button({ }, 3, function()
                                               awful.menu.client_list({ theme = { width = 250 } })
                                           end),
@@ -429,6 +430,7 @@ client.connect_signal("focus", function(c)
 		c.border_color = beautiful.border_focus
 	end
 end)
+
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_normal
 end)

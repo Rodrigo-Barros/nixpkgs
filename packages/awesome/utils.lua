@@ -1,5 +1,6 @@
 local utils = {}
 local execute = require("awful").spawn.with_shell
+local naughty = require("naughty")
 
 -- launch only one instance of given command
 local spawn_once = function(command,filter)
@@ -48,6 +49,18 @@ end
 
 utils.fix_super_key=function()
 	spawn_once('xcape -t 250 -e "Super_L=Alt_L|F1;Super_R=Alt_L|F1"','xcape')
+end
+
+utils.enable_conky = function()
+    local conky_path=os.getenv("HOME") .. "/.config/nixpkgs/packages/remind/conky"
+
+    local start_cmd = string.format([[
+        cd %s
+        conky -c TODO &
+        conky -c Gotham &
+    ]],conky_path)
+    spawn_once(start_cmd,{'conky'})
+    -- execute(start_cmd)
 end
 
 return utils

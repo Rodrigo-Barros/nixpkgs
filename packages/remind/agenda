@@ -1,3 +1,4 @@
 # vim: set syntax=remind:
+INCLUDE /home/rodrigo/.config/nixpkgs/packages/remind/feriados
 INCLUDE /home/rodrigo/.config/nixpkgs/packages/remind/tarefas
 INCLUDE /home/rodrigo/.config/nixpkgs/packages/remind/google-agenda

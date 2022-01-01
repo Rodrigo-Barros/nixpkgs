@@ -88,8 +88,18 @@ awful.rules.rules = {
 		rule_any = {
 			class = {
 				"Steam"
-			}
+			},
+            name = {
+                "Steam"
+            },
 		}, properties = { tag=tags[6]}
+	},
+	{
+		rule_any = {
+			class = {
+				"conky"
+			},
+		}, properties = { border_width = 0 }
 	},
 	{
 		rule_any = {

@@ -1,0 +1,19 @@
+#Calendar
+REM JAN 1  +7 MSG Ano Novo %b
+REM JAN 25 +7 MSG Carnaval %b
+#little hack as showed in the docs
+REM MAY 1 -35 +7 Sunday MSG Páscoa %b
+REM MAY 1 -28 +7 Friday MSG Sexta-feira santa %b
+REM APR 21 +7 MSG Dia de Tirandentes %b
+REM MAY 1  +7 MSG Dia do Trabalho %b
+REM JUL 1  Thursday -21 +7 MSG Corpus Christi %b
+REM SEP 7  +7 MSG Independência do Brasil %b
+REM OCT 12 +7 MSG Dia das crianças %b
+REM NOV 2  +7 MSG Dia de finados %b
+REM NOV 15 +7 MSG Proclamação da República %b
+REM DEC 25 +7 MSG Natal %b
+
+# USER SPECIFIC CALENDAR
+REM SEP 21 +7 MSG Seu Aniversário %b
+REM MAY 7  +7 MSG Aniversário da mãe %b
+REM MAY 23 +7 MSG Aniversário do pai %b

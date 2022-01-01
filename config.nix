@@ -172,13 +172,11 @@
         # games
         chiaki lutris
         
-        # Scripts
-        # nixEnvBuilder
-        # taskremind
-                
         #desktop
         dmenu
         rofi
+        conky
+
         #others
         zathura
         nix-index
@@ -189,6 +187,9 @@
         timewarrior
         
         xcape
+
+        entr
+
         
        # Custom env
       ] ++ packages ++ tools ++ units;
