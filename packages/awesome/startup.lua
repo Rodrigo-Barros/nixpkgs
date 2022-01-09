@@ -9,6 +9,7 @@ utils.enable_dbus()
 utils.enable_picom()
 utils.fix_super_key()
 utils.enable_conky()
+utils.enable_print_screen()
 
 local displays = tonumber(utils.os_capture("xrandr -q | grep connected | wc -l"))
 if displays == 2 then

@@ -173,6 +173,7 @@
         chiaki lutris
         
         #desktop
+        flameshot
         dmenu
         rofi
         conky

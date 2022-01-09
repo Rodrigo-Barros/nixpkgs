@@ -1,6 +1,5 @@
 local utils = {}
 local execute = require("awful").spawn.with_shell
-local naughty = require("naughty")
 
 -- launch only one instance of given command
 local spawn_once = function(command,filter)
@@ -55,12 +54,17 @@ utils.enable_conky = function()
     local conky_path=os.getenv("HOME") .. "/.config/nixpkgs/packages/remind/conky"
 
     local start_cmd = string.format([[
-        cd %s
-        conky -c TODO &
+        export LOCALE_ARCHIVE=$(nix-build --no-out-link '<nixpkgs>' -A glibcLocales)/lib/locale/locale-archive
+        export TASKRC=$HOME/.config/taskrc
+        cd %s 
         conky -c Gotham &
+        conky -c TODO &
     ]],conky_path)
     spawn_once(start_cmd,{'conky'})
-    -- execute(start_cmd)
+end
+
+utils.enable_print_screen = function ()
+    spawn_once("flameshot",{"flameshot"})
 end
 
 return utils

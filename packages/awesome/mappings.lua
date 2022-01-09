@@ -141,8 +141,10 @@ globalkeys = gears.table.join(
         onsupend = function()
             awful.spawn.with_shell("systemctl hybrid-sleep")
         end
-    } end)
-
+    } end),
+    awful.key({ },"Print", function()
+        awful.spawn.with_shell("flameshot gui")
+    end)
 )
 
 local clientkeys = gears.table.join(

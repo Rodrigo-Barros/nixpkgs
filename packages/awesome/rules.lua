@@ -74,6 +74,8 @@ awful.rules.rules = {
 		rule_any = {
 			class = {
 				"Element",
+                "discord",
+                "TelegramDesktop"
 			}
 		}, properties = { maximized=true, tag=tags[4] }
 	},
