@@ -20,6 +20,6 @@
 	nix-build-env = pkgs.writeScriptBin "build-env" "${builtins.readFile ./nix-env-builder}";
 
     vscode-php-debug = pkgs.writeScriptBin "vscode-php-debug" ''
-        ${pkgs.nodejs}/bin/node ${vscode-php-debug}/lib/phpDebug.js
+        NODE_PATH=${pkgs.nodejs}/lib/node_modules/npm/node_modules ${pkgs.nodejs}/bin/node ${vscode-php-debug}/lib/phpDebug.js
     '';
 }

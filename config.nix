@@ -29,7 +29,6 @@
        awesome
        matrix
        jekyll
-       intelephense
        remind
        ical2rem
        vscode-php-debug
@@ -147,6 +146,7 @@
         
         #LSP nodeps for nvim
         nodePackages.bash-language-server
+        nodePackages.intelephense
         sumneko-lua-language-server
         rnix-lsp
         
