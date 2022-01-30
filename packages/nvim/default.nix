@@ -143,6 +143,8 @@ pkgs.neovim.override {
 			nvim-autopairs
 			nvim-lspconfig
 			lsp_signature-nvim
+            dart-vim-plugin
+            vim-flutter
 			#nvim-compe
             
             # cmp env

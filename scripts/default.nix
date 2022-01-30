@@ -22,4 +22,8 @@
     vscode-php-debug = pkgs.writeScriptBin "vscode-php-debug" ''
         NODE_PATH=${pkgs.nodejs}/lib/node_modules/npm/node_modules ${pkgs.nodejs}/bin/node ${vscode-php-debug}/lib/phpDebug.js
     '';
+
+    dart-lsp = pkgs.writeScriptBin "dart-lsp" ''
+        ${pkgs.dart}/bin/dart ${pkgs.dart}/bin/snapshots/analysis_server.dart.snapshot --lsp
+    '';
 }

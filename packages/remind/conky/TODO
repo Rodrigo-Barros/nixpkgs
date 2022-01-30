@@ -164,4 +164,3 @@ ${voffset 5 }${Color white}${font 16}Atividades de Hoje:
 ${voffset 5 }${color orange}${execpi 10 remind -taa ~/.config/conky/TODO/agenda | tail -n +2 | sed -r '/^\s*$/d'}
 ${voffset 5 }${color white}Agenda:
 ${voffset 5 }${font Ubuntu:pixelsize=14}${execpi 10  remind -nb1 ~/.config/nixpkgs/packages/remind/agenda | sort | sed -r "s|([0-9]{4})/([0-9]{2})/([0-9]{2})|\3/\2/\1|" | head -n 7 }
-${voffset 5 }${font Ubuntu:pixelsize=16}${execpi 10  exec remind ~/.config/nixpkgs/packages/remind/agenda}

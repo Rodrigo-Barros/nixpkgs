@@ -43,6 +43,7 @@
         nix-build-env
         vscode-php-debug
         encrypt-tool
+        dart-lsp
     ];
     
     services = {

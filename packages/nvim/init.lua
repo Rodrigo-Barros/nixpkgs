@@ -62,7 +62,7 @@ create_augroup({
 -- {{{
 
 local nvim_lsp = require('lspconfig')
-local lsp_server = require'lspconfig/configs'
+
 local util = nvim_lsp.util
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -150,6 +150,10 @@ nvim_lsp.sumneko_lua.setup{
 			}
 		}
 	}
+}
+
+nvim_lsp.dartls.setup{
+    cmd = {"dart-lsp"}
 }
 -- }}}
 
