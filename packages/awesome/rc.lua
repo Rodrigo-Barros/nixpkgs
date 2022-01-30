@@ -25,17 +25,21 @@ local tags = settings.tags
 -- nix fixes
 
 local function patch_volume_icon_dir()
-    local awesome_path = os.getenv('HOME') .. '.config/nixpkgs/packages/awesome'
-    local cmd = "nix build --no-out-link " .. awesome_path .. "/default.nix -A awesome"
+    local awesome_path = os.getenv('HOME') .. '/.config/nixpkgs/packages/awesome'
+    local cmd = "nix-build --no-out-link " .. awesome_path .. "/default.nix"
     local icon_dir = utils.os_capture(cmd) .. "/share/awesome/lib/awesome-wm-widgets/volume-widget/icons/"
     return icon_dir
 end
 
 -- awesome-wm-widgets
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
-volume_widget = volume_widget({})
+volume_widget = volume_widget({
+    icon_dir = patch_volume_icon_dir(),
+    widget_type = 'arc',
+    with_icon=true,
+    mute_color='#f00'
+})
 
-local logout_popup = require("awesome-wm-widgets.logout-popup-widget.logout-popup")
 
 require('startup')
 

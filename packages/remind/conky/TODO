@@ -50,7 +50,7 @@ total_run_times 0
 own_window yes
 
 # If own_window is yes, you may use type normal, desktop or override
-own_window_type desktop
+own_window_type override
 
 # Use pseudo transparency with own_window?
 own_window_transparent yes
@@ -158,8 +158,8 @@ own_window_argb_visual yes
 TEXT
 ${color white}${font 16}Tarefas:
 ${voffset 5 }${color red}${execpi 10 task +OVERDUE export | jq ".[] .description" | sed 's/"//g' }
-${voffset 5 }${color yellow}${execpi 10 task +TODAY export | jq ".[] .description" | sed 's/"//g' }
-${voffset 5 }${color green}${execpi 10 task +MONTH export | jq ".[] .description" | sed 's/"//g'}
+${voffset 5 }${color yellow}${execpi 10 task status:pending due.after:$(date +"%Y-%m-%dT00:00") and due.before:$(date +"%Y-%m-%dT23:59" -d "7 days") export | jq ".[] .description" | sed 's/"//g' }
+${voffset 5 }${color green}${execpi 10 task status:pending due.after:$(date +"%Y-%m-%dT23:59" -d "7 days") export | jq ".[] .description" | sed 's/"//g'}
 ${voffset 5 }${Color white}${font 16}Atividades de Hoje:
 ${voffset 5 }${color orange}${execpi 10 remind -taa ~/.config/conky/TODO/agenda | tail -n +2 | sed -r '/^\s*$/d'}
 ${voffset 5 }${color white}Agenda:

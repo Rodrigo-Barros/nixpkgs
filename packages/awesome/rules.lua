@@ -101,7 +101,7 @@ awful.rules.rules = {
 			class = {
 				"conky"
 			},
-		}, properties = { border_width = 0 }
+		}, properties = { border_width = 0, skip_taskbar=true }
 	},
 	{
 		rule_any = {

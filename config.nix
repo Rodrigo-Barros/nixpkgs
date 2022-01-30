@@ -124,6 +124,7 @@
         # flatpak-updater from system
         # nix-update channel and packages
         # nix-garbage-collector 
+        jq
         profile
         compton
         
@@ -190,8 +191,6 @@
         xcape
 
         entr
-
-        
        # Custom env
       ] ++ packages ++ tools ++ units;
       
