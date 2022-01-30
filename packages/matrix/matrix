@@ -549,7 +549,7 @@ setup_server(){
   cd $synapse
 
   debug "Criando arquivo de configuração para o server"
-  homeserver \
+  synapse_homeserver \
     --server-name $HOSTNAME \
     --config-directory $synapse \
     --data-directory $synapse \
@@ -595,7 +595,7 @@ EOF
 
 # START SERVICES SECTION
 start_server(){
-  homeserver -c $synapse/homeserver.yaml -D
+  synapse_homeserver -c $synapse/homeserver.yaml -D
 }
 
 stop_server(){

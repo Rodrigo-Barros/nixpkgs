@@ -1,5 +1,5 @@
 #!/bin/bash
 WIDTH=800
 HEIGHT=600
-Xephyr :2 -ac -br -noreset -screen $WIDTHx$HEIGHT &
-DISPLAY=:2 awesome
+Xephyr :1 -ac -br -noreset -screen $WIDTHx$HEIGHT &
+DISPLAY=:1 awesome

@@ -69,6 +69,8 @@ pkgs.awesome.overrideAttrs(oldAttrs: {
     ln -s ${awesome-wm-widgets}/lib/lua/${lua.luaversion}/awesome-wm-widgets $out/share/awesome/lib/awesome-wm-widgets
     ln -s ${awesome-buttons}/lib/lua/${lua.luaversion}/awesome-buttons $out/share/awesome/lib/awesome-buttons
     ln -s ${json-lua}/lib/lua/${lua.luaversion}/json-lua/json.lua $out/share/awesome/lib/json.lua
+    
+    echo sed -i -r "s/icon = os.getenv.+/icon_dir=$out/share/awesome/lib/awesome-buttons/g" $out/share/awesome/lib/awesome-buttons/awesome-buttons.lua
 
     # arguments every restart
     mv "$out/bin/awesome" "$out/bin/.awesome-wrapped"

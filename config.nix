@@ -158,7 +158,7 @@
         # php74 php74Extensions.pdo mysql80 apacheHttpd
         
         # dev mobile
-        
+        flutter
         # communication
        
         # network-tools
