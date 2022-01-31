@@ -180,6 +180,8 @@
         rofi
         conky
 
+        element-desktop
+
         #others
         zathura
         nix-index

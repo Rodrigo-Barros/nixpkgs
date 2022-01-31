@@ -500,7 +500,7 @@ EOF
 
   debug "Configurando o alembic especifico para o telegram"
   update_key "script_location =" "$bridge_telegram/alembic" "$bridge_telegram/alembic.ini"
-  alembic -x config="$bridge_telegram/config.yaml" -c "$bridge_telegram/alembic.ini" upgrade head
+  alembic -x config="$bridge_telegram/config.yaml" -c "$bridge_telegram/alembic.ini" init "$bridge_telegram/alembic"
 
 
   #GENERATE REGISTRATION FILE
